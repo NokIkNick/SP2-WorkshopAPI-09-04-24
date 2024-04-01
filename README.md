@@ -8,6 +8,6 @@
 ## API DOCUMENTATION:
 | HTTP method | REST Resource | Response / Request Payload | Comment |
 | -------- | ------- | ------- | ------- |
-| January  | $250    |
+| Example: GET  | /api/test | reponse: [{response body}] | Retrieve all tests |
 | February | $80     |
 | March    | $420    |
