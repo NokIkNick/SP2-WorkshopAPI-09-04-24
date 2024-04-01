@@ -6,8 +6,8 @@
 
 
 ## API DOCUMENTATION:
-| test     | thing   |
-| -------- | ------- |
+| HTTP method | REST Resource | Response / Request Payload | Comment |
+| -------- | ------- | ------- | ------- |
 | January  | $250    |
 | February | $80     |
 | March    | $420    |
