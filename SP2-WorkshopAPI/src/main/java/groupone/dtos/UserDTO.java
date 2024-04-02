@@ -12,23 +12,25 @@ import java.util.Set;
 @NoArgsConstructor
 public class UserDTO {
 
-    private String username;
+    private String email;
     private String password;
+    private Integer phone;
+    private String name;
     private Set<String> roles;
 
-    public UserDTO(String username, String password,Set<String> roles){
-        this.username = username;
+    public UserDTO(String email, String password, Set<String> roles){
+        this.email = email;
         this.password = password;
         this.roles = roles;
     }
 
-    public UserDTO(String username, Set<String> roles) {
-        this.username = username;
+    public UserDTO(String email, Set<String> roles) {
+        this.email = email;
         this.roles = roles;
     }
 
     public UserDTO(User user){
-        this.username = user.getUsername();
+        this.email = user.getEmail();
         this.password = user.getPassword();
         this.roles = user.getRolesToString();
     }

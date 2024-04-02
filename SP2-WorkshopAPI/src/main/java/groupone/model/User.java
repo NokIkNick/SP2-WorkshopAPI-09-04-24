@@ -1,5 +1,6 @@
 package groupone.model;
 
+import groupone.dtos.UserDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import org.mindrot.jbcrypt.BCrypt;
@@ -16,24 +17,28 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode
 public class User {
     @Id
-    private String username;
+    private String email;
     private String password;
+    private String name;
+    private Integer phoneNumber;
 
-    @JoinTable(name = "user_role", joinColumns = {
-            @JoinColumn(name="user_name", referencedColumnName = "username")},
-            inverseJoinColumns = {
-                    @JoinColumn(name = "role_name", referencedColumnName = "name")})
-    @ManyToMany(cascade = CascadeType.DETACH)
+    @ManyToMany(cascade = CascadeType.DETACH, mappedBy = "users")
     Set<Role> roles = new HashSet<>();
+
+    @ManyToMany(cascade = CascadeType.DETACH, mappedBy = ("users"))
+    Set<Event> events = new HashSet<>();
+
 
     @PrePersist
     private void PrePersist(){
         this.password = BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
-    public User(String username, String password){
-        this.username = username;
-        this.password = password;
+    public User(UserDTO userDTO){
+        this.email = userDTO.getEmail();
+        this.password = userDTO.getPassword();
+        this.name = userDTO.getName();
+        this.phoneNumber = userDTO.getPhone();
     }
 
 
@@ -53,4 +58,10 @@ public class User {
         }
     }
 
+    public void addEvent(Event event) {
+            if(event != null && !events.contains(event)){
+                events.add(event);
+                event.addUser(this);
+            }
+    }
 }

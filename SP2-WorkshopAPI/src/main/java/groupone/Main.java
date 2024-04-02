@@ -10,9 +10,9 @@ public class Main {
         ApplicationConfig app = ApplicationConfig.getInstance()
                 .initiateServer()
                 .setExceptionHandling()
-                .startServer(69420)
-                .setRoutes(Routes.getRoutes(isTesting));
-                //.checkSecurityRoles(isTesting);
+                .startServer(7008)
+                .setRoutes(Routes.getRoutes(isTesting))
+                .checkSecurityRoles(isTesting);
 
     }
 }

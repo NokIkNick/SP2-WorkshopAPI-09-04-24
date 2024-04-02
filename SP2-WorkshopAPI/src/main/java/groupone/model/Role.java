@@ -14,7 +14,6 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode
 public class Role {
-
     @Id
     private String name;
 
@@ -26,4 +25,5 @@ public class Role {
             users.add(user);
         }
     }
+
 }

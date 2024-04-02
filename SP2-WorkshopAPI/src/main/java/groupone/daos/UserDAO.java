@@ -22,12 +22,14 @@ public class UserDAO extends DAO<User, String> {
         return instance;
     }
 
-    public User createUser(String username, String password){
+    public User createUser(String username, String password, String name, Integer phonenumber){
         User user = new User();
-        user.setUsername(username);
+        user.setEmail(username);
         user.setPassword(password);
+        user.setName(name);
+        user.setPhoneNumber(phonenumber);
         try(var em = emf.createEntityManager()){
-            Role role = em.find(Role.class, "USER");
+            Role role = em.find(Role.class, "STUDENT");
             user.addRole(role);
             em.getTransaction().begin();
             em.persist(user);
@@ -40,7 +42,7 @@ public class UserDAO extends DAO<User, String> {
     public User getVerifiedUser(String username, String password) throws ValidationException {
         try(var em = emf.createEntityManager()){
             List<User> users = em.createQuery("select u from users u", User.class).getResultList();
-            users.stream().forEach(user -> System.out.println(user.getUsername()+" "+user.getPassword()));
+            users.stream().forEach(user -> System.out.println(user.getEmail()+" "+user.getPassword()));
             User user = em.find(User.class, username);
             if(user == null){
                 throw new EntityNotFoundException("No user found with username: "+username);

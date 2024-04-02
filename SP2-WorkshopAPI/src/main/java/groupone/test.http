@@ -1,0 +1,15 @@
+POST http://localhost:7008/api/auth/register
+
+{
+"email":"12345678910@12345678910.dk",
+"password":"123456712",
+"phone":"1234542",
+"name":"Jophnfasd"
+}
+###
+POST http://localhost:7008/api/auth/login
+
+{
+"email":"1234567@1234567.dk",
+"password":"1234567"
+}

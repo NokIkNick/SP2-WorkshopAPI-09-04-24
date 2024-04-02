@@ -1,7 +1,6 @@
 package groupone.config;
 
-import groupone.model.Role;
-import groupone.model.User;
+import groupone.model.*;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
 import org.hibernate.SessionFactory;
@@ -22,7 +21,7 @@ public class HibernateConfig {
 
             Properties props = new Properties();
 
-            props.put("hibernate.connection.url", "jdbc:postgresql://localhost:5432/dev?currentSchema=public");
+            props.put("hibernate.connection.url", "jdbc:postgresql://localhost:5432/eventdb?currentSchema=public");
             props.put("hibernate.connection.username", "postgres");
             props.put("hibernate.connection.password", "postgres");
             props.put("hibernate.show_sql", "true"); // show sql in console
@@ -58,6 +57,10 @@ public class HibernateConfig {
     private static void getAnnotationConfiguration(Configuration configuration) {
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Role.class);
+        configuration.addAnnotatedClass(Event.class);
+        configuration.addAnnotatedClass(Location.class);
+        configuration.addAnnotatedClass(EventSpec.class);
+        configuration.addAnnotatedClass(Zipcode.class);
 
 
     }
