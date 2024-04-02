@@ -10,6 +10,8 @@ POST http://localhost:7008/api/auth/register
 POST http://localhost:7008/api/auth/login
 
 {
-"email":"1234567@1234567.dk",
-"password":"1234567"
+"email":"12345678910@12345678910.dk",
+"password":"123456712"
 }
+###
+GET http://localhost:7008/api/events

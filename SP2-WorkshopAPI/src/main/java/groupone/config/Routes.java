@@ -1,6 +1,7 @@
 package groupone.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import groupone.controllers.EventController;
 import groupone.controllers.SecurityController;
 import io.javalin.apibuilder.EndpointGroup;
 import io.javalin.security.RouteRole;
@@ -17,11 +18,14 @@ public class Routes {
         return () -> {
             path("/", () -> {
                 get("/", ctx -> ctx.json(objectMapper.createObjectNode().put("Message", "Connected Successfully")), roles.ANYONE);
+                get("/events", EventController.getAllEvents(), roles.ANYONE);
+                get("/events/{id}", EventController.getEventsById(), roles.ANYONE);
             });
             path("/auth", () -> {
                 post("/login", sc.login(), roles.ANYONE);
                 post("/register", sc.register(), roles.ANYONE);
             });
+
         };
     }
 
