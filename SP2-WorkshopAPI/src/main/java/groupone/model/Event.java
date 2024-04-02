@@ -1,4 +1,4 @@
 package groupone.model;
 
-public class Roles {
+public class Event {
 }
