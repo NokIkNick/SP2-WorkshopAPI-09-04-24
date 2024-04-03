@@ -16,14 +16,14 @@ public class EventSpec {
     @Id
     private Integer id;
     private LocalDate date;
-    private LocalTime time;
+    private LocalTime time = LocalTime.of(16,30);
     private Double duration;
     private String instructorName;
     private String instructorEmail;
     private Status status;
     private Integer capacity;
 
-    @MapsId("id")
+    @MapsId
     @OneToOne(mappedBy = "eventSpec", cascade = CascadeType.DETACH)
     private Location location;
 
