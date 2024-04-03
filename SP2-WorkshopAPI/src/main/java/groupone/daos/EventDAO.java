@@ -32,6 +32,22 @@ public class EventDAO extends DAO<Event, Integer>{
         return eventList;
     }
 
+    @Override
+    public Event getById(Integer id){
+        Event event;
+        try(var em = emf.createEntityManager()){
+            em.getTransaction().begin();
+            event = em.find(Event.class, id);
+            event.getLocations().size();
+            for(Location l : event.getLocations()){
+                l.getEventSpec();
+                l.getZipcodes().size();
+            }
+            em.getTransaction().commit();
+        }
+        return event;
+    }
+
     public static EventDAO getInstance(boolean isTesting){
         if(instance == null){
             instance = new EventDAO(isTesting);
