@@ -1,6 +1,8 @@
 package groupone.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import groupone.controllers.EventController;
 import groupone.controllers.SecurityController;
 import io.javalin.apibuilder.EndpointGroup;
@@ -12,7 +14,7 @@ import static io.javalin.apibuilder.ApiBuilder.*;
 
 public class Routes {
     private static SecurityController sc;
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper objectMapper = new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false).registerModule(new JavaTimeModule());
     public static EndpointGroup getRoutes(Boolean isTesting) {
         sc = SecurityController.getInstance(isTesting);
         return () -> {

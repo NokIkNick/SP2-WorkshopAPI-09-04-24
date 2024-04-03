@@ -14,7 +14,7 @@ public class Main {
                 .startServer(7008)
                 .setRoutes(Routes.getRoutes(isTesting))
                 .checkSecurityRoles(isTesting);
-        RoleDAO roleDAO = RoleDAO.getInstance(isTesting);
-        roleDAO.createRoles();
+        //RoleDAO roleDAO = RoleDAO.getInstance(isTesting);
+        //roleDAO.createRoles();
     }
 }

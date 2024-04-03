@@ -1,26 +1,35 @@
 package groupone.daos;
 
 import groupone.model.Event;
+import groupone.model.Location;
+import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
-public class EventDAO extends DAO<Event, String>{
+public class EventDAO extends DAO<Event, Integer>{
     private static EventDAO instance;
 
     public EventDAO(boolean isTesting) {
         super(Event.class, isTesting);
     }
 
-    public List<Event> getAll() {
+    @Override
+    public List<Event> getAll(){
+        List<Event> eventList;
         try(var em = emf.createEntityManager()){
-            return em.createQuery("SELECT e FROM Event e", Event.class).getResultList();
+            em.getTransaction().begin();
+            TypedQuery<Event> query = em.createQuery("select e from Event e", Event.class);
+            eventList = query.getResultList();
+            for (Event e: eventList) {
+                e.getLocations().size();
+                for(Location l : e.getLocations()){
+                    l.getEventSpec();
+                    l.getZipcodes().size();
+                }
+            }
+            em.getTransaction().commit();
         }
-    }
-
-    public Event getById(int id) {
-        try(var em = emf.createEntityManager()){
-            return em.createQuery("SELECT e from Event e where id = "+id, Event.class).getSingleResult();
-        }
+        return eventList;
     }
 
     public static EventDAO getInstance(boolean isTesting){
