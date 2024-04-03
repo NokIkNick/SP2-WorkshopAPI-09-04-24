@@ -120,4 +120,20 @@ public class EventController {
             ctx.json(superEventDTO);
         };
     }
+
+    public static Handler getEventsByCategory() {
+        return ctx -> {
+            String category = ctx.pathParam("category");
+            List<Event> events = eventService.getEventsByCategory(category);
+            ctx.json(events);
+        };
+    }
+
+    public static Handler getEventsByStatus() {
+        return ctx -> {
+            String status = ctx.pathParam("status");
+            List<Event> events = eventService.getEventsByStatus(status);
+            ctx.json(events);
+        };
+    }
 }

@@ -22,6 +22,8 @@ public class Routes {
                 get("/", ctx -> ctx.json(objectMapper.createObjectNode().put("Message", "Connected Successfully")), roles.ANYONE);
                 get("/events", EventController.getAllEvents(), roles.ANYONE);
                 get("/events/{id}", EventController.getEventsById(), roles.ANYONE);
+                get("/events/category/{category}", EventController.getEventsByCategory(), roles.ANYONE);
+                get("/events/status/{status}", EventController.getEventsByStatus(), roles.ANYONE);
             });
             path("/auth", () -> {
                 post("/login", sc.login(), roles.ANYONE);
