@@ -27,7 +27,7 @@ public class EventSpec {
     @OneToOne(mappedBy = "eventSpec", cascade = CascadeType.DETACH)
     private Location location;
 
-    private enum Status{
+    public enum Status{
         ONGOING,
         CANCELLED,
         UPCOMING,
