@@ -1,7 +1,7 @@
 package groupone.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,7 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,23 +27,22 @@ public class Event {
 
 
     @ManyToMany
+    @JsonIgnore
     private List<User> users = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.DETACH},fetch = FetchType.EAGER)
     private List<Location> locations = new ArrayList<>();
 
     public Event( String title,String description,double price,String imageUrl){
         this.title = title;
         this.description = description;
         this.price = price;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
         this.imageUrl = imageUrl;
     }
 
     public void addUser(User user){
-        if(user != null && !users.contains(user)){
-            users.add(user);
+        if(user != null && !this.users.contains(user)){
+            this.users.add(user);
             user.addEvent(this);
         }
     }

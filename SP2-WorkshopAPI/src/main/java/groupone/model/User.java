@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 public class User {
     @Id
     private String email;
@@ -22,10 +21,10 @@ public class User {
     private String name;
     private Integer phoneNumber;
 
-    @ManyToMany(cascade = CascadeType.DETACH, mappedBy = "users")
+    @ManyToMany(cascade = CascadeType.DETACH, mappedBy = "users",fetch = FetchType.EAGER)
     Set<Role> roles = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.DETACH, mappedBy = ("users"))
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.DETACH}, mappedBy = ("users"),fetch = FetchType.EAGER)
     Set<Event> events = new HashSet<>();
 
 
@@ -40,7 +39,7 @@ public class User {
         this.name = userDTO.getName();
         this.phoneNumber = userDTO.getPhone();
     }
-    public User(String email,String password,String name,Integer phoneNumber){
+    public User(String email, String password, String name, Integer phoneNumber){
         this.email = email;
         this.password = password;
         this.name = name;

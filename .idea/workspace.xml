@@ -5,12 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b59af9bc-6a0a-4a0a-8aff-8280499ebafd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/enums/Status.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/config/Routes.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/config/Routes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/UserDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/Event.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/EventSpec.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/EventSpec.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/Location.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/Role.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/Zipcode.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/Zipcode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/controllers/UserControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/controllers/UserControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,18 +53,29 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "us3-register-user-for-event",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "19",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.UserControllerTest.addEventToUser">
     <configuration name="UserControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SP2-WorkshopAPI" />
       <extension name="coverage">
@@ -75,8 +91,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="UserControllerTest.addEventToUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SP2-WorkshopAPI" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="groupone.controllers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="groupone.controllers" />
+      <option name="MAIN_CLASS_NAME" value="groupone.controllers.UserControllerTest" />
+      <option name="METHOD_NAME" value="addEventToUser" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.UserControllerTest.addEventToUser" />
         <item itemvalue="JUnit.UserControllerTest" />
       </list>
     </recent_temporary>
@@ -95,5 +128,16 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/UserController.java</url>
+          <line>41</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

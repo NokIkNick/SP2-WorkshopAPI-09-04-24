@@ -1,17 +1,12 @@
 package groupone.controllers;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import groupone.daos.EventDAO;
 import groupone.daos.UserDAO;
-import groupone.dtos.TokenDTO;
-import groupone.dtos.UserDTO;
-import groupone.exceptions.ApiException;
-import groupone.exceptions.ValidationException;
 import groupone.model.Event;
 import groupone.model.User;
-import io.javalin.http.Context;
 import io.javalin.http.Handler;
-import jakarta.persistence.EntityNotFoundException;
+
+import java.util.List;
 
 public class UserController {
 
@@ -42,5 +37,10 @@ public class UserController {
     }
 
 
-
+    public Handler getAll() {
+        return (ctx) -> {
+            User users = userDAO.getById("test@test.com");
+            ctx.json(users);
+        };
+    }
 }

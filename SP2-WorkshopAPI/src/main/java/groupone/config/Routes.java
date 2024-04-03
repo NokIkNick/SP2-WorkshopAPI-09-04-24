@@ -17,8 +17,8 @@ public class Routes {
     public static EndpointGroup getRoutes(Boolean isTesting) {
         sc = SecurityController.getInstance(isTesting);
         uc = UserController.getInstance(isTesting);
-        before(sc.authenticate());
         return () -> {
+            before(sc.authenticate());
             path("/", () -> {
                 get("/", ctx -> ctx.json(objectMapper.createObjectNode().put("Message", "Connected Successfully")), roles.ANYONE);
             });
@@ -28,6 +28,9 @@ public class Routes {
             });
             path("/student",() ->{
                 post("/toevent/{id}",uc.addEventToUser(),roles.STUDENT);
+            });
+            path("/test", () ->{
+                get("/",uc.getAll(),roles.ANYONE);
             });
         };
     }

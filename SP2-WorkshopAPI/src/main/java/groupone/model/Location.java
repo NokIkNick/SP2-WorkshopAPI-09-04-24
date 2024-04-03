@@ -1,5 +1,6 @@
 package groupone.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,7 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,12 +24,13 @@ public class Location {
     }
 
     @ManyToMany(mappedBy = "locations")
+    @JsonIgnore
     private List<Event> events = new ArrayList<>();
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.DETACH},fetch = FetchType.EAGER)
     private EventSpec eventSpec;
 
-    @OneToMany
+    @OneToMany(cascade = {/*CascadeType.PERSIST,*/CascadeType.DETACH},fetch = FetchType.EAGER)
     private List<Zipcode> zipcodes = new ArrayList<>();
 
     public void addEvent(Event event) {

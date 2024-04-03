@@ -1,5 +1,6 @@
 package groupone.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import groupone.enums.Status;
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -13,7 +14,6 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 public class EventSpec {
     @Id
     private Integer id;
@@ -35,8 +35,9 @@ public class EventSpec {
         this.capacity = capacity;
     }
 
-    @MapsId("id")
     @OneToOne(mappedBy = "eventSpec", cascade = CascadeType.DETACH)
+    @MapsId
+    @JsonIgnore
     private Location location;
 
     public void setLocation(Location location){

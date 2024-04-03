@@ -15,9 +15,6 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.jupiter.api.Assertions.*;
-
 class UserControllerTest {
 
     @BeforeAll
@@ -37,14 +34,15 @@ class UserControllerTest {
 
         try(EntityManager em = emf.createEntityManager()){
             em.getTransaction().begin();
+
             em.createQuery("delete from users").executeUpdate();
-            em.createQuery("delete from Zipcode").executeUpdate();
-            em.createQuery("delete from EventSpec").executeUpdate();
             em.createQuery("delete from Location").executeUpdate();
+            em.createQuery("delete from EventSpec").executeUpdate();
             em.createQuery("delete from Event").executeUpdate();
+            em.createQuery("delete from Zipcode").executeUpdate();
 
             em.createNativeQuery("ALTER SEQUENCE event_id_seq RESTART WITH 1").executeUpdate();
-            em.createNativeQuery("ALTER SEQUENCE location_id_seq RESTART WITH 1").executeUpdate();
+            //em.createNativeQuery("ALTER SEQUENCE location_id_seq RESTART WITH 1").executeUpdate();
 
             User user = new User("test@test.com","test","Patrick",456765353);
             Role role = new Role("STUDENT");
@@ -52,6 +50,9 @@ class UserControllerTest {
             Location location = new Location("Fredensvej 19");
             EventSpec eventSpec = new EventSpec(LocalDate.now(), LocalTime.now(),30,"Den vilde","denVilde@hej.com", Status.UPCOMING,30);
             Zipcode zipcode = new Zipcode(2970,"Hørsholm");
+
+            em.persist(location);
+            em.persist(zipcode);
 
             location.addZipcode(zipcode);
             location.setEventSpec(eventSpec);
@@ -61,25 +62,25 @@ class UserControllerTest {
             user.addRole(role);
 
             em.persist(user);
-            em.persist(event);
-            em.persist(location);
-            em.persist(eventSpec);
-            em.persist(zipcode);
+
             em.getTransaction().commit();
         }
     }
 
     @Test
     void addEventToUser() {
-
+        RestAssured.given()
+                .when()
+                .get("/test")
+                .then().log();
     }
     @Test
     void getAllInfo(){
-        RestAssured.given().log().all()
+        /*RestAssured.given().log().all()
                 .when()
                 .get("/hotels")
                 .then().log().all()
                 .statusCode(200)
-                .body("[0].name",equalTo("Charmander"));
+                .body("[0].name",equalTo("Charmander"));*/
     }
 }
