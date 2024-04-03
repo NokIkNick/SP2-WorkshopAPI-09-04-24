@@ -28,7 +28,6 @@ public class UserController {
     }
 
     public void getAllEvents(Context ctx){
-        String role = ctx.pathParam("roles");
         List<Event> events = eventDAO.getAll();
         List<EventDTO> eventDTOS = new ArrayList<>();
         for(Event e : events){
@@ -38,9 +37,9 @@ public class UserController {
         ctx.json(eventDTOS);
     }
 
-    public void getAllUsers(Context ctx){
-        String role = ctx.pathParam("roles");
 
+
+    public void getAllUsers(Context ctx){
           List<User> users = userDAO.getAll();
           List<UserDTO> userDTOS = new ArrayList<>();
           for(User u: users){
