@@ -28,6 +28,7 @@ public abstract class DAO<T, K> implements IDAO<T, K> {
         }
     }
 
+
     public T getById(K in){
         try(var em = emf.createEntityManager()){
             return em.find(entityClass, in);
