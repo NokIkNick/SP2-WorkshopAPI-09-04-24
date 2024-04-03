@@ -31,11 +31,11 @@ public class EventController {
 
 
     /**
-     Handler for the "getAllEvents" route.
-     This handler fetches all events from the database, maps them to DTOs, and sends them as the response.
-     The response includes the event details, locations, and zipcodes.
-
-     @return A Handler that can be used with Javalin to handle requests to the "getAllEvents" route.
+     * Handler for the "getAllEvents" route.
+     * This handler fetches all events from the database, maps them to DTOs, and sends them as the response.
+     * The response includes the event details, locations, and zipcodes.
+     *
+     * @return A Handler that can be used with Javalin to handle requests to the "getAllEvents" route.
      */
     public static Handler getAllEvents() {
         return ctx -> {
@@ -91,13 +91,33 @@ public class EventController {
     public static Handler getEventsById() {
         return ctx -> {
             // Fetch the event from the database by its ID
-            Event event = eventDAO.getById(Integer.parseInt(ctx.pathParam("id")));
+            int id = Integer.parseInt(ctx.pathParam("id"));
+            Event event = eventDAO.getById(id);
 
             // Map the event to an EventDTO
             EventDTO eventDTO = new EventDTO(event.getId(), event.getImageUrl(), event.getTitle(), event.getDescription(), event.getPrice());
-
-            // Send the EventDTO as the response
             ctx.json(eventDTO);
+            // Map each location of the event to a LocationDTO, including the zipcodes
+            List<LocationDTO> locationDTOS = event.getLocations().stream()
+                    .map(location -> {
+                        LocationDTO locationDTO = new LocationDTO(
+                                location.getId(),
+                                location.getStreet(),
+                                new EventSpecsDTO(location.getEventSpec())
+                        );
+                        locationDTO.setZipcodes(location.getZipcodes().stream()
+                                .map(zipcode -> new ZipcodeDTO(zipcode.getZip(), zipcode.getCity()))
+                                .collect(Collectors.toList()));
+                        return locationDTO;
+                    })
+                    .toList();
+
+            // Create a SuperEventDTO and set the EventDTO and LocationDTOs
+            SuperEventDTO superEventDTO = new SuperEventDTO(eventDTO);
+            superEventDTO.setLocations(locationDTOS);
+
+            // Send the SuperEventDTO as the response
+            ctx.json(superEventDTO);
         };
     }
 }
