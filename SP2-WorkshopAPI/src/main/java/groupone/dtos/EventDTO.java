@@ -1,11 +1,16 @@
 package groupone.dtos;
 
 import groupone.model.Event;
+import groupone.model.Location;
+import groupone.model.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,6 +25,8 @@ public class EventDTO {
     private LocalDate updatedAt;
     private LocalDate deletedAt;
     private String imageUrl;
+    private List<User> users;
+    private List<Location> locations;
     public EventDTO(Event event){
         this.id = event.getId();
         this.title = event.getTitle();
@@ -29,6 +36,8 @@ public class EventDTO {
         this.updatedAt = event.getUpdatedAt();
         this.deletedAt = event.getDeletedAt();
         this.imageUrl = event.getImageUrl();
+        this.users = event.getUsers();
+        this.locations = event.getLocations();
     }
 
 }
