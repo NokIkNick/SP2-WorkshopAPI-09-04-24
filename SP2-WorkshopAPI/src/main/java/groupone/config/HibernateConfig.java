@@ -94,7 +94,7 @@ public class HibernateConfig {
         }
     }
 
-    private static EntityManagerFactory getEntityManagerFactory(boolean isTest){
+    public static EntityManagerFactory getEntityManagerFactory(boolean isTest){
         if(isTest) return getEntityManagerFactoryConfigForTesting();
         return getEntityManagerFactoryConfig();
     }
