@@ -2,8 +2,10 @@ package groupone.controllers;
 
 import groupone.daos.EventDAO;
 import groupone.daos.UserDAO;
+import groupone.dtos.UserDTO;
 import groupone.model.Event;
 import groupone.model.User;
+import io.javalin.http.Context;
 
 public class UserController {
 
@@ -19,10 +21,13 @@ public class UserController {
         }
         return instance;
     }
+    
+    public void addEventToUser(Context ctx) {
+        String userEmail = ctx.pathParam("email");
+        Integer eventId = Integer.parseInt( ctx.pathParam("eventId"));
 
-    public void addEventToUser(User user, Event event) {
-        User foundUser =  userDAO.getById(user.getEmail());
-        Event foundEvent = eventDAO.getById(event.getId());
+        User foundUser =  userDAO.getById(userEmail);
+        Event foundEvent = eventDAO.getById(eventId);
         foundUser.addEvent(foundEvent);
         userDAO.update(foundUser, foundUser.getEmail());
     }
