@@ -19,6 +19,10 @@ public class Location {
 
     private String street;
 
+    public Location(String street){
+        this.street = street;
+    }
+
     @ManyToMany(mappedBy = "locations")
     private List<Event> events = new ArrayList<>();
 
@@ -40,5 +44,10 @@ public class Location {
             zipcodes.add(zipcode);
         }
     }
-
+    public void setEventSpec(EventSpec eventSpec){
+        if(this.eventSpec != eventSpec){
+            this.eventSpec = eventSpec;
+            eventSpec.setLocation(this);
+        }
+    }
 }

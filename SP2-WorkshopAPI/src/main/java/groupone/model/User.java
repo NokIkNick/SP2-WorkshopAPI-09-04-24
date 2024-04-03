@@ -40,6 +40,12 @@ public class User {
         this.name = userDTO.getName();
         this.phoneNumber = userDTO.getPhone();
     }
+    public User(String email,String password,String name,Integer phoneNumber){
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+    }
 
 
     public Set<String> getRolesToString(){

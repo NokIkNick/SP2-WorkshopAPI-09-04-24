@@ -1,11 +1,13 @@
 package groupone.dtos;
 
+import groupone.model.Role;
 import groupone.model.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
+import java.util.List;
 import java.util.Set;
 @Getter
 @Setter
@@ -34,7 +36,5 @@ public class UserDTO {
         this.password = user.getPassword();
         this.roles = user.getRolesToString();
     }
-
-
 
 }

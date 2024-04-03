@@ -20,6 +20,10 @@ public class Role {
     @ManyToMany()
     List<User> users;
 
+    public Role(String name){
+        this.name = name;
+    }
+
     public void addUser(User user) {
         if(user != null && !users.contains(user)){
             users.add(user);

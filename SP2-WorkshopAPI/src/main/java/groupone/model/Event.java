@@ -1,6 +1,7 @@
 package groupone.model;
 
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -32,6 +33,15 @@ public class Event {
     @ManyToMany
     private List<Location> locations = new ArrayList<>();
 
+    public Event( String title,String description,double price,String imageUrl){
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.imageUrl = imageUrl;
+    }
+
     public void addUser(User user){
         if(user != null && !users.contains(user)){
             users.add(user);
@@ -45,6 +55,16 @@ public class Event {
             location.addEvent(this);
         }
     }
-
+    @PrePersist
+    public void prePersist(){
+        if(this.createdAt == null) {
+            this.createdAt = LocalDate.now();
+        }
+        this.updatedAt = LocalDate.now();
+    }
+    @PreUpdate
+    public void preUpdate(){
+        this.updatedAt = LocalDate.now();
+    }
 
 }
