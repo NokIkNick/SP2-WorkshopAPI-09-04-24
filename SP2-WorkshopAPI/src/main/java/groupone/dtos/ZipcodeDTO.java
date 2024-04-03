@@ -1,13 +1,12 @@
 package groupone.dtos;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class ZipcodeDTO {
-
-    private int zip;
-    private String city;
-
+    private Integer id;
+    private String zipcode;
 }
