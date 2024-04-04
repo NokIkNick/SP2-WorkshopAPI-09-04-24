@@ -14,6 +14,7 @@ import java.time.LocalTime;
 @EqualsAndHashCode
 public class EventSpec {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private LocalDate date;
     private LocalTime time;

@@ -124,15 +124,16 @@ public class EventController {
     public static Handler getEventsByCategory() {
         return ctx -> {
             String category = ctx.pathParam("category");
-            List<Event> events = eventService.getEventsByCategory(category);
+
+            List<Event> events = eventDAO.getEventsByCategory(category);
             ctx.json(events);
         };
     }
 
     public static Handler getEventsByStatus() {
         return ctx -> {
-            String status = ctx.pathParam("status");
-            List<Event> events = eventService.getEventsByStatus(status);
+            String status = (ctx.pathParam("status"));
+            List<Event> events = eventDAO.getEventsByStatus(status);
             ctx.json(events);
         };
     }
