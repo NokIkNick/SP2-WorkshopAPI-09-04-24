@@ -27,7 +27,7 @@ public class Location {
     @JsonIgnore
     private List<Event> events = new ArrayList<>();
 
-    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.DETACH},fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "location",cascade = {CascadeType.PERSIST,CascadeType.DETACH},fetch = FetchType.EAGER)
     private EventSpec eventSpec;
 
     @ManyToOne(cascade = {/*CascadeType.PERSIST,*/CascadeType.DETACH},fetch = FetchType.EAGER)
@@ -40,6 +40,7 @@ public class Location {
             }
     )*/
     private Zipcode zipcodes;
+
 
     public void addEvent(Event event) {
         if(event != null && !events.contains(event)){

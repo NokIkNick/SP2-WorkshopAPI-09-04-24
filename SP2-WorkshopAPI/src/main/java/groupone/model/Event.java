@@ -26,6 +26,7 @@ public class Event {
     private String imageUrl;
 
 
+
     @ManyToMany(cascade = CascadeType.DETACH,fetch = FetchType.EAGER)
     @JsonIgnore
     private List<User> users = new ArrayList<>();

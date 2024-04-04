@@ -6,10 +6,86 @@ POST http://localhost:7008/api/auth/register
 "phone":"1234542",
 "name":"Jophnfasd"
 }
+
 ###
+
 POST http://localhost:7008/api/auth/login
 
 {
-"email":"1234567@1234567.dk",
-"password":"1234567"
+"email":"12345678910@12345678910.dk",
+"password":"123456712"
+}
+
+###
+
+GET http://localhost:7008/api/auth/request/password/reset?email=12345678910@12345678910.dk
+
+###
+
+GET http://localhost:7008/api/auth/reset/password?email=12345678910@12345678910.dk&guid=
+
+###
+
+GET http://localhost:7008/api/events/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiIxMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjI1NjU3NCwicm9sZXMiOiJJTlNUUlVDVE9SIiwidXNlcm5hbWUiOiIxMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayJ9.Y1oJFYGgXuSbSuz-YGeT-ROqOF93puzZvBLvcNSLELY
+
+###
+
+GET http://localhost:7008/api/events
+
+###
+
+GET http://localhost:7008/api/events/status/ONGOING
+
+###
+
+POST http://localhost:7008/api/events
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiIxMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjI1NjU3NCwicm9sZXMiOiJJTlNUUlVDVE9SIiwidXNlcm5hbWUiOiIxMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayJ9.Y1oJFYGgXuSbSuz-YGeT-ROqOF93puzZvBLvcNSLELY
+
+{
+  "title":"newTestEvent",
+  "description":"This is a new test event!",
+  "price":100.0,
+  "createdAt":"2024-04-03",
+  "updatedAt":"2024-04-03",
+  "imageUrl":"www.moretexturl.com",
+  "locations":[
+    {
+      "street":"test-street-wahoo",
+      "eventSpec":{
+        "date":"2024-05-05",
+        "time":"16:30",
+        "duration":2,
+        "instructorName":"Peter Maker",
+        "instructorEmail":"Peter@Maker.dk",
+        "status":"UPCOMING",
+        "category":"EVENT",
+        "capacity":1200
+      },
+      "zipcodes":[
+        {
+          "zip":4700
+        }
+      ]
+    },
+    {
+    "street":"the-other-test-street-wahoo",
+    "eventSpec":{
+      "date":"2024-06-08",
+      "time":"17:30",
+      "duration":3,
+      "instructorName":"Morten Bungi",
+      "instructorEmail":"Morten@Bungi.dk",
+      "status":"UPCOMING",
+      "category":"EVENT",
+      "capacity":500
+    },
+      "zipcodes":[
+        {
+          "zip":3990
+        }
+      ]
+    }
+  ]
 }

@@ -25,6 +25,7 @@ public class EventSpec {
     private String instructorEmail;
     private Status status;
     private Integer capacity;
+    private Category category;
 
     public EventSpec(LocalDate date, LocalTime time, double duration, String instructorName, String instructorEmail, Status status, Integer capacity){
         this.date = date;
@@ -46,5 +47,4 @@ public class EventSpec {
             location.setEventSpec(this);
         }
     }
-
 }

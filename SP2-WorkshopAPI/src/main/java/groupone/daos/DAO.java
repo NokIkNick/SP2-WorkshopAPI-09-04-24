@@ -3,9 +3,11 @@ package groupone.daos;
 import groupone.config.HibernateConfig;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
+import org.hibernate.Hibernate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public abstract class DAO<T, K> implements IDAO<T, K> {
 
@@ -31,6 +33,16 @@ public abstract class DAO<T, K> implements IDAO<T, K> {
     public T getById(K in){
         try(var em = emf.createEntityManager()){
             return em.find(entityClass, in);
+        }
+    }
+
+    public T getById(K in, List<Consumer<T>> initializeList){
+        try(var em = emf.createEntityManager()){
+            T result = em.find(entityClass, in);
+            for(Consumer<T> initialize: initializeList){
+                initialize.accept(result);
+            }
+            return result;
         }
     }
 
