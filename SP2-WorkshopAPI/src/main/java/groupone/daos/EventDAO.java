@@ -54,7 +54,7 @@ public class EventDAO extends DAO<Event, Integer>{
         List<Event> eventList;
         try(var em = emf.createEntityManager()){
             em.getTransaction().begin();
-            TypedQuery<Event> query = em.createQuery("select e from Event e where e.category = :category", Event.class);
+            TypedQuery<Event> query = em.createQuery("select e from Event e JOIN Location l on e.id = l.id JOIN EventSpec es ON l.id = es.id WHERE es.category = :category", Event.class);
             query.setParameter("category", category);
             eventList = query.getResultList();
             for (Event e: eventList) {
@@ -73,7 +73,7 @@ public class EventDAO extends DAO<Event, Integer>{
         List<Event> eventList;
         try(var em = emf.createEntityManager()){
             em.getTransaction().begin();
-            TypedQuery<Event> query = em.createQuery("SELECT e FROM Event e JOIN e.locations l JOIN l.eventSpec es WHERE es.status = :status", Event.class);
+            TypedQuery<Event> query = em.createQuery("select e from Event e JOIN Location l on e.id = l.id JOIN EventSpec es ON l.id = es.id WHERE es.status = :status", Event.class);
             query.setParameter("status", EventSpec.Status.valueOf(status));
             eventList = query.getResultList();
             for (Event e: eventList) {

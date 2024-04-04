@@ -23,6 +23,7 @@ public class EventSpec {
     private String instructorEmail;
     private Status status;
     private Integer capacity;
+    private Category category;
 
     @MapsId("id")
     @OneToOne(mappedBy = "eventSpec", cascade = CascadeType.DETACH)
@@ -34,5 +35,11 @@ public class EventSpec {
         UPCOMING,
         ENDED,
         TBD
+    }
+
+    public enum Category{
+        EVENT,
+        WORKSHOP,
+        OTHER
     }
 }
