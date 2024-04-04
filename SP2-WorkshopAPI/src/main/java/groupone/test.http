@@ -20,6 +20,14 @@ GET http://localhost:7008/api/events/1
 
 ###
 
+GET http://localhost:7008/api/events
+
+###
+
+GET http://localhost:7008/api/events/status/ONGOING
+
+###
+
 POST http://localhost:7008/api/events
 Content-Type: application/json
 
@@ -40,6 +48,7 @@ Content-Type: application/json
     "instructorName":"Peter Maker",
     "instructorEmail":"Peter@Maker.dk",
     "status":"UPCOMING",
+    "category":"EVENT",
     "capacity":1200
     },
     "zipcodes":[
@@ -58,6 +67,7 @@ Content-Type: application/json
 "instructorName":"Morten Bungi",
 "instructorEmail":"Morten@Bungi.dk",
 "status":"UPCOMING",
+"category":"EVENT",
 "capacity":500
 },
 "zipcodes":[

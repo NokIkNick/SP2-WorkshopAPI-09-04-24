@@ -22,8 +22,11 @@ public class Routes {
         return () -> {
             path("/", () -> {
                 get("/", ctx -> ctx.json(objectMapper.createObjectNode().put("Message", "Connected Successfully")), roles.ANYONE);
+                get("/events/category/{category}", ec.getEventsByCategory(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
+                get("/events/status/{status}", ec.getEventsByStatus(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
                 get("/events", ec.getAllEvents(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
                 get("/events/{id}", ec.getEventsById(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
+                // Posts!
                 post("/events", ec.createEvent(), roles.INSTRUCTOR);
             });
             path("/auth", () -> {
