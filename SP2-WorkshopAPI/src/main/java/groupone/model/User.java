@@ -19,6 +19,9 @@ public class User {
     @Id
     private String email;
     private String password;
+    public void setPassword(String password){
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
+    }
     private String name;
     private Integer phoneNumber;
 
@@ -28,10 +31,9 @@ public class User {
     @ManyToMany(cascade = CascadeType.DETACH, mappedBy = ("users"))
     Set<Event> events = new HashSet<>();
 
-
     @PrePersist
     private void PrePersist(){
-        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
+        // kryptering af password ændret til setPassword.
     }
 
     public User(UserDTO userDTO){

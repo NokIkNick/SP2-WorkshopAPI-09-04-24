@@ -13,3 +13,7 @@ POST http://localhost:7008/api/auth/login
 "email":"1234567@1234567.dk",
 "password":"1234567"
 }
+###
+GET http://localhost:7008/api/auth/request/password/reset?email=12345678910@12345678910.dk
+###
+GET http://localhost:7008/api/auth/reset/password?email=12345678910@12345678910.dk&GUID=

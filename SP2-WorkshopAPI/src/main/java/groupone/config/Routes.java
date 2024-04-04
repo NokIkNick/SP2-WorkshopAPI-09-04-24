@@ -4,8 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import groupone.controllers.SecurityController;
 import io.javalin.apibuilder.EndpointGroup;
 import io.javalin.security.RouteRole;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
 
@@ -21,6 +19,8 @@ public class Routes {
             path("/auth", () -> {
                 post("/login", sc.login(), roles.ANYONE);
                 post("/register", sc.register(), roles.ANYONE);
+                get("/request/password/reset", sc.requestPasswordReset(), roles.ANYONE);
+                get("/reset/password", sc.resetPassword(), roles.ANYONE);
             });
         };
     }
