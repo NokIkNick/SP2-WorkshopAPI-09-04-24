@@ -8,6 +8,7 @@ POST http://localhost:7008/api/auth/register
 }
 
 ###
+
 POST http://localhost:7008/api/auth/login
 
 {
@@ -16,6 +17,15 @@ POST http://localhost:7008/api/auth/login
 }
 
 ###
+
+GET http://localhost:7008/api/auth/request/password/reset?email=12345678910@12345678910.dk
+
+###
+
+GET http://localhost:7008/api/auth/reset/password?email=12345678910@12345678910.dk&guid=
+
+###
+
 GET http://localhost:7008/api/events/1
 
 ###
@@ -32,50 +42,50 @@ POST http://localhost:7008/api/events
 Content-Type: application/json
 
 {
-"title":"newTestEvent",
-"description":"This is a new test event!",
-"price":100.0,
-"createdAt":"2024-04-03",
-"updatedAt":"2024-04-03",
-"imageUrl":"www.moretexturl.com",
+  "title":"newTestEvent",
+  "description":"This is a new test event!",
+  "price":100.0,
+  "createdAt":"2024-04-03",
+  "updatedAt":"2024-04-03",
+  "imageUrl":"www.moretexturl.com",
   "locations":[
     {
-    "street":"test-street-wahoo",
-    "eventSpec":{
-    "date":"2024-05-05",
-    "time":"16:30",
-    "duration":2,
-    "instructorName":"Peter Maker",
-    "instructorEmail":"Peter@Maker.dk",
-    "status":"UPCOMING",
-    "category":"EVENT",
-    "capacity":1200
+      "street":"test-street-wahoo",
+      "eventSpec":{
+        "date":"2024-05-05",
+        "time":"16:30",
+        "duration":2,
+        "instructorName":"Peter Maker",
+        "instructorEmail":"Peter@Maker.dk",
+        "status":"UPCOMING",
+        "category":"EVENT",
+        "capacity":1200
+      },
+      "zipcodes":[
+        {
+          "zip":2700,
+          "city":"test-street!"
+        }
+      ]
     },
-    "zipcodes":[
     {
-      "zip":2700,
-      "city":"test-street!"
+    "street":"the-other-test-street-wahoo",
+    "eventSpec":{
+      "date":"2024-06-08",
+      "time":"17:30",
+      "duration":3,
+      "instructorName":"Morten Bungi",
+      "instructorEmail":"Morten@Bungi.dk",
+      "status":"UPCOMING",
+      "category":"EVENT",
+      "capacity":500
+    },
+      "zipcodes":[
+        {
+          "zip":3000,
+          "city":"another-test-street!"
+        }
+      ]
     }
   ]
-},
-{
-"street":"the-other-test-street-wahoo",
-"eventSpec":{
-"date":"2024-06-08",
-"time":"17:30",
-"duration":3,
-"instructorName":"Morten Bungi",
-"instructorEmail":"Morten@Bungi.dk",
-"status":"UPCOMING",
-"category":"EVENT",
-"capacity":500
-},
-"zipcodes":[
-{
-"zip":3000,
-"city":"another-test-street!"
-}
-]
-}
-]
 }

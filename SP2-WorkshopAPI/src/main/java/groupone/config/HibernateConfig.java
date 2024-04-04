@@ -61,8 +61,7 @@ public class HibernateConfig {
         configuration.addAnnotatedClass(Location.class);
         configuration.addAnnotatedClass(EventSpec.class);
         configuration.addAnnotatedClass(Zipcode.class);
-
-
+        configuration.addAnnotatedClass(ResetRequest.class);
     }
 
     public static EntityManagerFactory getEntityManagerFactoryConfig() {
