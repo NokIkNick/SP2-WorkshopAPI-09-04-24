@@ -61,11 +61,13 @@ public class ApplicationConfig {
         app.exception(IllegalStateException.class, (e, ctx) -> {
             ObjectNode json = jsonMapper.createObjectNode();
             json.put("errorMessage", e.getMessage());
+            e.printStackTrace();
             ctx.status(500).json(json);
         });
         app.exception(Exception.class, (e, ctx) -> {
             ObjectNode json = jsonMapper.createObjectNode();
             json.put("errorMessage",e.getMessage());
+            e.printStackTrace();
             ctx.status(500).json(json);
         });
         app.error(404, ctx -> {
