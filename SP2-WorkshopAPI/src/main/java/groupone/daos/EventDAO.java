@@ -1,5 +1,6 @@
 package groupone.daos;
 
+import groupone.enums.Status;
 import groupone.model.Event;
 import groupone.model.EventSpec;
 import groupone.model.Location;
@@ -26,7 +27,7 @@ public class EventDAO extends DAO<Event, Integer>{
                 e.getLocations().size();
                 for(Location l : e.getLocations()){
                     l.getEventSpec();
-                    l.getZipcodes().size();
+                    l.getZipcodes().getCity();
                 }
             }
             em.getTransaction().commit();
@@ -43,7 +44,7 @@ public class EventDAO extends DAO<Event, Integer>{
             event.getLocations().size();
             for(Location l : event.getLocations()){
                 l.getEventSpec();
-                l.getZipcodes().size();
+                l.getZipcodes().getCity();
             }
             em.getTransaction().commit();
         }
@@ -61,7 +62,7 @@ public class EventDAO extends DAO<Event, Integer>{
                 e.getLocations().size();
                 for(Location l : e.getLocations()){
                     l.getEventSpec();
-                    l.getZipcodes().size();
+                    l.getZipcodes().getCity();
                 }
             }
             em.getTransaction().commit();
@@ -74,13 +75,13 @@ public class EventDAO extends DAO<Event, Integer>{
         try(var em = emf.createEntityManager()){
             em.getTransaction().begin();
             TypedQuery<Event> query = em.createQuery("select e from Event e JOIN Location l on e.id = l.id JOIN EventSpec es ON l.id = es.id WHERE es.status = :status", Event.class);
-            query.setParameter("status", EventSpec.Status.valueOf(status));
+            query.setParameter("status", Status.valueOf(status));
             eventList = query.getResultList();
             for (Event e: eventList) {
                 e.getLocations().size();
                 for(Location l : e.getLocations()){
                     l.getEventSpec();
-                    l.getZipcodes().size();
+                    l.getZipcodes().getCity();
                 }
             }
             em.getTransaction().commit();

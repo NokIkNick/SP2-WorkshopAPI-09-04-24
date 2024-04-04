@@ -5,39 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b59af9bc-6a0a-4a0a-8aff-8280499ebafd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/SP2-WorkshopAPI-09-04-24.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/.creds.ser" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/config/Mailer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/EventController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/daos/RequestDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/daos/RoleDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/EmailCredentialsDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/EventDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/EventSpecsDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/LocationDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/SuperEventDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/ZipcodeDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/ResetRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/sendEmailTilAnders.http" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/daos/EventDAOTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/daos/RoleDAOTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/config/ApplicationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/config/ApplicationConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/config/HibernateConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/config/HibernateConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/config/Routes.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/config/Routes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/SecurityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/SecurityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/daos/DAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/daos/DAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/daos/EventDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/daos/EventDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/EventSpec.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/EventSpec.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/Location.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/test.http" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/test.http" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +50,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Merging us3-register-user-for-event",
+    "git-widget-placeholder": "us3-register-user-for-event",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "19",
     "node.js.detected.package.eslint": "true",
@@ -151,7 +119,7 @@
       <updated>1712130572408</updated>
       <workItem from="1712130573504" duration="12034000" />
       <workItem from="1712213556913" duration="13949000" />
-      <workItem from="1712253351914" duration="10443000" />
+      <workItem from="1712253351914" duration="10757000" />
     </task>
     <servers />
   </component>
