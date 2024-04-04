@@ -1,5 +1,6 @@
 package groupone.controllers;
 
+import groupone.config.HibernateConfig;
 import groupone.daos.EventDAO;
 import groupone.daos.UserDAO;
 import groupone.dtos.EventDTO;
@@ -7,6 +8,8 @@ import groupone.dtos.UserDTO;
 import groupone.model.Event;
 import groupone.model.User;
 import io.javalin.http.Context;
+import io.javalin.http.Handler;
+import jakarta.persistence.EntityManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,27 +30,32 @@ public class UserController {
         return instance;
     }
 
-    public void getAllEvents(Context ctx){
-        List<Event> events = eventDAO.getAll();
-        List<EventDTO> eventDTOS = new ArrayList<>();
-        for(Event e : events){
-            EventDTO eventDTO = new EventDTO(e);
-            eventDTOS.add(eventDTO);
-        }
-        ctx.json(eventDTOS);
+    public Handler getAllEvents(){
+        return(ctx)->{
+            List<Event> events = eventDAO.getAll();
+            List<EventDTO> eventDTOS = new ArrayList<>();
+            for(Event e : events){
+                EventDTO eventDTO = new EventDTO(e);
+                eventDTOS.add(eventDTO);
+            }
+            ctx.json(eventDTOS);
+        };
+
     }
 
 
 
-    public void getAllUsers(Context ctx){
-          List<User> users = userDAO.getAll();
-          List<UserDTO> userDTOS = new ArrayList<>();
-          for(User u: users){
-              UserDTO userDTO = new UserDTO(u);
-              userDTOS.add(userDTO);
-          }
-          ctx.json(userDTOS);
-
+    public Handler getAllUsers(){
+        return(ctx)->{
+            var em = HibernateConfig.getEntityManagerFactoryConfig().createEntityManager();
+            List<User> users = (List<User>) em.createQuery("SELECT u from users u",User.class).getResultList();
+            List<UserDTO> userDTOS = new ArrayList<>();
+            for(User u: users){
+                UserDTO userDTO = new UserDTO(u);
+                userDTOS.add(userDTO);
+            }
+            ctx.json(userDTOS);
+        };
     }
     
     public void addEventToUser(Context ctx) {

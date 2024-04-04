@@ -11,7 +11,6 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 public class EventSpec {
     @Id
     private Integer id;

@@ -1,15 +1,20 @@
 POST http://localhost:7008/api/auth/register
 
 {
-"email":"12345678910@12345678910.dk",
-"password":"123456712",
-"phone":"1234542",
-"name":"Jophnfasd"
+"email":"patrick_the_awesome2_12345678910@12345678910.dk",
+"password":"123456789",
+"phone":"88888888",
+"name":"patrick_the_awesome"
 }
 ###
 POST http://localhost:7008/api/auth/login
 
 {
-"email":"1234567@1234567.dk",
-"password":"1234567"
+"email":"patrick_the_awesome2_12345678910@12345678910.dk",
+"password":"123456789"
 }
+###
+GET http://localhost:7008/api/admin/get_all_users
+
+###
+POST http://localhost:7008/api/admin/get_all_events
