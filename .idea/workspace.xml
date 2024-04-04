@@ -5,11 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b59af9bc-6a0a-4a0a-8aff-8280499ebafd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/SP2-WorkshopAPI-09-04-24.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/.creds.ser" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/config/Mailer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/EventController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/daos/RequestDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/daos/RoleDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/EmailCredentialsDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/EventDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/EventSpecsDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/LocationDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/SuperEventDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/ZipcodeDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/ResetRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/sendEmailTilAnders.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/daos/EventDAOTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/daos/RoleDAOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/config/ApplicationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/config/ApplicationConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/config/HibernateConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/config/HibernateConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/config/Routes.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/config/Routes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/SecurityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/SecurityController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/daos/DAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/daos/DAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/daos/EventDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/daos/EventDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/EventSpec.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/EventSpec.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/Location.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/controllers/UserControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/controllers/UserControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/test.http" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/test.http" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,36 +72,36 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;us3-register-user-for-event&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;19&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.importing&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "Merging us3-register-user-for-event",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "19",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;,
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql",
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="JUnit.UserControllerTest.addEventToUser">
     <configuration name="UserControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SP2-WorkshopAPI" />
@@ -123,7 +151,7 @@
       <updated>1712130572408</updated>
       <workItem from="1712130573504" duration="12034000" />
       <workItem from="1712213556913" duration="13949000" />
-      <workItem from="1712253351914" duration="9852000" />
+      <workItem from="1712253351914" duration="10443000" />
     </task>
     <servers />
   </component>
@@ -145,12 +173,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/SecurityController.java</url>
-          <line>80</line>
+          <line>233</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/SecurityController.java</url>
-          <line>56</line>
+          <line>64</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
