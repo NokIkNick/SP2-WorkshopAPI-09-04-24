@@ -69,7 +69,7 @@ public class Mailer {
                     }
                 })
         );
-        message.setFrom(credentials.getEmail());
+        message.setFrom(new InternetAddress(credentials.getEmail()));
         return message;
     }
 
@@ -85,16 +85,18 @@ public class Mailer {
             creds.setEmail(System.getenv("SMTP_FROM_EMAIL"));
             return creds;
         } else {
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(credsFile))) {
-                Object obj = ois.readObject();
-                if (obj instanceof EmailCredentialsDTO) {
-                    return (EmailCredentialsDTO) obj;
-                } else {
-                    throw new IllegalArgumentException("The deserialized object is not of the expected type.");
+            synchronized (credsFile) {
+                try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(credsFile))) {
+                    Object obj = ois.readObject();
+                    if (obj instanceof EmailCredentialsDTO) {
+                        return (EmailCredentialsDTO) obj;
+                    } else {
+                        throw new IllegalArgumentException("The deserialized object is not of the expected type.");
+                    }
+                } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                    return null;
                 }
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-                return null;
             }
         }
     }
