@@ -26,7 +26,8 @@ GET http://localhost:7008/api/auth/reset/password?email=12345678910@12345678910.
 
 ###
 
-GET http://localhost:7008/api/events/1
+GET http://localhost:7008/api/events/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiIxMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjI1NjU3NCwicm9sZXMiOiJJTlNUUlVDVE9SIiwidXNlcm5hbWUiOiIxMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayJ9.Y1oJFYGgXuSbSuz-YGeT-ROqOF93puzZvBLvcNSLELY
 
 ###
 
@@ -40,6 +41,7 @@ GET http://localhost:7008/api/events/status/ONGOING
 
 POST http://localhost:7008/api/events
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiIxMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjI1NjU3NCwicm9sZXMiOiJJTlNUUlVDVE9SIiwidXNlcm5hbWUiOiIxMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayJ9.Y1oJFYGgXuSbSuz-YGeT-ROqOF93puzZvBLvcNSLELY
 
 {
   "title":"newTestEvent",
@@ -63,8 +65,7 @@ Content-Type: application/json
       },
       "zipcodes":[
         {
-          "zip":2700,
-          "city":"test-street!"
+          "zip":4700
         }
       ]
     },
@@ -82,8 +83,7 @@ Content-Type: application/json
     },
       "zipcodes":[
         {
-          "zip":3000,
-          "city":"another-test-street!"
+          "zip":3990
         }
       ]
     }
