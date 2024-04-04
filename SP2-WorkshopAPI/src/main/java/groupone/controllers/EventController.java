@@ -6,9 +6,11 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import groupone.daos.EventDAO;
 import groupone.dtos.*;
 import groupone.model.Event;
+import groupone.model.EventSpec;
 import groupone.model.Location;
 import io.javalin.http.Handler;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -130,7 +132,7 @@ public class EventController {
             ctx.json(superEventDTO);
         };
     }
-    public static Handler getEventsByCategory() {
+    public Handler getEventsByCategory() {
         return ctx -> {
             String category = (ctx.pathParam("category"));
             List<Event> eventList = eventDAO.getEventsByCategory(category);
@@ -173,7 +175,7 @@ public class EventController {
         };
     }
 
-    public static Handler getEventsByStatus() {
+    public Handler getEventsByStatus() {
         return ctx -> {
             String status = (ctx.pathParam("status"));
             List<Event> eventList = eventDAO.getEventsByStatus(status);
@@ -219,13 +221,23 @@ public class EventController {
     public Handler createEvent(){
         return ctx -> {
             Event event = ctx.bodyAsClass(Event.class);
-            /*for(int i = 0; i < event.getLocations().size(); i++){
-                event.getLocations().get(i).getEventSpec().setLocation(event.getLocations().get(i));
-            }*/
             eventDAO.create(event);
             ctx.json(event);
         };
     }
 
+
+    public Handler cancelEvent(){
+        return ctx -> {
+            int id = Integer.parseInt(ctx.pathParam("id"));
+            Event event = eventDAO.getById(id);
+            for(int i = 0; i < event.getLocations().size(); i++){
+                event.getLocations().get(i).getEventSpec().setStatus(EventSpec.Status.CANCELLED);
+            }
+            event.setDeletedAt(LocalDate.now());
+            Event updated = eventDAO.update(event, event.getId());
+            ctx.json(updated);
+        };
+    }
 }
 

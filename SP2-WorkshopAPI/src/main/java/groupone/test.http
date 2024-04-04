@@ -26,11 +26,13 @@ GET http://localhost:7008/api/auth/reset/password?email=12345678910@12345678910.
 
 ###
 
-GET http://localhost:7008/api/events/1
+GET http://localhost:7008/api/events/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiIxMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjI1NTU1Miwicm9sZXMiOiJJTlNUUlVDVE9SIiwidXNlcm5hbWUiOiIxMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayJ9.PEzYf8BUptNs0VfaSbe7d6AF2KaO2v1R-UghjFIMPvY
 
 ###
 
 GET http://localhost:7008/api/events
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiIxMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjI1NDc0Mywicm9sZXMiOiJJTlNUUlVDVE9SIiwidXNlcm5hbWUiOiIxMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayJ9.XUFh3GqfPwXO-XOEjzqbIMFmfCPPiucw9K4STL_esxg
 
 ###
 
@@ -40,6 +42,7 @@ GET http://localhost:7008/api/events/status/ONGOING
 
 POST http://localhost:7008/api/events
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiIxMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjI1NDc0Mywicm9sZXMiOiJJTlNUUlVDVE9SIiwidXNlcm5hbWUiOiIxMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayJ9.XUFh3GqfPwXO-XOEjzqbIMFmfCPPiucw9K4STL_esxg
 
 {
   "title":"newTestEvent",
@@ -89,3 +92,15 @@ Content-Type: application/json
     }
   ]
 }
+###
+
+PUT http://localhost:7008/api/events/2/cancel
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiIxMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjI1NDc0Mywicm9sZXMiOiJJTlNUUlVDVE9SIiwidXNlcm5hbWUiOiIxMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayJ9.XUFh3GqfPwXO-XOEjzqbIMFmfCPPiucw9K4STL_esxg
+Content-Type: application/json
+
+{
+
+  "status":"CANCELLED"
+
+}
+###
