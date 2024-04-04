@@ -31,8 +31,8 @@ public class EventController {
      */
     private static ObjectMapper objectMapper = new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false).registerModule(new JavaTimeModule());
 
-    public static EventController getInstance(Boolean isTesting){
-        if(instance == null){
+    public static EventController getInstance(Boolean isTesting) {
+        if (instance == null) {
             instance = new EventController();
             eventDAO = EventDAO.getInstance(isTesting);
         }
@@ -130,7 +130,8 @@ public class EventController {
             ctx.json(superEventDTO);
         };
     }
-    public static Handler getEventsByCategory() {
+
+    public Handler getEventsByCategory() {
         return ctx -> {
             String category = (ctx.pathParam("category"));
             List<Event> eventList = eventDAO.getEventsByCategory(category);
@@ -173,7 +174,7 @@ public class EventController {
         };
     }
 
-    public static Handler getEventsByStatus() {
+    public Handler getEventsByStatus() {
         return ctx -> {
             String status = (ctx.pathParam("status"));
             List<Event> eventList = eventDAO.getEventsByStatus(status);
@@ -216,16 +217,17 @@ public class EventController {
         };
     }
 
-    public Handler createEvent(){
+    public Handler createEvent() {
         return ctx -> {
             Event event = ctx.bodyAsClass(Event.class);
-            /*for(int i = 0; i < event.getLocations().size(); i++){
+            for (int i = 0; i < event.getLocations().size(); i++) {
                 event.getLocations().get(i).getEventSpec().setLocation(event.getLocations().get(i));
-            }*/
-            eventDAO.create(event);
-            ctx.json(event);
+                eventDAO.create(event);
+                ctx.json(event);
+            }
+            ;
         };
-    }
 
+    }
 }
 

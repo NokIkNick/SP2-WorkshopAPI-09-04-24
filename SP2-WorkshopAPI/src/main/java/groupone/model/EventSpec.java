@@ -1,5 +1,6 @@
 package groupone.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,7 +18,7 @@ public class EventSpec {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private LocalDate date;
-    private LocalTime time = LocalTime.of(16,30);
+    private LocalTime time;
     private Double duration;
     private String instructorName;
     private String instructorEmail;
@@ -25,7 +26,7 @@ public class EventSpec {
     private Integer capacity;
     private Category category;
 
-
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.DETACH)
     private Location location;
 

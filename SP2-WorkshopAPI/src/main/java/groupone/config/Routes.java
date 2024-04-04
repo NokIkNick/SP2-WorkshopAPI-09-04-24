@@ -19,6 +19,7 @@ public class Routes {
         ec = EventController.getInstance(isTesting);
         return () -> {
             path("/", () -> {
+                before(sc.authenticate());
                 get("/", ctx -> ctx.json(objectMapper.createObjectNode().put("Message", "Connected Successfully")), roles.ANYONE);
                 get("/events/category/{category}", ec.getEventsByCategory(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
                 get("/events/status/{status}", ec.getEventsByStatus(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
