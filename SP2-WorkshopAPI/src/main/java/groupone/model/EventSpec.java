@@ -14,6 +14,7 @@ import java.time.LocalTime;
 @EqualsAndHashCode
 public class EventSpec {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private LocalDate date;
     private LocalTime time = LocalTime.of(16,30);
@@ -23,8 +24,8 @@ public class EventSpec {
     private Status status;
     private Integer capacity;
 
-    @MapsId
-    @OneToOne(mappedBy = "eventSpec", cascade = CascadeType.DETACH)
+
+    @OneToOne(cascade = CascadeType.DETACH)
     private Location location;
 
     public enum Status{

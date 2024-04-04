@@ -135,9 +135,9 @@ public class EventController {
     public Handler createEvent(){
         return ctx -> {
             Event event = ctx.bodyAsClass(Event.class);
-            for(int i = 0; i < event.getLocations().size(); i++){
+            /*for(int i = 0; i < event.getLocations().size(); i++){
                 event.getLocations().get(i).getEventSpec().setLocation(event.getLocations().get(i));
-            }
+            }*/
             eventDAO.create(event);
             ctx.json(event);
         };

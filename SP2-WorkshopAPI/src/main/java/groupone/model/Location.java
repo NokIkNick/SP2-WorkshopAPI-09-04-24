@@ -22,10 +22,10 @@ public class Location {
     @ManyToMany(mappedBy = "locations")
     private List<Event> events = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(mappedBy = "location", cascade = CascadeType.PERSIST)
     private EventSpec eventSpec;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.DETACH)
     private List<Zipcode> zipcodes = new ArrayList<>();
 
     public void addEvent(Event event) {

@@ -6,6 +6,7 @@ POST http://localhost:7008/api/auth/register
 "phone":"1234542",
 "name":"Jophnfasd"
 }
+
 ###
 POST http://localhost:7008/api/auth/login
 
@@ -13,11 +14,14 @@ POST http://localhost:7008/api/auth/login
 "email":"12345678910@12345678910.dk",
 "password":"123456712"
 }
+
 ###
 GET http://localhost:7008/api/events/1
+
 ###
 
 POST http://localhost:7008/api/events
+Content-Type: application/json
 
 {
 "title":"newTestEvent",
@@ -26,24 +30,24 @@ POST http://localhost:7008/api/events
 "createdAt":"2024-04-03",
 "updatedAt":"2024-04-03",
 "imageUrl":"www.moretexturl.com",
-"locations":[
-{
-"street":"test-street-wahoo",
-"eventSpec":{
-"date":"2024-05-05",
-"time":"16:30",
-"duration":2,
-"instructorName":"Peter Maker",
-"instructorEmail":"Peter@Maker.dk",
-"status":"UPCOMING",
-"capacity":1200
-},
-"zipcodes":[
-{
-"zip":2700,
-"city":"test-street!"
-}
-]
+  "locations":[
+    {
+    "street":"test-street-wahoo",
+    "eventSpec":{
+    "date":"2024-05-05",
+    "time":"16:30",
+    "duration":2,
+    "instructorName":"Peter Maker",
+    "instructorEmail":"Peter@Maker.dk",
+    "status":"UPCOMING",
+    "capacity":1200
+    },
+    "zipcodes":[
+    {
+      "zip":2700,
+      "city":"test-street!"
+    }
+  ]
 },
 {
 "street":"the-other-test-street-wahoo",
