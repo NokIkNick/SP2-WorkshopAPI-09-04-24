@@ -31,16 +31,16 @@ class UserControllerTest {
 
     @BeforeAll
     static void setUpAll(){
-       // emf = HibernateConfig.getEntityManagerFactoryConfigForTesting();
-        emf = HibernateConfig.getEntityManagerFactoryConfig();
+        emf = HibernateConfig.getEntityManagerFactoryConfigForTesting();
+        //emf = HibernateConfig.getEntityManagerFactoryConfig();
 
         RestAssured.baseURI = "http://localhost:7777/api";
         ApplicationConfig applicationConfig = ApplicationConfig.getInstance();
         applicationConfig.initiateServer()
                 .startServer(7777)
                 .setExceptionHandling()
-                .setRoutes(Routes.getRoutes(false))
-                .checkSecurityRoles(false);
+                .setRoutes(Routes.getRoutes(true))
+                .checkSecurityRoles(true);
 
         student = new Role("STUDENT");
         admin = new Role("ADMIN");
@@ -50,7 +50,7 @@ class UserControllerTest {
         userAdmin = new User("test@admin.com","test","PatrickAdmin",456765353,admin);
         userInstructor = new User("test@instructor.com","test","PatrickInstructor",456765353,instructor);
 
-       /* try(EntityManager em = emf.createEntityManager()){
+        try(EntityManager em = emf.createEntityManager()){
             em.getTransaction().begin();
             em.persist(student);
             em.persist(admin);
@@ -59,7 +59,7 @@ class UserControllerTest {
             em.persist(userAdmin);
             em.persist(userInstructor);
             em.getTransaction().commit();
-        }*/
+        }
         adminToken = getToken(userAdmin.getEmail(), "test");
         studentToken = getToken(userStudent.getEmail(), "test");
         instructorToken = getToken(userInstructor.getEmail(),"test");
@@ -111,6 +111,8 @@ class UserControllerTest {
             User user124 = em.merge(userStudent);
             em.getTransaction().commit();
             //User found = em.find(User.class,user124.getEmail());
+
+
         }
     }
 
@@ -140,13 +142,13 @@ class UserControllerTest {
     @Test
     void addEventToUser() {
         RestAssured.given()
-                .header("Authorization", studentToken).log().all()
+                .header("Authorization", studentToken)
                 .when()
-                .get("http://localhost:7008/api/student/toevent/2")
+                .post("http://localhost:7777/api/student/toevent/2")
                 .then().log().all()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200)
-                .body("",equalTo(""));
+                .body("email",equalTo("test@student.com"));
 
     }
     @Test

@@ -31,7 +31,7 @@ public class User {
 
     @PrePersist
     private void PrePersist(){
-        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
+        //this.password = BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
     public User(UserDTO userDTO){
@@ -44,12 +44,14 @@ public class User {
     // test constructor
     public User(String email, String password, String name, Integer phoneNumber,Role role){
         this.email = email;
-        this.password = password;
+        setPassword(password);
         this.name = name;
         this.phoneNumber = phoneNumber;
         addRole(role);
     }
-
+    public void setPassword(String password){
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
+    }
     @JsonIgnore
     public Set<String> getRolesToString(){
         return roles.stream().map(Role::getName).collect(Collectors.toSet());

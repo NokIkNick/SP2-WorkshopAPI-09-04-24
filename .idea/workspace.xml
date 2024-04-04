@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b59af9bc-6a0a-4a0a-8aff-8280499ebafd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/EventSpec.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/EventSpec.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/Location.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/Role.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/model/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/controllers/UserControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/controllers/UserControllerTest.java" afterDir="false" />
     </list>
@@ -78,7 +74,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="JUnit.UserControllerTest">
+  <component name="RunManager" selected="JUnit.UserControllerTest.addEventToUser">
     <configuration name="UserControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SP2-WorkshopAPI" />
       <extension name="coverage">
@@ -112,8 +108,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.UserControllerTest" />
         <item itemvalue="JUnit.UserControllerTest.addEventToUser" />
+        <item itemvalue="JUnit.UserControllerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -127,7 +123,7 @@
       <updated>1712130572408</updated>
       <workItem from="1712130573504" duration="12034000" />
       <workItem from="1712213556913" duration="13949000" />
-      <workItem from="1712253351914" duration="7206000" />
+      <workItem from="1712253351914" duration="9852000" />
     </task>
     <servers />
   </component>
@@ -138,34 +134,24 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/SecurityController.java</url>
-          <line>56</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/UserController.java</url>
-          <line>41</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/controllers/UserControllerTest.java</url>
           <line>112</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/daos/UserDAO.java</url>
-          <line>43</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/UserController.java</url>
-          <line>27</line>
+          <line>28</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/controllers/UserControllerTest.java</url>
-          <line>62</line>
-          <option name="timeStamp" value="13" />
+          <url>file://$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/SecurityController.java</url>
+          <line>80</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/SecurityController.java</url>
+          <line>56</line>
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
