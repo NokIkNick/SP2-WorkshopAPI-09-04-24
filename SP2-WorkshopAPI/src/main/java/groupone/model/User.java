@@ -28,7 +28,7 @@ public class User {
     @ManyToMany(cascade = CascadeType.DETACH, mappedBy = "users")
     Set<Role> roles = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.DETACH, mappedBy = ("users"))
+    @ManyToMany(cascade = CascadeType.DETACH, mappedBy = "users")
     Set<Event> events = new HashSet<>();
 
     @PrePersist

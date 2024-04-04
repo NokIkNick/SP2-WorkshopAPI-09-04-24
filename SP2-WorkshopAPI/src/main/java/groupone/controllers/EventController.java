@@ -6,6 +6,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import groupone.daos.EventDAO;
 import groupone.dtos.*;
 import groupone.model.Event;
+import groupone.model.Location;
 import io.javalin.http.Handler;
 
 import java.util.ArrayList;
@@ -21,13 +22,22 @@ public class EventController {
      * A singleton instance of EventDAO used for database operations related to events.
      * The instance is fetched once and reused for all database operations.
      */
-    private static EventDAO eventDAO = EventDAO.getInstance(false);
+    private static EventController instance;
+    private static EventDAO eventDAO;
 
     /**
      * An ObjectMapper used for mapping between different object types.
      * It is configured to not fail on empty beans and to support Java Time objects.
      */
     private static ObjectMapper objectMapper = new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false).registerModule(new JavaTimeModule());
+
+    public static EventController getInstance(Boolean isTesting){
+        if(instance == null){
+            instance = new EventController();
+            eventDAO = EventDAO.getInstance(isTesting);
+        }
+        return instance;
+    }
 
 
     /**
@@ -37,7 +47,7 @@ public class EventController {
      *
      * @return A Handler that can be used with Javalin to handle requests to the "getAllEvents" route.
      */
-    public static Handler getAllEvents() {
+    public Handler getAllEvents() {
         return ctx -> {
             // Fetch all events from the database
             List<Event> eventList = eventDAO.getAll();
@@ -88,7 +98,7 @@ public class EventController {
      *
      * @return A Handler that can be used with Javalin to handle requests to the "getEventsById" route.
      */
-    public static Handler getEventsById() {
+    public Handler getEventsById() {
         return ctx -> {
             // Fetch the event from the database by its ID
             int id = Integer.parseInt(ctx.pathParam("id"));
@@ -120,4 +130,17 @@ public class EventController {
             ctx.json(superEventDTO);
         };
     }
+
+
+    public Handler createEvent(){
+        return ctx -> {
+            Event event = ctx.bodyAsClass(Event.class);
+            /*for(int i = 0; i < event.getLocations().size(); i++){
+                event.getLocations().get(i).getEventSpec().setLocation(event.getLocations().get(i));
+            }*/
+            eventDAO.create(event);
+            ctx.json(event);
+        };
+    }
+
 }
