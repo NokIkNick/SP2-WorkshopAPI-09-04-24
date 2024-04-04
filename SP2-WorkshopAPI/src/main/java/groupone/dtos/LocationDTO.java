@@ -18,7 +18,7 @@ public class LocationDTO {
     private int id;
     private String street;
     private EventSpecsDTO eventSpecifications;
-    private List<ZipcodeDTO> zipcodes;
+    private ZipcodeDTO zipcode;
 
     public LocationDTO(int id, String street, EventSpecsDTO eventSpecifications) {
         this.id = id;

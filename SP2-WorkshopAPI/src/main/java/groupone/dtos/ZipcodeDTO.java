@@ -1,5 +1,6 @@
 package groupone.dtos;
 
+import groupone.model.Zipcode;
 import lombok.*;
 
 @NoArgsConstructor
@@ -7,6 +8,11 @@ import lombok.*;
 @Getter
 @Setter
 public class ZipcodeDTO {
-    private Integer id;
-    private String zipcode;
+    private String city;
+    private Integer zip;
+
+    public ZipcodeDTO(Zipcode zipcode){
+        setZip(zipcode.getZip());
+        setCity(zipcode.getCity());
+    }
 }

@@ -12,8 +12,8 @@ POST http://localhost:7008/api/auth/register
 POST http://localhost:7008/api/auth/login
 
 {
-"email":"12345678910@12345678910.dk",
-"password":"123456712"
+"email":"test@student.com",
+"password":"test"
 }
 
 ###
@@ -26,8 +26,8 @@ GET http://localhost:7008/api/auth/reset/password?email=12345678910@12345678910.
 
 ###
 
-GET http://localhost:7008/api/events/3
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiIxMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjI1NjU3NCwicm9sZXMiOiJJTlNUUlVDVE9SIiwidXNlcm5hbWUiOiIxMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayJ9.Y1oJFYGgXuSbSuz-YGeT-ROqOF93puzZvBLvcNSLELY
+GET http://localhost:7008/api/events/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJ0ZXN0QHN0dWRlbnQuY29tIiwiZXhwIjoxNzEyMjY3MzM4LCJyb2xlcyI6IlNUVURFTlQiLCJ1c2VybmFtZSI6InRlc3RAc3R1ZGVudC5jb20ifQ.pgwcd8x0RmIu2uUmKF9fu2soXi63O2sw1qNQUQnN2GY
 
 ###
 

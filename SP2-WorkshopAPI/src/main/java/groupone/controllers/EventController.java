@@ -66,9 +66,7 @@ public class EventController {
                                         location.getStreet(),
                                         new EventSpecsDTO(location.getEventSpec())
                                 );
-                                locationDTO.setZipcodes(location.getZipcodes().stream()
-                                        .map(zipcode -> new ZipcodeDTO(zipcode.getZip(), zipcode.getCity()))
-                                        .collect(Collectors.toList()));
+                                locationDTO.setZipcode(new ZipcodeDTO(location.getZipcodes()));
                                 return locationDTO;
                             })
                     )
@@ -115,9 +113,7 @@ public class EventController {
                                 location.getStreet(),
                                 new EventSpecsDTO(location.getEventSpec())
                         );
-                        locationDTO.setZipcodes(location.getZipcodes().stream()
-                                .map(zipcode -> new ZipcodeDTO(zipcode.getZip(), zipcode.getCity()))
-                                .collect(Collectors.toList()));
+                        locationDTO.setZipcode(new ZipcodeDTO(location.getZipcodes()));
                         return locationDTO;
                     })
                     .toList();
@@ -149,9 +145,7 @@ public class EventController {
                                         location.getStreet(),
                                         new EventSpecsDTO(location.getEventSpec())
                                 );
-                                locationDTO.setZipcodes(location.getZipcodes().stream()
-                                        .map(zipcode -> new ZipcodeDTO(zipcode.getZip(), zipcode.getCity()))
-                                        .collect(Collectors.toList()));
+                                locationDTO.setZipcode(new ZipcodeDTO(location.getZipcodes()));
                                 return locationDTO;
                             })
                     )
@@ -192,9 +186,7 @@ public class EventController {
                                         location.getStreet(),
                                         new EventSpecsDTO(location.getEventSpec())
                                 );
-                                locationDTO.setZipcodes(location.getZipcodes().stream()
-                                        .map(zipcode -> new ZipcodeDTO(zipcode.getZip(), zipcode.getCity()))
-                                        .collect(Collectors.toList()));
+                                locationDTO.setZipcode(new ZipcodeDTO(location.getZipcodes()));
                                 return locationDTO;
                             })
                     )

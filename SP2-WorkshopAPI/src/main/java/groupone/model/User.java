@@ -56,9 +56,6 @@ public class User {
         this.phoneNumber = phoneNumber;
         addRole(role);
     }
-    public void setPassword(String password){
-        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
-    }
     @JsonIgnore
     public Set<String> getRolesToString(){
         return roles.stream().map(Role::getName).collect(Collectors.toSet());

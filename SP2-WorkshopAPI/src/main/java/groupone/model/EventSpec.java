@@ -1,6 +1,7 @@
 package groupone.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import groupone.enums.Category;
 import groupone.enums.Status;
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -37,7 +38,7 @@ public class EventSpec {
         this.capacity = capacity;
     }
 
-    @OneToOne(mappedBy = "eventSpec", cascade = {/*CascadeType.PERSIST,*/ CascadeType.DETACH})
+    @OneToOne(cascade = {/*CascadeType.PERSIST,*/ CascadeType.DETACH})
     @JsonIgnore
     private Location location;
 
