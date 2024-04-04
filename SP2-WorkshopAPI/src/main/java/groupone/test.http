@@ -6,14 +6,26 @@ POST http://localhost:7008/api/auth/register
 "phone":"1234542",
 "name":"Jophnfasd"
 }
+
 ###
+
 POST http://localhost:7008/api/auth/login
 
 {
-"email":"1234567@1234567.dk",
-"password":"1234567"
+"email":"12345678910@12345678910.dk",
+"password":"123456712"
 }
+
 ###
+
 GET http://localhost:7008/api/auth/request/password/reset?email=12345678910@12345678910.dk
+
 ###
-GET http://localhost:7008/api/auth/reset/password?email=12345678910@12345678910.dk&GUID=
+
+GET http://localhost:7008/api/auth/reset/password?email=12345678910@12345678910.dk&guid=
+
+###
+
+GET http://localhost:7008/api/events/1
+
+###
