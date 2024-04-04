@@ -16,6 +16,7 @@ import java.time.LocalTime;
 @Setter
 public class EventSpec {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private LocalDate date;
     private LocalTime time;
@@ -35,8 +36,7 @@ public class EventSpec {
         this.capacity = capacity;
     }
 
-    @OneToOne(mappedBy = "eventSpec", cascade = CascadeType.DETACH)
-    @MapsId
+    @OneToOne(mappedBy = "eventSpec", cascade = {/*CascadeType.PERSIST,*/ CascadeType.DETACH})
     @JsonIgnore
     private Location location;
 

@@ -31,7 +31,7 @@ public class UserController {
             Event foundEvent = eventDAO.getById(eventId);
             foundUser.addEvent(foundEvent);
             User updated = userDAO.update(foundUser, foundUser.getEmail());
-
+            ctx.json(updated);
         };
 
     }
@@ -39,7 +39,7 @@ public class UserController {
 
     public Handler getAll() {
         return (ctx) -> {
-            User users = userDAO.getById("test@test.com");
+            User users = userDAO.getById("test@student.com");
             ctx.json(users);
         };
     }

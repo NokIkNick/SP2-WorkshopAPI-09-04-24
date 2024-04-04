@@ -1,5 +1,6 @@
 package groupone.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import groupone.dtos.UserDTO;
 import jakarta.persistence.*;
 import lombok.*;
@@ -21,10 +22,10 @@ public class User {
     private String name;
     private Integer phoneNumber;
 
-    @ManyToMany(cascade = CascadeType.DETACH, mappedBy = "users",fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.DETACH/*,CascadeType.PERSIST*/}, mappedBy = "users",fetch = FetchType.EAGER)
     Set<Role> roles = new HashSet<>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.DETACH}, mappedBy = ("users"),fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.DETACH}, mappedBy = "users",fetch = FetchType.EAGER)
     Set<Event> events = new HashSet<>();
 
 
@@ -39,14 +40,17 @@ public class User {
         this.name = userDTO.getName();
         this.phoneNumber = userDTO.getPhone();
     }
-    public User(String email, String password, String name, Integer phoneNumber){
+
+    // test constructor
+    public User(String email, String password, String name, Integer phoneNumber,Role role){
         this.email = email;
         this.password = password;
         this.name = name;
         this.phoneNumber = phoneNumber;
+        addRole(role);
     }
 
-
+    @JsonIgnore
     public Set<String> getRolesToString(){
         return roles.stream().map(Role::getName).collect(Collectors.toSet());
     }

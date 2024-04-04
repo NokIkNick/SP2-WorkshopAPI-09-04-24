@@ -8,6 +8,8 @@ import groupone.model.*;
 import io.restassured.RestAssured;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import org.eclipse.jetty.http.HttpStatus;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,64 +17,137 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.equalTo;
+
 class UserControllerTest {
+
+    private static EntityManagerFactory emf;
+    private static User userStudent, userAdmin,userInstructor;
+    private static Role student, admin,instructor;
+    private static Object adminToken;
+    private static Object studentToken;
+    private static Object instructorToken;
 
     @BeforeAll
     static void setUpAll(){
+       // emf = HibernateConfig.getEntityManagerFactoryConfigForTesting();
+        emf = HibernateConfig.getEntityManagerFactoryConfig();
+
         RestAssured.baseURI = "http://localhost:7777/api";
         ApplicationConfig applicationConfig = ApplicationConfig.getInstance();
         applicationConfig.initiateServer()
                 .startServer(7777)
                 .setExceptionHandling()
-                .setRoutes(Routes.getRoutes(true))
-                .checkSecurityRoles(true);
+                .setRoutes(Routes.getRoutes(false))
+                .checkSecurityRoles(false);
+
+        student = new Role("STUDENT");
+        admin = new Role("ADMIN");
+        instructor = new Role("INSTRUCTOR");
+
+        userStudent = new User("test@student.com","test","PatrickStudent",456765353,student);
+        userAdmin = new User("test@admin.com","test","PatrickAdmin",456765353,admin);
+        userInstructor = new User("test@instructor.com","test","PatrickInstructor",456765353,instructor);
+
+       /* try(EntityManager em = emf.createEntityManager()){
+            em.getTransaction().begin();
+            em.persist(student);
+            em.persist(admin);
+            em.persist(instructor);
+            em.persist(userStudent);
+            em.persist(userAdmin);
+            em.persist(userInstructor);
+            em.getTransaction().commit();
+        }*/
+        adminToken = getToken(userAdmin.getEmail(), "test");
+        studentToken = getToken(userStudent.getEmail(), "test");
+        instructorToken = getToken(userInstructor.getEmail(),"test");
+
     }
 
     @BeforeEach
     void setUp() {
-        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfigForTesting();
-
         try(EntityManager em = emf.createEntityManager()){
             em.getTransaction().begin();
 
-            em.createQuery("delete from users").executeUpdate();
+            //em.createQuery("delete from users").executeUpdate();
             em.createQuery("delete from Location").executeUpdate();
             em.createQuery("delete from EventSpec").executeUpdate();
             em.createQuery("delete from Event").executeUpdate();
             em.createQuery("delete from Zipcode").executeUpdate();
 
             em.createNativeQuery("ALTER SEQUENCE event_id_seq RESTART WITH 1").executeUpdate();
-            //em.createNativeQuery("ALTER SEQUENCE location_id_seq RESTART WITH 1").executeUpdate();
+            em.createNativeQuery("ALTER SEQUENCE location_id_seq RESTART WITH 1").executeUpdate();
+            em.createNativeQuery("ALTER SEQUENCE eventspec_id_seq RESTART WITH 1").executeUpdate();
 
-            User user = new User("test@test.com","test","Patrick",456765353);
-            Role role = new Role("STUDENT");
-            Event event = new Event("testEvent","test med test på",99999,"pictureUrl");
-            Location location = new Location("Fredensvej 19");
-            EventSpec eventSpec = new EventSpec(LocalDate.now(), LocalTime.now(),30,"Den vilde","denVilde@hej.com", Status.UPCOMING,30);
-            Zipcode zipcode = new Zipcode(2970,"Hørsholm");
+            Event event1 = new Event("testEvent","test med test på",99999,"pictureUrl");
+            Location location1 = new Location("Fredensvej 19");
+            EventSpec eventSpec1 = new EventSpec(LocalDate.now(), LocalTime.now(),30,"Den vilde","denVilde@hej.com", Status.UPCOMING,30);
+            Zipcode zipcode1 = new Zipcode(2970,"Hørsholm");
 
-            em.persist(location);
-            em.persist(zipcode);
+            Event event2 = new Event("testEvent2","test med test på",99999,"pictureUrl");
+            Location location2 = new Location("Thyrasvej 4");
+            EventSpec eventSpec2 = new EventSpec(LocalDate.now(), LocalTime.now(),30,"Den vilde","denVilde@hej.com", Status.UPCOMING,30);
+            //Zipcode zipcode2 = new Zipcode(2970,"Hørsholm");
 
-            location.addZipcode(zipcode);
-            location.setEventSpec(eventSpec);
+            em.persist(zipcode1);
 
-            event.addLocation(location);
-            user.addEvent(event);
-            user.addRole(role);
+            location1.addZipcode(zipcode1);
+            location1.setEventSpec(eventSpec1);
 
-            em.persist(user);
+            location2.addZipcode(zipcode1);
+            location2.setEventSpec(eventSpec2);
 
+            event1.addLocation(location1);
+            event2.addLocation(location2);
+
+            em.persist(event1);
+            em.persist(event2);
+
+            userStudent.addEvent(event1);
+            //userStudent.addRole(student);
+
+            User user124 = em.merge(userStudent);
             em.getTransaction().commit();
+            //User found = em.find(User.class,user124.getEmail());
         }
+    }
+
+    public static Object getToken(String email, String password)
+    {
+        return login(email, password);
+    }
+
+    private static Object login(String email, String password)
+    {
+        String json = String.format("{\"email\": \"%s\", \"password\": \"%s\"}", email, password);
+
+        var token = given()
+                .contentType("application/json")
+                .body(json)
+                .when()
+                .post("http://localhost:7777/api/auth/login")
+                .then()
+                .extract()
+                .response()
+                .body()
+                .path("token");
+
+        return "Bearer " + token;
     }
 
     @Test
     void addEventToUser() {
         RestAssured.given()
+                .header("Authorization", studentToken).log().all()
                 .when()
-                .get("/test")
-                .then().log();
+                .get("http://localhost:7008/api/student/toevent/2")
+                .then().log().all()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200)
+                .body("",equalTo(""));
+
     }
     @Test
     void getAllInfo(){
@@ -82,5 +157,13 @@ class UserControllerTest {
                 .then().log().all()
                 .statusCode(200)
                 .body("[0].name",equalTo("Charmander"));*/
+    }
+    @Test
+    void testStuff(){
+        RestAssured.given()
+                .when()
+                .get("/test")
+                .then().log().all()
+                .body("email",equalTo("test@student.com"));
     }
 }

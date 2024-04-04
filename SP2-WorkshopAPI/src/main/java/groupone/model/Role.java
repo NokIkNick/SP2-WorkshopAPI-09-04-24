@@ -29,6 +29,7 @@ public class Role {
     public void addUser(User user) {
         if(user != null && !this.users.contains(user)){
             this.users.add(user);
+            user.addRole(this);
         }
     }
 
