@@ -38,7 +38,7 @@ public class User {
 
     public User(UserDTO userDTO){
         this.email = userDTO.getEmail();
-        this.password = userDTO.getPassword();
+        setPassword(userDTO.getPassword());
         this.name = userDTO.getName();
         this.phoneNumber = userDTO.getPhone();
     }
