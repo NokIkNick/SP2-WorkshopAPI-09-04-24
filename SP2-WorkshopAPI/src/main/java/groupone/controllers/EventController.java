@@ -66,10 +66,10 @@ public class EventController {
 
             // Map each EventDTO to a SuperEventDTO and add the corresponding LocationDTOs
             List<SuperEventDTO> completeEvents = new ArrayList<>();
-            for(EventDTO e: eventDTOs){
+            for (EventDTO e : eventDTOs) {
                 SuperEventDTO event = new SuperEventDTO(e);
-                for(int i = 0; i < locationDTOS.size(); i++){
-                    if(e.getId() == locationDTOS.get(i).getId()){
+                for (int i = 0; i < locationDTOS.size(); i++) {
+                    if (e.getId() == locationDTOS.get(i).getId()) {
                         event.getLocations().add(locationDTOS.get(i));
                         completeEvents.add(event);
                     }
@@ -133,8 +133,45 @@ public class EventController {
     public static Handler getEventsByStatus() {
         return ctx -> {
             String status = (ctx.pathParam("status"));
-            List<Event> events = eventDAO.getEventsByStatus(status);
-            ctx.json(events);
+            List<Event> eventList = eventDAO.getEventsByStatus(status);
+            // Map each event to an EventDTO
+            List<EventDTO> eventDTOs = eventList.stream()
+                    .map(x -> new EventDTO(x.getId(), x.getImageUrl(), x.getTitle(), x.getDescription(), x.getPrice()))
+                    .toList();
+
+            // Map each location of each event to a LocationDTO, including the zipcodes
+            List<LocationDTO> locationDTOS = eventList.stream()
+                    .flatMap(event -> event.getLocations().stream()
+                            .map(location -> {
+                                LocationDTO locationDTO = new LocationDTO(
+                                        location.getId(),
+                                        location.getStreet(),
+                                        new EventSpecsDTO(location.getEventSpec())
+                                );
+                                locationDTO.setZipcodes(location.getZipcodes().stream()
+                                        .map(zipcode -> new ZipcodeDTO(zipcode.getZip(), zipcode.getCity()))
+                                        .collect(Collectors.toList()));
+                                return locationDTO;
+                            })
+                    )
+                    .toList();
+
+            // Map each EventDTO to a SuperEventDTO and add the corresponding LocationDTOs
+            List<SuperEventDTO> completeEvents = new ArrayList<>();
+            for (EventDTO e : eventDTOs) {
+                SuperEventDTO event = new SuperEventDTO(e);
+                for (int i = 0; i < locationDTOS.size(); i++) {
+                    if (e.getId() == locationDTOS.get(i).getId()) {
+                        event.getLocations().add(locationDTOS.get(i));
+                        completeEvents.add(event);
+                    }
+                }
+            }
+
+            // Send the list of SuperEventDTOs as the response
+            ctx.json(completeEvents);
         };
+
     }
 }
+

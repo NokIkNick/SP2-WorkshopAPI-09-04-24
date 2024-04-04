@@ -5,6 +5,7 @@ import groupone.model.EventSpec;
 import groupone.model.Location;
 import jakarta.persistence.TypedQuery;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventDAO extends DAO<Event, Integer>{
@@ -72,8 +73,8 @@ public class EventDAO extends DAO<Event, Integer>{
         List<Event> eventList;
         try(var em = emf.createEntityManager()){
             em.getTransaction().begin();
-            TypedQuery<Event> query = em.createQuery("select e from Event e join e.locations l join l.eventSpec es where es.status = :status", Event.class);
-            query.setParameter("status", Integer.parseInt(status));
+            TypedQuery<Event> query = em.createQuery("SELECT e FROM Event e JOIN e.locations l JOIN l.eventSpec es WHERE es.status = :status", Event.class);
+            query.setParameter("status", EventSpec.Status.valueOf(status));
             eventList = query.getResultList();
             for (Event e: eventList) {
                 e.getLocations().size();

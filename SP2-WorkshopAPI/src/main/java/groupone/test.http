@@ -14,6 +14,6 @@ POST http://localhost:7008/api/auth/login
 "password":"123456712"
 }
 ###
-GET http://localhost:7008/api/events/
+GET http://localhost:7008/api/events
 ###
-GET http://localhost:7008/api/events/status/1
+GET http://localhost:7008/api/events/status/ONGOING
