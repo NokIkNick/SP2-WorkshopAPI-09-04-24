@@ -51,8 +51,7 @@ public class Routes {
                 get("/",uc.getAll(),roles.ANYONE);
             });
             path("/admin",()->{
-                get("/get_all_events",uc.getAllEvents(),roles.ADMIN);
-               
+                get("/get_all_users",uc.getAllUsers(),roles.ADMIN);
             });
         };
     }
