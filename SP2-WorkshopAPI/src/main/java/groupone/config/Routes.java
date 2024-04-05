@@ -54,6 +54,7 @@ public class Routes {
             });
             path("/admin",()->{
                 get("/get_all_events",ec.getAllEvents(),roles.ADMIN);
+                // TODO add tests for below endpoint.
                 get("/get_all_users",uc.getAllUsers(),roles.ADMIN);
             });
         };
