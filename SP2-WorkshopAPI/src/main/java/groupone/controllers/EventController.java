@@ -6,8 +6,9 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import groupone.daos.EventDAO;
 import groupone.dtos.*;
 import groupone.model.Event;
-import groupone.model.Location;
 import io.javalin.http.Handler;
+import io.javalin.http.HttpStatus;
+import org.hibernate.Hibernate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +55,7 @@ public class EventController {
 
             // Map each event to an EventDTO
             List<EventDTO> eventDTOs = eventList.stream()
-                    .map(x -> new EventDTO(x.getId(), x.getImageUrl(), x.getTitle(), x.getDescription(), x.getPrice()))
+                    .map(EventDTO::new)
                     .toList();
 
             // Map each location of each event to a LocationDTO, including the zipcodes
@@ -78,9 +79,9 @@ public class EventController {
             List<SuperEventDTO> completeEvents = new ArrayList<>();
             for (EventDTO e : eventDTOs) {
                 SuperEventDTO event = new SuperEventDTO(e);
-                for (int i = 0; i < locationDTOS.size(); i++) {
-                    if (e.getId() == locationDTOS.get(i).getId()) {
-                        event.getLocations().add(locationDTOS.get(i));
+                for (LocationDTO locationDTO : locationDTOS) {
+                    if (e.getId() == locationDTO.getId()) {
+                        event.getLocations().add(locationDTO);
                         completeEvents.add(event);
                     }
                 }
@@ -105,7 +106,7 @@ public class EventController {
             Event event = eventDAO.getById(id);
 
             // Map the event to an EventDTO
-            EventDTO eventDTO = new EventDTO(event.getId(), event.getImageUrl(), event.getTitle(), event.getDescription(), event.getPrice());
+            EventDTO eventDTO = new EventDTO(event);
             ctx.json(eventDTO);
             // Map each location of the event to a LocationDTO, including the zipcodes
             List<LocationDTO> locationDTOS = event.getLocations().stream()
@@ -137,7 +138,7 @@ public class EventController {
             List<Event> eventList = eventDAO.getEventsByCategory(category);
             // Map each event to an EventDTO
             List<EventDTO> eventDTOs = eventList.stream()
-                    .map(x -> new EventDTO(x.getId(), x.getImageUrl(), x.getTitle(), x.getDescription(), x.getPrice()))
+                    .map(EventDTO::new)
                     .toList();
 
             // Map each location of each event to a LocationDTO, including the zipcodes
@@ -161,9 +162,9 @@ public class EventController {
             List<SuperEventDTO> completeEvents = new ArrayList<>();
             for (EventDTO e : eventDTOs) {
                 SuperEventDTO event = new SuperEventDTO(e);
-                for (int i = 0; i < locationDTOS.size(); i++) {
-                    if (e.getId() == locationDTOS.get(i).getId()) {
-                        event.getLocations().add(locationDTOS.get(i));
+                for (LocationDTO locationDTO : locationDTOS) {
+                    if (e.getId() == locationDTO.getId()) {
+                        event.getLocations().add(locationDTO);
                         completeEvents.add(event);
                     }
                 }
@@ -180,7 +181,7 @@ public class EventController {
             List<Event> eventList = eventDAO.getEventsByStatus(status);
             // Map each event to an EventDTO
             List<EventDTO> eventDTOs = eventList.stream()
-                    .map(x -> new EventDTO(x.getId(), x.getImageUrl(), x.getTitle(), x.getDescription(), x.getPrice()))
+                    .map(EventDTO::new)
                     .toList();
 
             // Map each location of each event to a LocationDTO, including the zipcodes
@@ -204,9 +205,9 @@ public class EventController {
             List<SuperEventDTO> completeEvents = new ArrayList<>();
             for (EventDTO e : eventDTOs) {
                 SuperEventDTO event = new SuperEventDTO(e);
-                for (int i = 0; i < locationDTOS.size(); i++) {
-                    if (e.getId() == locationDTOS.get(i).getId()) {
-                        event.getLocations().add(locationDTOS.get(i));
+                for (LocationDTO locationDTO : locationDTOS) {
+                    if (e.getId() == locationDTO.getId()) {
+                        event.getLocations().add(locationDTO);
                         completeEvents.add(event);
                     }
                 }
@@ -225,9 +226,24 @@ public class EventController {
                 eventDAO.create(event);
                 ctx.json(event);
             }
-            ;
         };
 
+    }
+
+    public Handler getEventByIdsParticipants() {
+        return ctx -> {
+            String event = (ctx.pathParam("event"));
+            int eventID;
+            try {
+                eventID = Integer.parseInt(event);
+            } catch (NumberFormatException e) {
+                ctx.status(HttpStatus.BAD_GATEWAY);
+                return;
+            }
+            Event FoundEvent = eventDAO.getById(eventID, (ev) -> Hibernate.initialize(ev.getUsers().toString())); // toString so everything being part of toString on users is also initialized.
+            List<UserDTO> users = FoundEvent.getUsers().stream().map(UserDTO::new).collect(Collectors.toList());
+            ctx.json(users);
+        };
     }
 }
 

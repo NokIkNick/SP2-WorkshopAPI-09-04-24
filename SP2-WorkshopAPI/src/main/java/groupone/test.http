@@ -95,4 +95,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiIxM
 GET http://localhost:7008/api/admin/get_all_users
 Authorization: BEARER eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwYXRyaWNrX3RoZV9hd2Vzb21lMl8xMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjMwNDM2Niwicm9sZXMiOiJBRE1JTiIsInVzZXJuYW1lIjoicGF0cmlja190aGVfYXdlc29tZTJfMTIzNDU2Nzg5MTBAMTIzNDU2Nzg5MTAuZGsifQ.D2FUpfxov9G-jZZr5LwJx2biwBBUgZoJRYtktuRA4yI
 
-###
+### Instructor - Get All participants of Event
+
+GET http://localhost:7008/api/events/?/users
+Authorization: BEARER

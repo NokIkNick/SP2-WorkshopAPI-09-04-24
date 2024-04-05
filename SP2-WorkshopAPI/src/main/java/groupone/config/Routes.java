@@ -23,15 +23,18 @@ public class Routes {
         sc = SecurityController.getInstance(isTesting);
         uc = UserController.getInstance(isTesting);
         return () -> {
-            path("/", () -> {
+            path("", () -> {
                 before(sc.authenticate());
                 get("/", ctx -> ctx.json(objectMapper.createObjectNode().put("Message", "Connected Successfully")), roles.ANYONE);
-                get("/events/category/{category}", ec.getEventsByCategory(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
-                get("/events/status/{status}", ec.getEventsByStatus(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
-                get("/events", ec.getAllEvents(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
-                get("/events/{id}", ec.getEventsById(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
+            });
+            path("/events", () -> {
+                get("/category/{category}", ec.getEventsByCategory(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
+                get("/status/{status}", ec.getEventsByStatus(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
+                get("", ec.getAllEvents(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
+                get("/{id}", ec.getEventsById(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
+                get("/{id}/users", ec.getEventByIdsParticipants(), roles.INSTRUCTOR);
                 // Posts!
-                post("/events", ec.createEvent(), roles.INSTRUCTOR);
+                post("", ec.createEvent(), roles.INSTRUCTOR);
             });
             path("/auth", () -> {
                 post("/login", sc.login(), roles.ANYONE);
