@@ -32,8 +32,10 @@ public class Routes {
             path("/events", () -> {
                 get("/category/{category}", ec.getEventsByCategory(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
                 get("/status/{status}", ec.getEventsByStatus(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
+                // TODO update below endpoint to only show information about upcoming events
                 get("", ec.getAllEvents(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
                 get("/{id}", ec.getEventById(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
+                // TODO add tests for below endpoint.
                 get("/{id}/users", ec.getEventByIdsParticipants(), roles.INSTRUCTOR);
                 // Posts!
                 post("", ec.createEvent(), roles.INSTRUCTOR);
@@ -51,7 +53,7 @@ public class Routes {
                 get("/",uc.getAll(),roles.ANYONE);
             });
             path("/admin",()->{
-                get("/get_all_events",uc.getAllEvents(),roles.ADMIN);
+                get("/get_all_events",ec.getAllEvents(),roles.ADMIN);
                
             });
         };

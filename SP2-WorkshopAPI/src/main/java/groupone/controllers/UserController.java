@@ -30,7 +30,20 @@ public class UserController {
         return instance;
     }
 
-    public Handler getAllEvents(){
+    public Handler getAllUsers(){
+        return(ctx)->{
+            var em = HibernateConfig.getEntityManagerFactoryConfig().createEntityManager();
+            List<User> users = (List<User>) em.createQuery("SELECT u from users u",User.class).getResultList();
+            List<UserDTO> userDTOS = new ArrayList<>();
+            for(User u: users){
+                UserDTO userDTO = new UserDTO(u);
+                userDTOS.add(userDTO);
+            }
+            ctx.json(userDTOS);
+        };
+    }
+    // already done in event Controller.
+   /* public Handler getAllEvents(){
         return(ctx)->{
             EntityManager em = HibernateConfig.getEntityManagerFactoryConfig().createEntityManager();
             List<Event> events = em.createQuery("select e from Event e").getResultList();
@@ -44,24 +57,7 @@ public class UserController {
                 ctx.json("no events was found.");
             }
         };
-
-    }
-
-
-
-    public Handler getAllUsers(){
-        return(ctx)->{
-            var em = HibernateConfig.getEntityManagerFactoryConfig().createEntityManager();
-            List<User> users = (List<User>) em.createQuery("SELECT u from users u",User.class).getResultList();
-            List<UserDTO> userDTOS = new ArrayList<>();
-            for(User u: users){
-                UserDTO userDTO = new UserDTO(u);
-                userDTOS.add(userDTO);
-            }
-            ctx.json(userDTOS);
-        };
-    }
-    
+    }*/
     public Handler addEventToUser() {
         return (ctx) -> {
             UserDTO user = ctx.attribute("user");
