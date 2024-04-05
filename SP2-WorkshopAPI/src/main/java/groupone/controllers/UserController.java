@@ -32,13 +32,17 @@ public class UserController {
 
     public Handler getAllEvents(){
         return(ctx)->{
-            List<Event> events = eventDAO.getAll();
+            EntityManager em = HibernateConfig.getEntityManagerFactoryConfig().createEntityManager();
+            List<Event> events = em.createQuery("select e from Event e").getResultList();
             List<EventDTO> eventDTOS = new ArrayList<>();
             for(Event e : events){
                 EventDTO eventDTO = new EventDTO(e);
                 eventDTOS.add(eventDTO);
             }
             ctx.json(eventDTOS);
+            if(eventDTOS.size() == 0){
+                ctx.json("no events was found.");
+            }
         };
 
     }
