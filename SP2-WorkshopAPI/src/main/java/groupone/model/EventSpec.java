@@ -12,7 +12,6 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 public class EventSpec {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import groupone.controllers.EventController;
 import groupone.controllers.SecurityController;
+import groupone.controllers.UserController;
+import groupone.dtos.UserDTO;
 import io.javalin.apibuilder.EndpointGroup;
 import io.javalin.security.RouteRole;
 
@@ -12,11 +14,14 @@ import static io.javalin.apibuilder.ApiBuilder.*;
 
 public class Routes {
     private static SecurityController sc;
+    private static UserController uc;
+    private static UserDTO userDTO;
     private static EventController ec;
     private static final ObjectMapper objectMapper = new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false).registerModule(new JavaTimeModule());
     public static EndpointGroup getRoutes(Boolean isTesting) {
-        sc = SecurityController.getInstance(isTesting);
         ec = EventController.getInstance(isTesting);
+        sc = SecurityController.getInstance(isTesting);
+        uc = UserController.getInstance(isTesting);
         return () -> {
             path("/", () -> {
                 before(sc.authenticate());
@@ -34,7 +39,10 @@ public class Routes {
                 get("/request/password/reset", sc.requestPasswordReset(), roles.ANYONE);
                 get("/reset/password", sc.resetPassword(), roles.ANYONE);
             });
-
+            path("/admin",()->{
+                get("/get_all_events",uc.getAllEvents(),roles.ADMIN);
+               
+            });
         };
     }
 

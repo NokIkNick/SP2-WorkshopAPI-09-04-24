@@ -11,7 +11,6 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
