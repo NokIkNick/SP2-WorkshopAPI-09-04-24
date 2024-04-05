@@ -79,4 +79,12 @@ public class User {
                 event.addUser(this);
             }
     }
+
+    public void removeEvent(Event event){
+        if(event != null && events.contains(event)){
+            events.remove(event);
+            event.removeUser(this);
+        }
+    }
+
 }

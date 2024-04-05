@@ -48,6 +48,13 @@ public class Event {
         }
     }
 
+    public void removeUser(User user){
+        if(user != null && this.users.contains(user)){
+            this.users.remove(user);
+            user.removeEvent(this);
+        }
+    }
+
     public void addLocation(Location location) {
         if(location != null && !locations.contains(location)){
             locations.add(location);

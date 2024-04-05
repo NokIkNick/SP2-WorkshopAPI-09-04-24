@@ -48,6 +48,7 @@ public class Routes {
             });
             path("/student",() ->{
                 post("/toevent/{id}",uc.addEventToUser(),roles.STUDENT);
+                post("/remove_event/{id}", uc.removeEventFromUser(),roles.STUDENT);
             });
             path("/test", () ->{
                 get("/",uc.getAll(),roles.ANYONE);
