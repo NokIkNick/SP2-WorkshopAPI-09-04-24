@@ -18,24 +18,26 @@ public class User {
     @Id
     private String email;
     private String password;
+    public void setPassword(String password){
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
+    }
     private String name;
     private Integer phoneNumber;
 
     @ManyToMany(cascade = CascadeType.DETACH, mappedBy = "users")
     Set<Role> roles = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.DETACH, mappedBy = ("users"))
+    @ManyToMany(cascade = CascadeType.DETACH, mappedBy = "users")
     Set<Event> events = new HashSet<>();
-
 
     @PrePersist
     private void PrePersist(){
-        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
+        // kryptering af password ændret til setPassword.
     }
 
     public User(UserDTO userDTO){
         this.email = userDTO.getEmail();
-        this.password = userDTO.getPassword();
+        setPassword(userDTO.getPassword());
         this.name = userDTO.getName();
         this.phoneNumber = userDTO.getPhone();
     }

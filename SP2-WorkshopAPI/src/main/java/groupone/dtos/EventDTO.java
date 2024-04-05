@@ -3,6 +3,7 @@ package groupone.dtos;
 import groupone.model.Event;
 import groupone.model.Location;
 import groupone.model.User;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,6 +22,7 @@ public class EventDTO {
     private String title;
     private String description;
     private Double price;
+    private String imageUrl;
     private LocalDate createdAt;
     private LocalDate updatedAt;
     private LocalDate deletedAt;
@@ -39,5 +41,4 @@ public class EventDTO {
         this.users = event.getUsers();
         this.locations = event.getLocations();
     }
-
 }

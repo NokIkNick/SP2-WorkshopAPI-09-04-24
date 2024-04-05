@@ -1,10 +1,5 @@
 package groupone;
 
-import groupone.config.HibernateConfig;
-import groupone.daos.RoleDAO;
-import groupone.dtos.UserDTO;
-import groupone.model.Role;
-import groupone.model.User;
 import io.javalin.Javalin;
 import groupone.config.ApplicationConfig;
 import groupone.config.Routes;
@@ -22,8 +17,5 @@ public class Main {
                 .startServer(7008)
                 .setRoutes(Routes.getRoutes(isTesting))
                 .checkSecurityRoles(isTesting);
-        /*RoleDAO roleDAO = RoleDAO.getInstance(isTesting);
-        roleDAO.createRoles();*/
-
     }
 }

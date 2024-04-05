@@ -1,5 +1,6 @@
 package groupone.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,6 +14,7 @@ import java.time.LocalTime;
 @Setter
 public class EventSpec {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private LocalDate date;
     private LocalTime time;
@@ -21,16 +23,23 @@ public class EventSpec {
     private String instructorEmail;
     private Status status;
     private Integer capacity;
+    private Category category;
 
-    @MapsId("id")
-    @OneToOne(mappedBy = "eventSpec", cascade = CascadeType.DETACH)
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.DETACH)
     private Location location;
 
-    private enum Status{
+    public enum Status{
         ONGOING,
         CANCELLED,
         UPCOMING,
         ENDED,
         TBD
+    }
+
+    public enum Category{
+        EVENT,
+        WORKSHOP,
+        OTHER
     }
 }

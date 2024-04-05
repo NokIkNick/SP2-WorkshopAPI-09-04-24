@@ -25,10 +25,10 @@ public class Event {
     private String imageUrl;
 
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<User> users = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Location> locations = new ArrayList<>();
 
     public void addUser(User user){
