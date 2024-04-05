@@ -1,6 +1,10 @@
 package groupone.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import groupone.enums.Category;
+import groupone.enums.Status;
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -11,9 +15,9 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 public class EventSpec {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private LocalDate date;
     private LocalTime time;
@@ -22,16 +26,27 @@ public class EventSpec {
     private String instructorEmail;
     private Status status;
     private Integer capacity;
+    private Category category;
 
-    @MapsId("id")
-    @OneToOne(mappedBy = "eventSpec", cascade = CascadeType.DETACH)
+    public EventSpec(LocalDate date, LocalTime time, double duration, String instructorName, String instructorEmail, Status status, Integer capacity, Category category){
+        this.date = date;
+        this.time = time;
+        this.duration = duration;
+        this.instructorName = instructorName;
+        this.instructorEmail = instructorEmail;
+        this.status = status;
+        this.capacity = capacity;
+        this.category = category;
+    }
+
+    @OneToOne(cascade = {/*CascadeType.PERSIST,*/ CascadeType.DETACH})
+    @JsonIgnore
     private Location location;
 
-    private enum Status{
-        ONGOING,
-        CANCELLED,
-        UPCOMING,
-        ENDED,
-        TBD
+    public void setLocation(Location location){
+        if(this.location != location) {
+            this.location = location;
+            location.setEventSpec(this);
+        }
     }
 }
