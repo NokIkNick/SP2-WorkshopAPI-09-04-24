@@ -1,6 +1,7 @@
 package groupone.dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import groupone.enums.Category;
 import groupone.enums.Status;
 import groupone.model.EventSpec;
 import lombok.Getter;
@@ -17,6 +18,7 @@ public class EventSpecsDTO {
     private String instructorName;
     private String instructorEmail;
     private Status status;
+    private Category category;
     private Integer capacity;
 
     public EventSpecsDTO(EventSpec e) {
@@ -27,6 +29,7 @@ public class EventSpecsDTO {
         this.instructorName = e.getInstructorName();
         this.instructorEmail = e.getInstructorEmail();
         this.status = e.getStatus();
+        this.category = e.getCategory();
         this.capacity = e.getCapacity();
     }
 }

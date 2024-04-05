@@ -21,7 +21,7 @@ import java.time.LocalTime;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-class UserControllerTest {
+class EventControllerTest {
 
     private static EntityManagerFactory emf;
     private static User userStudent, userAdmin,userInstructor;
@@ -35,10 +35,10 @@ class UserControllerTest {
         emf = HibernateConfig.getEntityManagerFactoryConfigForTesting();
         //emf = HibernateConfig.getEntityManagerFactoryConfig();
 
-        RestAssured.baseURI = "http://localhost:7777/api";
+        RestAssured.baseURI = "http://localhost:7778/api";
         ApplicationConfig applicationConfig = ApplicationConfig.getInstance();
         applicationConfig.initiateServer()
-                .startServer(7777)
+                .startServer(7778)
                 .setExceptionHandling()
                 .setRoutes(Routes.getRoutes(true))
                 .checkSecurityRoles(true);
@@ -130,7 +130,7 @@ class UserControllerTest {
                 .contentType("application/json")
                 .body(json)
                 .when()
-                .post("http://localhost:7777/api/auth/login")
+                .post("http://localhost:7778/api/auth/login")
                 .then()
                 .extract()
                 .response()
@@ -139,25 +139,70 @@ class UserControllerTest {
 
         return "Bearer " + token;
     }
-
     @Test
-    void addEventToUser() {
+    void getAllEvents(){
         RestAssured.given()
-                .header("Authorization", studentToken)
+                .header("Authorization", adminToken)
                 .when()
-                .post("http://localhost:7777/api/student/toevent/2")
+                .get("http://localhost:7778/api/events")
                 .then().log().all()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200)
                 .body("events.size()",equalTo(2));
-
     }
+
     @Test
-    void testStuff(){
+    void getEventsById() {
         RestAssured.given()
+                .header("Authorization", adminToken)
                 .when()
-                .get("/test")
+                .get("http://localhost:7778/api/events/2")
                 .then().log().all()
-                .body("email",equalTo("test@student.com"));
+                .assertThat()
+                .statusCode(HttpStatus.OK_200)
+                .body("title",equalTo("testEvent2"));
+    }
+
+    @Test
+    void getEventsByCategory() {
+        RestAssured.given()
+                .header("Authorization", adminToken)
+                .when()
+                .get("http://localhost:7778/api/events/category/event")
+                .then().log().all()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200)
+                .body("[0].locations[0].eventSpecifications.category",equalTo("EVENT"));
+    }
+
+    @Test
+    void getEventsByStatus() {
+        RestAssured.given()
+                .header("Authorization", adminToken)
+                .when()
+                .get("http://localhost:7778/api/events/status/upcoming")
+                .then().log().all()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200)
+                .body("[0].locations[0].eventSpecifications.status",equalTo("UPCOMING"))
+                .body("[1].locations[0].eventSpecifications.status",equalTo("UPCOMING"));
+    }
+
+    @Test
+    void createEvent() {
+        String json = "{\"title\":\"newTestEvent\",\"description\":\"This is a new test event!\",\"price\":100.0,\"createdAt\":\"2024-04-03\",\"updatedAt\":\"2024-04-03\",\"imageUrl\":\"www.moretexturl.com\",\"locations\":[{\"street\":\"test-street-wahoo\",\"eventSpec\":{\"date\":\"2024-05-05\",\"time\":\"16:30\",\"duration\":2,\"instructorName\":\"Peter Maker\",\"instructorEmail\":\"Peter@Maker.dk\",\"status\":\"UPCOMING\",\"category\":\"EVENT\",\"capacity\":1200},\"zipcodes\":{\"zip\":2970}},{\"street\":\"the-other-test-street-wahoo\",\"eventSpec\":{\"date\":\"2024-06-08\",\"time\":\"17:30\",\"duration\":3,\"instructorName\":\"Morten Bungi\",\"instructorEmail\":\"Morten@Bungi.dk\",\"status\":\"UPCOMING\",\"category\":\"EVENT\",\"capacity\":500},\"zipcodes\":{\"zip\":2970}}]}";
+
+
+        RestAssured.given()
+                .header("Authorization", instructorToken)
+                .contentType("application/json")
+                .body(json)
+                .when()
+                .post("http://localhost:7778/api/events")
+                .then().log().all()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200)
+                .body("title", equalTo("newTestEvent"))
+                .body("locations.size()",equalTo(2));
     }
 }

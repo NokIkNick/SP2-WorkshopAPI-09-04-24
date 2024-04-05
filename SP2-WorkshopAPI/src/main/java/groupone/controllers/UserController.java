@@ -2,6 +2,7 @@ package groupone.controllers;
 
 import groupone.daos.EventDAO;
 import groupone.daos.UserDAO;
+import groupone.dtos.EventDTO;
 import groupone.dtos.UserDTO;
 import groupone.model.Event;
 import groupone.model.User;
@@ -32,7 +33,8 @@ public class UserController {
             Event foundEvent = eventDAO.getById(eventId);
             foundUser.addEvent(foundEvent);
             User updated = userDAO.update(foundUser, foundUser.getEmail());
-            ctx.json(updated); // TODO should not show a user but an event DTO.
+            UserDTO userDTO = new UserDTO(updated);
+            ctx.json(updated);
         };
 
     }

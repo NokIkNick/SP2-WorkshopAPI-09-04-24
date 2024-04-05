@@ -28,7 +28,7 @@ public class EventSpec {
     private Integer capacity;
     private Category category;
 
-    public EventSpec(LocalDate date, LocalTime time, double duration, String instructorName, String instructorEmail, Status status, Integer capacity){
+    public EventSpec(LocalDate date, LocalTime time, double duration, String instructorName, String instructorEmail, Status status, Integer capacity, Category category){
         this.date = date;
         this.time = time;
         this.duration = duration;
@@ -36,6 +36,7 @@ public class EventSpec {
         this.instructorEmail = instructorEmail;
         this.status = status;
         this.capacity = capacity;
+        this.category = category;
     }
 
     @OneToOne(cascade = {/*CascadeType.PERSIST,*/ CascadeType.DETACH})

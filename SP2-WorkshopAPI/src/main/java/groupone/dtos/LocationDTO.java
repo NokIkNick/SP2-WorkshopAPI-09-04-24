@@ -1,6 +1,7 @@
 package groupone.dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import groupone.model.Location;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,5 +25,12 @@ public class LocationDTO {
         this.id = id;
         this.street = street;
         this.eventSpecifications = eventSpecifications;
+    }
+
+    public LocationDTO(Location location){
+        setId(location.getId());
+        setStreet(location.getStreet());
+        setEventSpecifications(new EventSpecsDTO(location.getEventSpec()));
+        setZipcode(new ZipcodeDTO(location.getZipcodes()));
     }
 }

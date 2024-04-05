@@ -1,5 +1,6 @@
 package groupone.daos;
 
+import groupone.enums.Category;
 import groupone.enums.Status;
 import groupone.model.Event;
 import groupone.model.EventSpec;
@@ -51,12 +52,11 @@ public class EventDAO extends DAO<Event, Integer>{
         return event;
     }
 
-    public List<Event> getEventsByCategory(String category){
+    public List<Event> getEventsByCategory(Category category){
         List<Event> eventList;
         try(var em = emf.createEntityManager()){
             em.getTransaction().begin();
-            TypedQuery<Event> query = em.createQuery("select e from Event e JOIN Location l on e.id = l.id JOIN EventSpec es ON l.id = es.id WHERE es.category = :category", Event.class);
-            query.setParameter("category", category);
+            TypedQuery<Event> query = em.createQuery("select e from Event e JOIN Location l on e.id = l.id JOIN EventSpec es ON l.id = es.id WHERE es.category = ?1", Event.class).setParameter(1, category);
             eventList = query.getResultList();
             for (Event e: eventList) {
                 e.getLocations().size();
@@ -70,12 +70,12 @@ public class EventDAO extends DAO<Event, Integer>{
         return eventList;
     }
 
-    public List<Event> getEventsByStatus(String status){
+    public List<Event> getEventsByStatus(Status status){
         List<Event> eventList;
         try(var em = emf.createEntityManager()){
             em.getTransaction().begin();
             TypedQuery<Event> query = em.createQuery("select e from Event e JOIN Location l on e.id = l.id JOIN EventSpec es ON l.id = es.id WHERE es.status = :status", Event.class);
-            query.setParameter("status", Status.valueOf(status));
+            query.setParameter("status",status);
             eventList = query.getResultList();
             for (Event e: eventList) {
                 e.getLocations().size();
