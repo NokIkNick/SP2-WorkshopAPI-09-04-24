@@ -11,7 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
+
 public class Zipcode {
     @Id
     private Integer zip;

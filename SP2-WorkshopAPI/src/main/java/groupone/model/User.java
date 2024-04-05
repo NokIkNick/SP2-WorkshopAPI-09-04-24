@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 public class User {
     @Id
     private String email;

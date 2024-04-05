@@ -12,7 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 public class Role {
     @Id
     private String name;
