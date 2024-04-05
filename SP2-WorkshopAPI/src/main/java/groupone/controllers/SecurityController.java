@@ -72,7 +72,7 @@ public class SecurityController {
                 ctx.status(200).json(new TokenDTO(token, user.getEmail()));
 
             }catch(EntityNotFoundException | ValidationException | ApiException e){
-                ctx.status(401);
+                ctx.status(HttpStatus.BAD_REQUEST);
                 System.out.println(e.getMessage());
                 ctx.json(returnObject.put("msg", e.getMessage()));
             }
