@@ -4,8 +4,7 @@ import groupone.exceptions.ValidationException;
 import groupone.model.Role;
 import groupone.model.User;
 import jakarta.persistence.EntityNotFoundException;
-
-import java.util.List;
+import org.hibernate.Hibernate;
 
 public class UserDAO extends DAO<User, String> {
 
@@ -41,13 +40,11 @@ public class UserDAO extends DAO<User, String> {
 
     public User getVerifiedUser(String username, String password) throws ValidationException {
         try(var em = emf.createEntityManager()){
-            List<User> users = em.createQuery("select u from users u", User.class).getResultList();
-            users.stream().forEach(user -> System.out.println(user.getEmail()+" "+user.getPassword()));
             User user = em.find(User.class, username);
             if(user == null){
                 throw new EntityNotFoundException("No user found with username: "+username);
             }
-            user.getRoles().size();
+            Hibernate.initialize(user.getRoles());
             if(!user.verifyPassword(password)){
                 throw new ValidationException("Error while logging in, invalid credentials");
             }
