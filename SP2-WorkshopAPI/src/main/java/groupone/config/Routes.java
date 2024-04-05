@@ -15,23 +15,28 @@ import static io.javalin.apibuilder.ApiBuilder.*;
 public class Routes {
     private static SecurityController sc;
     private static UserController uc;
+    @SuppressWarnings("unused")
     private static UserDTO userDTO;
     private static EventController ec;
     private static final ObjectMapper objectMapper = new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false).registerModule(new JavaTimeModule());
+    @SuppressWarnings("CodeBlock2Expr")
     public static EndpointGroup getRoutes(Boolean isTesting) {
         ec = EventController.getInstance(isTesting);
         sc = SecurityController.getInstance(isTesting);
         uc = UserController.getInstance(isTesting);
         return () -> {
-            path("/", () -> {
-                before(sc.authenticate());
+            before(sc.authenticate());
+            path("", () -> {
                 get("/", ctx -> ctx.json(objectMapper.createObjectNode().put("Message", "Connected Successfully")), roles.ANYONE);
-                get("/events/category/{category}", ec.getEventsByCategory(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
-                get("/events/status/{status}", ec.getEventsByStatus(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
-                get("/events", ec.getAllEvents(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
-                get("/events/{id}", ec.getEventsById(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
+            });
+            path("/events", () -> {
+                get("/category/{category}", ec.getEventsByCategory(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
+                get("/status/{status}", ec.getEventsByStatus(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
+                get("", ec.getAllEvents(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
+                get("/{id}", ec.getEventsById(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
+                get("/{id}/users", ec.getEventByIdsParticipants(), roles.INSTRUCTOR);
                 // Posts!
-                post("/events", ec.createEvent(), roles.INSTRUCTOR);
+                post("", ec.createEvent(), roles.INSTRUCTOR);
             });
             path("/auth", () -> {
                 post("/login", sc.login(), roles.ANYONE);

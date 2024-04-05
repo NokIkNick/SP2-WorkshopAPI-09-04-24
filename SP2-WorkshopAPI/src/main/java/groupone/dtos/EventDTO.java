@@ -26,7 +26,6 @@ public class EventDTO {
     private LocalDate createdAt;
     private LocalDate updatedAt;
     private LocalDate deletedAt;
-    private String imageUrl;
     private List<User> users;
     private List<Location> locations;
     public EventDTO(Event event){

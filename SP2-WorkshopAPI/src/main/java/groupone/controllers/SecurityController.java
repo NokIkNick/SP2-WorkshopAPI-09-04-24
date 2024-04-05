@@ -47,8 +47,7 @@ public class SecurityController {
             ObjectNode returnObject = objectMapper.createObjectNode();
             try{
                 UserDTO userInput = ctx.bodyAsClass(UserDTO.class);
-                User toPersist = new User(userInput);
-                User created = userDAO.createUser(toPersist.getEmail(), toPersist.getPassword(), toPersist.getName(), toPersist.getPhoneNumber());
+                User created = userDAO.createUser(userInput.getEmail(), userInput.getPassword(), userInput.getName(), userInput.getPhone());
 
 
                 String token = tokenUtils.createToken(new UserDTO(created));
@@ -72,7 +71,7 @@ public class SecurityController {
                 ctx.status(200).json(new TokenDTO(token, user.getEmail()));
 
             }catch(EntityNotFoundException | ValidationException | ApiException e){
-                ctx.status(401);
+                ctx.status(HttpStatus.BAD_REQUEST);
                 System.out.println(e.getMessage());
                 ctx.json(returnObject.put("msg", e.getMessage()));
             }
@@ -151,7 +150,7 @@ public class SecurityController {
             String password = UUID.randomUUID().toString().replace("-", "");
 
             // Construct message.
-            String msg = constructResetPasswordMessage(ctx, password);
+            String msg = constructResetPasswordMessage(password);
 
             // Send the mail.
             boolean succeeded = Mailer.WriteEmail(email, "Your password has been changed", msg);
@@ -197,31 +196,29 @@ public class SecurityController {
                "</html>";
     }
     @NotNull
-    private static String constructResetPasswordMessage(Context ctx, String password) {
+    private static String constructResetPasswordMessage(String password) {
 
 
-        String sb = "<html>" + // html start
+        return "<html>" + // html start
 
-                    "<body style=\"align-content:middle\">" + // body start
+               "<body style=\"align-content:middle\">" + // body start
 
-                    // header to let the user know what this is about
-                    "<h1>Your password has been changed to this temporary one.</h1>" +
+               // header to let the user know what this is about
+               "<h1>Your password has been changed to this temporary one.</h1>" +
 
-                    // start of the link that will reset the password
-                    "<p>Your temporary password: " +
-                    password +
-                    "</p>" +
-                    // end of the link that will reset the password
+               // start of the link that will reset the password
+               "<p>Your temporary password: " +
+               password +
+               "</p>" +
+               // end of the link that will reset the password
 
-                    "<p>" + // start of information paragraph
-                    "If you haven't requested a reset, your email has been compromised.\n" + // ignore if not you.
-                    "Change your emails password and request a new password change." + // 24 hours message.
-                    "</p>" + // end of information paragraph
+               "<p>" + // start of information paragraph
+               "If you haven't requested a reset, your email has been compromised.\n" + // ignore if not you.
+               "Change your emails password and request a new password change." + // 24 hours message.
+               "</p>" + // end of information paragraph
 
-                    "</body>" + // end of body
-                    "</html>"; // end of html
-
-        return sb;
+               "</body>" + // end of body
+               "</html>";
     }
 
     public Handler authenticate(){
