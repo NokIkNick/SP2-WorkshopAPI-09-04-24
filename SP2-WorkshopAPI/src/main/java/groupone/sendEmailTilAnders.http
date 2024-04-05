@@ -12,7 +12,7 @@ POST http://localhost:7008/api/auth/register
 
 GET http://localhost:7008/api/auth/request/password/reset?email=anders.wade.jensen@hotmail.com
 
-### Reset+
+### Reset Password
 
 GET http://localhost:7008/api/auth/reset/password?email=12345678910@12345678910.dk&guid=
 
