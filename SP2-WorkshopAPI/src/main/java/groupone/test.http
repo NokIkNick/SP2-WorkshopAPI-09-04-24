@@ -1,13 +1,25 @@
+
+### Register user
+
 POST http://localhost:7008/api/auth/register
 
 {
-"email":"patrick_the_awesome2_12345678910@12345678910.dk",
+"email":"random_12345678910@12345678910.dk",
 "password":"123456789",
 "phone":"88888888",
-"name":"patrick_the_awesome"
+"name":"random"
 }
 
-###
+### Login as User
+
+POST http://localhost:7008/api/auth/login
+
+{
+"email":"random_12345678910@12345678910.dk",
+"password":"123456789"
+}
+
+### Login as Admin
 
 POST http://localhost:7008/api/auth/login
 
