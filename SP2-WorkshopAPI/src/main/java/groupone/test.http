@@ -1,19 +1,33 @@
+
+### Register user
+
 POST http://localhost:7008/api/auth/register
 
 {
-"email":"12345678910@12345678910.dk",
-"password":"123456712",
-"phone":"1234542",
-"name":"Jophnfasd"
+"email":"patrick_the_awesome2_12345678910@12345678910.dk",
+"password":"123456789",
+"phone":"88888888",
+"name":"random_test"
 }
 
-###
+### Login as User
 
 POST http://localhost:7008/api/auth/login
 
 {
-"email":"test@student.com",
-"password":"test"
+
+"email":"random_12345678910@12345678910.dk",
+"password":"123456789"
+}
+
+### Login as Admin
+
+POST http://localhost:7008/api/auth/login
+
+{
+"email":"patrick_the_awesome2_12345678910@12345678910.dk",
+"password":"123456789"
+
 }
 
 ###
@@ -89,3 +103,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiIxM
     }
   ]
 }
+
+###
+
+GET http://localhost:7008/api/admin/get_all_users
+Authorization: BEARER eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwYXRyaWNrX3RoZV9hd2Vzb21lMl8xMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjMwNDM2Niwicm9sZXMiOiJBRE1JTiIsInVzZXJuYW1lIjoicGF0cmlja190aGVfYXdlc29tZTJfMTIzNDU2Nzg5MTBAMTIzNDU2Nzg5MTAuZGsifQ.D2FUpfxov9G-jZZr5LwJx2biwBBUgZoJRYtktuRA4yI
+
+### Instructor - Get All participants of Event
+
+GET http://localhost:7008/api/events/1/users
+Authorization: BEARER eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwYXRyaWNrX3RoZV9hd2Vzb21lMl8xMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjMzMTAxNywicm9sZXMiOiJTVFVERU5ULEFETUlOLElOU1RSVUNUT1IiLCJ1c2VybmFtZSI6InBhdHJpY2tfdGhlX2F3ZXNvbWUyXzEyMzQ1Njc4OTEwQDEyMzQ1Njc4OTEwLmRrIn0._JlE9vQM6uwjs-JL6oMpsHi-_CJZfuw3YoKZEaMrFx0
+
+###

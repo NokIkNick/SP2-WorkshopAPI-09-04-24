@@ -13,6 +13,13 @@ import java.util.List;
 public class EventDAO extends DAO<Event, Integer>{
     private static EventDAO instance;
 
+    public static EventDAO getInstance(boolean isTesting){
+        if(instance == null){
+            instance = new EventDAO(isTesting);
+        }
+        return instance;
+    }
+
     public EventDAO(boolean isTesting) {
         super(Event.class, isTesting);
     }
@@ -87,11 +94,5 @@ public class EventDAO extends DAO<Event, Integer>{
             em.getTransaction().commit();
         }
         return eventList;
-    }
-    public static EventDAO getInstance(boolean isTesting){
-        if(instance == null){
-            instance = new EventDAO(isTesting);
-        }
-        return instance;
     }
 }

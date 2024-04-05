@@ -8,7 +8,10 @@ import groupone.dtos.*;
 import groupone.enums.Category;
 import groupone.enums.Status;
 import groupone.model.Event;
+import groupone.model.User;
 import io.javalin.http.Handler;
+import io.javalin.http.HttpStatus;
+import org.hibernate.Hibernate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +33,7 @@ public class EventController {
      * An ObjectMapper used for mapping between different object types.
      * It is configured to not fail on empty beans and to support Java Time objects.
      */
+    @SuppressWarnings({"FieldMayBeFinal", "unused"})
     private static ObjectMapper objectMapper = new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false).registerModule(new JavaTimeModule());
 
     public static EventController getInstance(Boolean isTesting) {
@@ -55,7 +59,7 @@ public class EventController {
 
             // Map each event to an EventDTO
             List<EventDTO> eventDTOs = eventList.stream()
-                    .map(x -> new EventDTO(x))
+                    .map(EventDTO::new)
                     .toList();
             ctx.json(eventDTOs);
             // TODO had to refactor a bit, check if you want to the below code to stay.
@@ -78,9 +82,9 @@ public class EventController {
             List<SuperEventDTO> completeEvents = new ArrayList<>();
             for (EventDTO e : eventDTOs) {
                 SuperEventDTO event = new SuperEventDTO(e);
-                for (int i = 0; i < locationDTOS.size(); i++) {
-                    if (e.getId() == locationDTOS.get(i).getId()) {
-                        event.getLocations().add(locationDTOS.get(i));
+                for (LocationDTO locationDTO : locationDTOS) {
+                    if (e.getId() == locationDTO.getId()) {
+                        event.getLocations().add(locationDTO);
                         completeEvents.add(event);
                     }
                 }
@@ -108,7 +112,6 @@ public class EventController {
             // TODO had to refactor a bit, check if you want to the below code to stay.
            /* // Map the event to an EventDTO
             EventDTO eventDTO = new EventDTO(event.getId(), event.getImageUrl(), event.getTitle(), event.getDescription(), event.getPrice());
-            ctx.json(eventDTO);
             // Map each location of the event to a LocationDTO, including the zipcodes
             List<LocationDTO> locationDTOS = event.getLocations().stream()
                     .map(location -> {
@@ -141,7 +144,7 @@ public class EventController {
             // TODO had to refactor a bit, check if you want to the below code to stay.
             /* // Map each event to an EventDTO
             List<EventDTO> eventDTOs = eventList.stream()
-                    .map(x -> new EventDTO(x.getId(), x.getImageUrl(), x.getTitle(), x.getDescription(), x.getPrice()))
+                    .map(EventDTO::new)
                     .toList();
 
             // Map each location of each event to a LocationDTO, including the zipcodes
@@ -163,9 +166,9 @@ public class EventController {
             List<SuperEventDTO> completeEvents = new ArrayList<>();
             for (EventDTO e : eventDTOs) {
                 SuperEventDTO event = new SuperEventDTO(e);
-                for (int i = 0; i < locationDTOS.size(); i++) {
-                    if (e.getId() == locationDTOS.get(i).getId()) {
-                        event.getLocations().add(locationDTOS.get(i));
+                for (LocationDTO locationDTO : locationDTOS) {
+                    if (e.getId() == locationDTO.getId()) {
+                        event.getLocations().add(locationDTO);
                         completeEvents.add(event);
                     }
                 }
@@ -185,7 +188,7 @@ public class EventController {
             // TODO had to refactor a bit, check if you want to the below code to stay.
            /* // Map each event to an EventDTO
             List<EventDTO> eventDTOs = eventList.stream()
-                    .map(x -> new EventDTO(x.getId(), x.getImageUrl(), x.getTitle(), x.getDescription(), x.getPrice()))
+                    .map(EventDTO::new)
                     .toList();
 
             // Map each location of each event to a LocationDTO, including the zipcodes
@@ -207,9 +210,9 @@ public class EventController {
             List<SuperEventDTO> completeEvents = new ArrayList<>();
             for (EventDTO e : eventDTOs) {
                 SuperEventDTO event = new SuperEventDTO(e);
-                for (int i = 0; i < locationDTOS.size(); i++) {
-                    if (e.getId() == locationDTOS.get(i).getId()) {
-                        event.getLocations().add(locationDTOS.get(i));
+                for (LocationDTO locationDTO : locationDTOS) {
+                    if (e.getId() == locationDTO.getId()) {
+                        event.getLocations().add(locationDTO);
                         completeEvents.add(event);
                     }
                 }
@@ -231,9 +234,34 @@ public class EventController {
                 ctx.status(200);
                 ctx.json(eventDTO);
             //}
-            ;
+        
         };
 
+    }
+
+    public Handler getEventByIdsParticipants() {
+        return ctx -> {
+            String event = (ctx.pathParam("id"));
+            int eventID;
+            try {
+                eventID = Integer.parseInt(event);
+            } catch (NumberFormatException e) {
+                ctx.status(HttpStatus.BAD_GATEWAY);
+                return;
+            }
+            Event FoundEvent = eventDAO.getById(eventID, (ev) -> {
+                Hibernate.initialize(ev.getUsers()); // initialize users
+                for(User u : ev.getUsers()) {
+                    Hibernate.initialize(u.getRoles());
+                }
+            }); // toString so everything being part of toString on users is also initialized.
+            if(FoundEvent == null) {
+                ctx.status(HttpStatus.NOT_FOUND);
+                return;
+            }
+            List<UserDTO> users = FoundEvent.getUsers().stream().map(UserDTO::new).collect(Collectors.toList());
+            ctx.json(users);
+        };
     }
 }
 
