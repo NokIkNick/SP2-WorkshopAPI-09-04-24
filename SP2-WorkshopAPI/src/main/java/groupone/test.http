@@ -4,10 +4,10 @@
 POST http://localhost:7008/api/auth/register
 
 {
-"email":"random_12345678910@12345678910.dk",
+"email":"patrick_the_awesome2_12345678910@12345678910.dk",
 "password":"123456789",
 "phone":"88888888",
-"name":"random"
+"name":"random_test"
 }
 
 ### Login as User
@@ -109,5 +109,7 @@ Authorization: BEARER eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwY
 
 ### Instructor - Get All participants of Event
 
-GET http://localhost:7008/api/events/?/users
-Authorization: BEARER
+GET http://localhost:7008/api/events/1/users
+Authorization: BEARER eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwYXRyaWNrX3RoZV9hd2Vzb21lMl8xMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjMzMTAxNywicm9sZXMiOiJTVFVERU5ULEFETUlOLElOU1RSVUNUT1IiLCJ1c2VybmFtZSI6InBhdHJpY2tfdGhlX2F3ZXNvbWUyXzEyMzQ1Njc4OTEwQDEyMzQ1Njc4OTEwLmRrIn0._JlE9vQM6uwjs-JL6oMpsHi-_CJZfuw3YoKZEaMrFx0
+
+###

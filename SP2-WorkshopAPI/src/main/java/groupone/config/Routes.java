@@ -15,16 +15,18 @@ import static io.javalin.apibuilder.ApiBuilder.*;
 public class Routes {
     private static SecurityController sc;
     private static UserController uc;
+    @SuppressWarnings("unused")
     private static UserDTO userDTO;
     private static EventController ec;
     private static final ObjectMapper objectMapper = new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false).registerModule(new JavaTimeModule());
+    @SuppressWarnings("CodeBlock2Expr")
     public static EndpointGroup getRoutes(Boolean isTesting) {
         ec = EventController.getInstance(isTesting);
         sc = SecurityController.getInstance(isTesting);
         uc = UserController.getInstance(isTesting);
         return () -> {
+            before(sc.authenticate());
             path("", () -> {
-                before(sc.authenticate());
                 get("/", ctx -> ctx.json(objectMapper.createObjectNode().put("Message", "Connected Successfully")), roles.ANYONE);
             });
             path("/events", () -> {

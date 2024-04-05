@@ -6,6 +6,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import groupone.daos.EventDAO;
 import groupone.dtos.*;
 import groupone.model.Event;
+import groupone.model.User;
 import io.javalin.http.Handler;
 import io.javalin.http.HttpStatus;
 import org.hibernate.Hibernate;
@@ -30,6 +31,7 @@ public class EventController {
      * An ObjectMapper used for mapping between different object types.
      * It is configured to not fail on empty beans and to support Java Time objects.
      */
+    @SuppressWarnings({"FieldMayBeFinal", "unused"})
     private static ObjectMapper objectMapper = new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false).registerModule(new JavaTimeModule());
 
     public static EventController getInstance(Boolean isTesting) {
@@ -232,7 +234,7 @@ public class EventController {
 
     public Handler getEventByIdsParticipants() {
         return ctx -> {
-            String event = (ctx.pathParam("event"));
+            String event = (ctx.pathParam("id"));
             int eventID;
             try {
                 eventID = Integer.parseInt(event);
@@ -240,7 +242,16 @@ public class EventController {
                 ctx.status(HttpStatus.BAD_GATEWAY);
                 return;
             }
-            Event FoundEvent = eventDAO.getById(eventID, (ev) -> Hibernate.initialize(ev.getUsers().toString())); // toString so everything being part of toString on users is also initialized.
+            Event FoundEvent = eventDAO.getById(eventID, (ev) -> {
+                Hibernate.initialize(ev.getUsers()); // initialize users
+                for(User u : ev.getUsers()) {
+                    Hibernate.initialize(u.getRoles());
+                }
+            }); // toString so everything being part of toString on users is also initialized.
+            if(FoundEvent == null) {
+                ctx.status(HttpStatus.NOT_FOUND);
+                return;
+            }
             List<UserDTO> users = FoundEvent.getUsers().stream().map(UserDTO::new).collect(Collectors.toList());
             ctx.json(users);
         };
