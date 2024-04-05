@@ -11,6 +11,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import org.eclipse.jetty.http.HttpStatus;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -114,6 +115,16 @@ class EventControllerTest {
             //User found = em.find(User.class,user124.getEmail());
 
 
+        }
+    }
+
+    @AfterAll
+    static void tearDown(){
+        try(EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            em.createQuery("delete from roles").executeUpdate();
+            em.createQuery("delete from users").executeUpdate();
+            em.getTransaction().commit();
         }
     }
 
