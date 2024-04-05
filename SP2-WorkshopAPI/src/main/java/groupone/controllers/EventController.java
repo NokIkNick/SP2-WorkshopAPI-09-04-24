@@ -58,7 +58,7 @@ public class EventController {
                     .map(x -> new EventDTO(x))
                     .toList();
             ctx.json(eventDTOs);
-
+            // TODO had to refactor a bit, check if you want to the below code to stay.
            /* // Map each location of each event to a LocationDTO, including the zipcodes
             List<LocationDTO> locationDTOS = eventList.stream()
                     .flatMap(event -> event.getLocations().stream()
@@ -105,7 +105,7 @@ public class EventController {
             Event event = eventDAO.getById(id);
             EventDTO eventDTO = new EventDTO(event);
             ctx.json(eventDTO);
-
+            // TODO had to refactor a bit, check if you want to the below code to stay.
            /* // Map the event to an EventDTO
             EventDTO eventDTO = new EventDTO(event.getId(), event.getImageUrl(), event.getTitle(), event.getDescription(), event.getPrice());
             ctx.json(eventDTO);
@@ -182,6 +182,7 @@ public class EventController {
             List<Event> eventList = eventDAO.getEventsByStatus(Status.valueOf(status.toUpperCase()));
             List<EventDTO> eventDTOList = eventList.stream().map(event -> new EventDTO(event)).collect(Collectors.toList());
             ctx.json(eventDTOList);
+            // TODO had to refactor a bit, check if you want to the below code to stay.
            /* // Map each event to an EventDTO
             List<EventDTO> eventDTOs = eventList.stream()
                     .map(x -> new EventDTO(x.getId(), x.getImageUrl(), x.getTitle(), x.getDescription(), x.getPrice()))
@@ -222,6 +223,7 @@ public class EventController {
     public Handler createEvent() {
         return ctx -> {
             Event event = ctx.bodyAsClass(Event.class);
+            // TODO remove below code its not needed
            /* for (int i = 0; i < event.getLocations().size(); i++) {
                 event.getLocations().get(i).getEventSpec().setLocation(event.getLocations().get(i));*/
                 eventDAO.create(event);
