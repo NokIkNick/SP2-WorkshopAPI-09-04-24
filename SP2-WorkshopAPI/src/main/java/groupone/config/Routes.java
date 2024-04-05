@@ -33,7 +33,7 @@ public class Routes {
                 get("/category/{category}", ec.getEventsByCategory(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
                 get("/status/{status}", ec.getEventsByStatus(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
                 get("", ec.getAllEvents(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
-                get("/{id}", ec.getEventsById(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
+                get("/{id}", ec.getEventById(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
                 get("/{id}/users", ec.getEventByIdsParticipants(), roles.INSTRUCTOR);
                 // Posts!
                 post("", ec.createEvent(), roles.INSTRUCTOR);

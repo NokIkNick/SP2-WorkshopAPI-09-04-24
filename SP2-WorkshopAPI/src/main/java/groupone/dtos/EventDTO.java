@@ -1,5 +1,6 @@
 package groupone.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import groupone.model.Event;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import groupone.model.Location;
@@ -28,11 +29,12 @@ public class EventDTO {
     private LocalDate createdAt;
     private LocalDate updatedAt;
     private LocalDate deletedAt;
-    private List<User> users;
+
+    private List<UserDTO> users = new ArrayList<>();
 
     private List<LocationDTO> locations = new ArrayList<>();
 
-    public EventDTO(Integer id,String imageUrl,String title,String description,Double price){
+    public EventDTO(Integer id, String imageUrl, String title, String description, Double price) {
         setId(id);
         setImageUrl(imageUrl);
         setTitle(title);
@@ -40,12 +42,30 @@ public class EventDTO {
         setPrice(price);
     }
 
-    public EventDTO(Event event){
+    public EventDTO(Event event) {
         setId(event.getId());
         setImageUrl(event.getImageUrl());
         setTitle(event.getTitle());
         setDescription(event.getDescription());
         setPrice(event.getPrice());
-        event.getLocations().stream().map( x -> new LocationDTO(x)).forEach(x -> locations.add(x));
+        setCreatedAt(event.getCreatedAt());
+        setUpdatedAt(event.getUpdatedAt());
+        setDeletedAt(event.getDeletedAt());
+        event.getUsers().stream().map(x -> new UserDTO(this,x)).forEach(x -> users.add(x));
+        event.getLocations().stream().map(x -> new LocationDTO(x)).forEach(x -> locations.add(x));
     }
+
+    public EventDTO(UserDTO userDTO,Event event){
+        setId(event.getId());
+        setImageUrl(event.getImageUrl());
+        setTitle(event.getTitle());
+        setDescription(event.getDescription());
+        setPrice(event.getPrice());
+        setCreatedAt(event.getCreatedAt());
+        setUpdatedAt(event.getUpdatedAt());
+        setDeletedAt(event.getDeletedAt());
+        this.users.add(userDTO);
+        event.getLocations().stream().map(x -> new LocationDTO(x)).forEach(x -> locations.add(x));
+    }
+
 }

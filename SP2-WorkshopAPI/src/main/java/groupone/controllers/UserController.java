@@ -71,7 +71,7 @@ public class UserController {
             foundUser.addEvent(foundEvent);
             User updated = userDAO.update(foundUser, foundUser.getEmail());
             UserDTO userDTO = new UserDTO(updated);
-            ctx.json(updated);
+            ctx.json(userDTO.getEventDTOList());
         };
 
     }

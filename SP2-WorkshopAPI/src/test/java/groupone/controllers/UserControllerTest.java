@@ -160,7 +160,7 @@ class UserControllerTest {
                 .then().log().all()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200)
-                .body("events.size()",equalTo(2));
+                .body("eventDTOList.size()",equalTo(2));
 
     }
     @Test

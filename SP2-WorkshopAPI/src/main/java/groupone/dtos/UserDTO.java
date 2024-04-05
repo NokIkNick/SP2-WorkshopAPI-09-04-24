@@ -1,5 +1,6 @@
 package groupone.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import groupone.model.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +21,8 @@ public class UserDTO {
     private String name;
     private Set<String> roles;
 
-    private List<EventDTO> evetDTOList = new ArrayList<>();
+    @JsonIgnore
+    private List<EventDTO> eventDTOList = new ArrayList<>();
 
     public UserDTO(String email, String password, Set<String> roles){
         this.email = email;
@@ -38,7 +40,14 @@ public class UserDTO {
         this.password = user.getPassword();
         this.phone = user.getPhoneNumber();
         this.roles = user.getRolesToString();
-        user.getEvents().stream().map(x -> new EventDTO(x)).forEach(x -> evetDTOList.add(x));
+        user.getEvents().stream().map(x -> new EventDTO(this,x)).forEach(x -> eventDTOList.add(x));
+    }
+    public UserDTO(EventDTO eventDTO, User user ){
+        this.email = user.getEmail();
+        this.password = user.getPassword();
+        this.phone = user.getPhoneNumber();
+        this.roles = user.getRolesToString();
+        this.eventDTOList.add(eventDTO);
     }
 
 }

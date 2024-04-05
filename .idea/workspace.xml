@@ -6,7 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="b59af9bc-6a0a-4a0a-8aff-8280499ebafd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/EventController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/config/Routes.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/config/Routes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/EventDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/EventDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/UserDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/controllers/UserControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/controllers/UserControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +86,7 @@
       <recent name="groupone.controllers" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.controllers in SP2-WorkshopAPI">
     <configuration name="EventControllerTest.getEventsByCategory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SP2-WorkshopAPI" />
       <extension name="coverage">
@@ -149,10 +153,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.controllers in SP2-WorkshopAPI" />
-        <item itemvalue="JUnit.java in SP2-WorkshopAPI" />
-        <item itemvalue="JUnit.EventControllerTest.getEventsByCategory" />
         <item itemvalue="JUnit.UserControllerTest.addEventToUser" />
         <item itemvalue="JUnit.UserControllerTest" />
+        <item itemvalue="JUnit.java in SP2-WorkshopAPI" />
+        <item itemvalue="JUnit.EventControllerTest.getEventsByCategory" />
       </list>
     </recent_temporary>
   </component>
@@ -168,6 +172,7 @@
       <workItem from="1712213556913" duration="13949000" />
       <workItem from="1712253351914" duration="11996000" />
       <workItem from="1712300596066" duration="10500000" />
+      <workItem from="1712342646998" duration="2119000" />
     </task>
     <servers />
   </component>
@@ -179,18 +184,18 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/controllers/UserControllerTest.java</url>
-          <line>113</line>
+          <line>93</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/UserController.java</url>
-          <line>29</line>
-          <option name="timeStamp" value="10" />
+          <line>66</line>
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/EventController.java</url>
-          <line>226</line>
-          <option name="timeStamp" value="26" />
+          <url>file://$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/EventDTO.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
