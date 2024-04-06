@@ -164,6 +164,16 @@ class UserControllerTest {
 
     }
     @Test
+    void getAllUsers(){
+        RestAssured.given()
+                .header("Authorization", adminToken)
+                .when()
+                .get("/admin/get_all_users")
+                .then().log().all()
+                .body("[0].email",equalTo("test@student.com"));
+    }
+
+    @Test
     void testStuff(){
         RestAssured.given()
                 .when()
