@@ -1,5 +1,6 @@
 package groupone.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import groupone.dtos.UserDTO;
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,7 +15,6 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 public class User {
     @Id
     private String email;
@@ -25,25 +25,38 @@ public class User {
     private String name;
     private Integer phoneNumber;
 
-    @ManyToMany(cascade = CascadeType.DETACH, mappedBy = "users")
+    @ManyToMany(cascade = {CascadeType.DETACH/*,CascadeType.PERSIST*/}, mappedBy = "users",fetch = FetchType.EAGER)
     Set<Role> roles = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.DETACH, mappedBy = "users")
+
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.DETACH}, mappedBy = "users",fetch = FetchType.EAGER)
+
     Set<Event> events = new HashSet<>();
 
     @PrePersist
     private void PrePersist(){
+
+        //this.password = BCrypt.hashpw(password, BCrypt.gensalt());
         // kryptering af password ændret til setPassword.
+
     }
 
     public User(UserDTO userDTO){
         this.email = userDTO.getEmail();
-        this.password = userDTO.getPassword();
+        setPassword(userDTO.getPassword());
         this.name = userDTO.getName();
         this.phoneNumber = userDTO.getPhone();
     }
 
-
+    // test constructor
+    public User(String email, String password, String name, Integer phoneNumber,Role role){
+        this.email = email;
+        setPassword(password);
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        addRole(role);
+    }
+    @JsonIgnore
     public Set<String> getRolesToString(){
         return roles.stream().map(Role::getName).collect(Collectors.toSet());
     }

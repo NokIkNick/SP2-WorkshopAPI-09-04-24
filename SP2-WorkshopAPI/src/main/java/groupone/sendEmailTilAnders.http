@@ -1,0 +1,19 @@
+### Opret Anders
+POST http://localhost:7008/api/auth/register
+
+{
+"email":"anders.wade.jensen@hotmail.com",
+"password":"123456712",
+"phone":"12345425",
+"name":"Anders Wade Jensen"
+}
+
+### Spørg om reset
+
+GET http://localhost:7008/api/auth/request/password/reset?email=anders.wade.jensen@hotmail.com
+
+### Reset Password
+
+GET http://localhost:7008/api/auth/reset/password?email=12345678910@12345678910.dk&guid=
+
+### ?
