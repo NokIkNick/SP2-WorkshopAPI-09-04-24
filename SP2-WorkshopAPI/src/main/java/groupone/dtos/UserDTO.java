@@ -38,6 +38,7 @@ public class UserDTO {
     public UserDTO(User user){
         this.email = user.getEmail();
         this.password = user.getPassword();
+        this.name = user.getName();
         this.phone = user.getPhoneNumber();
         this.roles = user.getRolesToString();
         user.getEvents().stream().map(x -> new EventDTO(this,x)).forEach(x -> eventDTOList.add(x));

@@ -151,7 +151,7 @@ class EventControllerTest {
         return "Bearer " + token;
     }
     @Test
-    void getAllEvents(){
+    void getUpcomingEvents(){
         RestAssured.given()
                 .header("Authorization", adminToken)
                 .when()
@@ -203,7 +203,6 @@ class EventControllerTest {
     void createEvent() {
         String json = "{\"title\":\"newTestEvent\",\"description\":\"This is a new test event!\",\"price\":100.0,\"createdAt\":\"2024-04-03\",\"updatedAt\":\"2024-04-03\",\"imageUrl\":\"www.moretexturl.com\",\"locations\":[{\"street\":\"test-street-wahoo\",\"eventSpec\":{\"date\":\"2024-05-05\",\"time\":\"16:30\",\"duration\":2,\"instructorName\":\"Peter Maker\",\"instructorEmail\":\"Peter@Maker.dk\",\"status\":\"UPCOMING\",\"category\":\"EVENT\",\"capacity\":1200},\"zipcodes\":{\"zip\":2970}},{\"street\":\"the-other-test-street-wahoo\",\"eventSpec\":{\"date\":\"2024-06-08\",\"time\":\"17:30\",\"duration\":3,\"instructorName\":\"Morten Bungi\",\"instructorEmail\":\"Morten@Bungi.dk\",\"status\":\"UPCOMING\",\"category\":\"EVENT\",\"capacity\":500},\"zipcodes\":{\"zip\":2970}}]}";
 
-
         RestAssured.given()
                 .header("Authorization", instructorToken)
                 .contentType("application/json")
@@ -216,4 +215,28 @@ class EventControllerTest {
                 .body("title", equalTo("newTestEvent"))
                 .body("locations.size()",equalTo(2));
     }
+    @Test
+    void getEventByIdsPerticipants(){
+        RestAssured.given()
+                .header("Authorization", instructorToken)
+                .when()
+                .get("http://localhost:7778/api/events/1/users")
+                .then().log().all()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200)
+                .body("[0].email",equalTo("test@student.com"));
+    }
+
+    @Test
+    void getAllEvents(){
+            RestAssured.given()
+                    .header("Authorization", adminToken)
+                    .when()
+                    .get("http://localhost:7778/api/admin/get_all_events")
+                    .then().log().all()
+                    .assertThat()
+                    .statusCode(HttpStatus.OK_200)
+                    .body("events.size()",equalTo(2));
+    }
+
 }

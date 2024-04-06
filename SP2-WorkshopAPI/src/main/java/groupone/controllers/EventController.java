@@ -239,6 +239,15 @@ public class EventController {
 
     }
 
+    public Handler getUpcomingEvents() {
+        return ctx -> {
+            String status = "upcoming";
+            List<Event> eventList = eventDAO.getEventsByStatus(Status.valueOf(status.toUpperCase()));
+            List<EventDTO> eventDTOList = eventList.stream().map(event -> new EventDTO(event)).collect(Collectors.toList());
+            ctx.json(eventDTOList);
+        };
+    }
+
     public Handler getEventByIdsParticipants() {
         return ctx -> {
             String event = (ctx.pathParam("id"));
