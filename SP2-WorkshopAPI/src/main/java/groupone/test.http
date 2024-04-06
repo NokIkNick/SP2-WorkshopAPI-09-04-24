@@ -4,7 +4,7 @@
 POST http://localhost:7008/api/auth/register
 
 {
-"email":"patrick_the_awesome2_12345678910@12345678910.dk",
+"email":"patrick_the_awesomest_person_12345678910@12345678910.dk",
 "password":"123456789",
 "phone":"88888888",
 "name":"random_test"
@@ -16,7 +16,7 @@ POST http://localhost:7008/api/auth/login
 
 {
 
-"email":"random_12345678910@12345678910.dk",
+"email":"patrick_the_awesomest_person_12345678910@12345678910.dk",
 "password":"123456789"
 }
 
@@ -25,7 +25,7 @@ POST http://localhost:7008/api/auth/login
 POST http://localhost:7008/api/auth/login
 
 {
-"email":"patrick_the_awesome2_12345678910@12345678910.dk",
+"email":"patrick_the_awesome_12345678910@12345678910.dk",
 "password":"123456789"
 
 }
@@ -41,7 +41,7 @@ GET http://localhost:7008/api/auth/reset/password?email=12345678910@12345678910.
 ###
 
 GET http://localhost:7008/api/events/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJ0ZXN0QHN0dWRlbnQuY29tIiwiZXhwIjoxNzEyMjY3MzM4LCJyb2xlcyI6IlNUVURFTlQiLCJ1c2VybmFtZSI6InRlc3RAc3R1ZGVudC5jb20ifQ.pgwcd8x0RmIu2uUmKF9fu2soXi63O2sw1qNQUQnN2GY
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwYXRyaWNrX3RoZV9hd2Vzb21lXzEyMzQ1Njc4OTEwQDEyMzQ1Njc4OTEwLmRrIiwiZXhwIjoxNzEyNDMxNzczLCJyb2xlcyI6IkFETUlOIiwidXNlcm5hbWUiOiJwYXRyaWNrX3RoZV9hd2Vzb21lXzEyMzQ1Njc4OTEwQDEyMzQ1Njc4OTEwLmRrIn0.LITNUws0JvhevSWnNChaOkkVPpvmgEoZTxqkYGWwNXI
 
 ###
 
@@ -55,7 +55,7 @@ GET http://localhost:7008/api/events/status/ONGOING
 
 POST http://localhost:7008/api/events
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiIxMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjI1NjU3NCwicm9sZXMiOiJJTlNUUlVDVE9SIiwidXNlcm5hbWUiOiIxMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayJ9.Y1oJFYGgXuSbSuz-YGeT-ROqOF93puzZvBLvcNSLELY
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwYXRyaWNrX3RoZV9hd2Vzb21lXzEyMzQ1Njc4OTEwQDEyMzQ1Njc4OTEwLmRrIiwiZXhwIjoxNzEyNDM3MzI3LCJyb2xlcyI6IklOU1RSVUNUT1IiLCJ1c2VybmFtZSI6InBhdHJpY2tfdGhlX2F3ZXNvbWVfMTIzNDU2Nzg5MTBAMTIzNDU2Nzg5MTAuZGsifQ.aI6JIeTGgcdJ8sgZuWe8Ip_5Emag_2nh_vmYMpdokMI
 
 {
   "title":"newTestEvent",
@@ -77,34 +77,18 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiIxM
         "category":"EVENT",
         "capacity":1200
       },
-      "zipcodes":[
+      "zipcodes":
         {
+
           "zip":4700
         }
-      ]
-    },
-    {
-    "street":"the-other-test-street-wahoo",
-    "eventSpec":{
-      "date":"2024-06-08",
-      "time":"17:30",
-      "duration":3,
-      "instructorName":"Morten Bungi",
-      "instructorEmail":"Morten@Bungi.dk",
-      "status":"UPCOMING",
-      "category":"EVENT",
-      "capacity":500
-    },
-      "zipcodes":[
-        {
-          "zip":3990
-        }
-      ]
+
     }
   ]
 }
 
 ###
+
 
 GET http://localhost:7008/api/admin/get_all_users
 Authorization: BEARER eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwYXRyaWNrX3RoZV9hd2Vzb21lMl8xMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjMwNDM2Niwicm9sZXMiOiJBRE1JTiIsInVzZXJuYW1lIjoicGF0cmlja190aGVfYXdlc29tZTJfMTIzNDU2Nzg5MTBAMTIzNDU2Nzg5MTAuZGsifQ.D2FUpfxov9G-jZZr5LwJx2biwBBUgZoJRYtktuRA4yI
@@ -114,4 +98,7 @@ Authorization: BEARER eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwY
 GET http://localhost:7008/api/events/1/users
 Authorization: BEARER eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwYXRyaWNrX3RoZV9hd2Vzb21lMl8xMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjMzMTAxNywicm9sZXMiOiJTVFVERU5ULEFETUlOLElOU1RSVUNUT1IiLCJ1c2VybmFtZSI6InBhdHJpY2tfdGhlX2F3ZXNvbWUyXzEyMzQ1Njc4OTEwQDEyMzQ1Njc4OTEwLmRrIn0._JlE9vQM6uwjs-JL6oMpsHi-_CJZfuw3YoKZEaMrFx0
 
-###
+### Need help getting event added to user so it can get removed and tested
+
+PUT http://localhost:7008/api/student/remove_event/2
+Authorization: BEARER eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwYXRyaWNrX3RoZV9hd2Vzb21lc3RfcGVyc29uXzEyMzQ1Njc4OTEwQDEyMzQ1Njc4OTEwLmRrIiwiZXhwIjoxNzEyNDM5ODM5LCJyb2xlcyI6IlNUVURFTlQiLCJ1c2VybmFtZSI6InBhdHJpY2tfdGhlX2F3ZXNvbWVzdF9wZXJzb25fMTIzNDU2Nzg5MTBAMTIzNDU2Nzg5MTAuZGsifQ.BK79cMHOuCm-gTgqedNG2ozNoWfa_0BuiVJmr0RJeXQ

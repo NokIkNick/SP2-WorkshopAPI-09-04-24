@@ -79,10 +79,11 @@ public class UserController {
           Integer eventId = Integer.parseInt((ctx.pathParam("id")));
           User foundUser = userDAO.getById(user.getEmail());
           Event foundEvent = eventDAO.getById(eventId);
-          foundUser.removeEvent(foundEvent);
-          User updated = userDAO.update(foundUser,foundUser.getEmail());
-          UserDTO userDTO = new UserDTO(updated);
-          ctx.json(userDTO.getEventDTOList());
+          foundEvent.removeUser(foundUser);
+          Event updated = eventDAO.update(foundEvent, foundEvent.getId());
+          //User updated = userDAO.update(foundUser,foundUser.getEmail());
+          EventDTO eventDTO = new EventDTO(updated);
+          ctx.json(eventDTO);
         };
     }
 
