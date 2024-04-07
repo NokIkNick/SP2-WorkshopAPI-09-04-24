@@ -1,6 +1,5 @@
 package groupone;
 
-import groupone.daos.RoleDAO;
 import io.javalin.Javalin;
 import groupone.config.ApplicationConfig;
 import groupone.config.Routes;
