@@ -16,10 +16,12 @@ import java.util.List;
 @Setter
 public class LocationDTO {
 
+    private String eventName;
     private int id;
     private String street;
     private EventSpecsDTO eventSpecifications;
     private ZipcodeDTO zipcode;
+
 
     public LocationDTO(int id, String street, EventSpecsDTO eventSpecifications) {
         this.id = id;
@@ -27,10 +29,13 @@ public class LocationDTO {
         this.eventSpecifications = eventSpecifications;
     }
 
+
     public LocationDTO(Location location){
         setId(location.getId());
         setStreet(location.getStreet());
         setEventSpecifications(new EventSpecsDTO(location.getEventSpec()));
         setZipcode(new ZipcodeDTO(location.getZipcodes()));
+        setEventName(location.getEvents().get(0).getTitle());
     }
+
 }
