@@ -27,7 +27,7 @@ public class Location {
     @JsonIgnore
     private List<Event> events = new ArrayList<>();
 
-    @OneToOne(mappedBy = "location",cascade = {CascadeType.PERSIST,CascadeType.DETACH},fetch = FetchType.EAGER)
+    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.DETACH, CascadeType.MERGE},fetch = FetchType.EAGER)
     private EventSpec eventSpec;
 
     @ManyToOne(cascade = {/*CascadeType.PERSIST,*/CascadeType.DETACH},fetch = FetchType.EAGER)

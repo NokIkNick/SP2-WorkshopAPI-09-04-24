@@ -53,9 +53,10 @@ GET http://localhost:7008/api/events/status/ONGOING
 
 ###
 
-POST http://localhost:7008/api/events
+POST http://localhost:7008/api/events/create
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwYXRyaWNrX3RoZV9hd2Vzb21lXzEyMzQ1Njc4OTEwQDEyMzQ1Njc4OTEwLmRrIiwiZXhwIjoxNzEyNDM3MzI3LCJyb2xlcyI6IklOU1RSVUNUT1IiLCJ1c2VybmFtZSI6InBhdHJpY2tfdGhlX2F3ZXNvbWVfMTIzNDU2Nzg5MTBAMTIzNDU2Nzg5MTAuZGsifQ.aI6JIeTGgcdJ8sgZuWe8Ip_5Emag_2nh_vmYMpdokMI
+
 
 {
   "title":"newTestEvent",
@@ -77,12 +78,25 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwY
         "category":"EVENT",
         "capacity":1200
       },
-      "zipcodes":
-        {
-
-          "zip":4700
+      "zipcodes":{
+          "zip":2700
         }
-
+    },
+    {
+    "street":"the-other-test-street-wahoo",
+    "eventSpec":{
+      "date":"2024-06-08",
+      "time":"17:30",
+      "duration":3,
+      "instructorName":"Morten Bungi",
+      "instructorEmail":"Morten@Bungi.dk",
+      "status":"UPCOMING",
+      "category":"EVENT",
+      "capacity":500
+    },
+      "zipcodes":{
+          "zip":2100
+        }
     }
   ]
 }
@@ -102,3 +116,9 @@ Authorization: BEARER eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwY
 
 PUT http://localhost:7008/api/student/remove_event/2
 Authorization: BEARER eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwYXRyaWNrX3RoZV9hd2Vzb21lc3RfcGVyc29uXzEyMzQ1Njc4OTEwQDEyMzQ1Njc4OTEwLmRrIiwiZXhwIjoxNzEyNDM5ODM5LCJyb2xlcyI6IlNUVURFTlQiLCJ1c2VybmFtZSI6InBhdHJpY2tfdGhlX2F3ZXNvbWVzdF9wZXJzb25fMTIzNDU2Nzg5MTBAMTIzNDU2Nzg5MTAuZGsifQ.BK79cMHOuCm-gTgqedNG2ozNoWfa_0BuiVJmr0RJeXQ
+
+### Instructor - Cancel event.
+
+PUT http://localhost:7008/api/events/1/the-other-test-street-wahoo/2100/cancel
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwYXRyaWNrX3RoZV9hd2Vzb21lMl8xMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjQ1MTM4MSwicm9sZXMiOiJJTlNUUlVDVE9SIiwidXNlcm5hbWUiOiJwYXRyaWNrX3RoZV9hd2Vzb21lMl8xMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayJ9.YZlvRgQDEJ9lP6C3A3oTB7lbrDvglmZqdJTsilnWh44
+###

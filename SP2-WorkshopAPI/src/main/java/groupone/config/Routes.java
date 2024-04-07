@@ -36,7 +36,9 @@ public class Routes {
                 get("/{id}", ec.getEventById(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
                 get("/{id}/users", ec.getEventByIdsParticipants(), roles.INSTRUCTOR);
                 // Posts!
-                post("", ec.createEvent(), roles.INSTRUCTOR);
+                post("/create", ec.createEvent(), roles.INSTRUCTOR);
+                //TODO: NEEDS TESTING
+                put("/{id}/{address}/{zip}/cancel", ec.cancelEvent(), roles.INSTRUCTOR);
             });
             path("/auth", () -> {
                 post("/login", sc.login(), roles.ANYONE);

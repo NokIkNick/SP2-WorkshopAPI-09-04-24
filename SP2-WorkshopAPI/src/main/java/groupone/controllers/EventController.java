@@ -2,17 +2,20 @@ package groupone.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import groupone.daos.EventDAO;
 import groupone.dtos.*;
 import groupone.enums.Category;
 import groupone.enums.Status;
 import groupone.model.Event;
+import groupone.model.Location;
 import groupone.model.User;
 import io.javalin.http.Handler;
 import io.javalin.http.HttpStatus;
 import org.hibernate.Hibernate;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -62,36 +65,6 @@ public class EventController {
                     .map(EventDTO::new)
                     .toList();
             ctx.json(eventDTOs);
-            // TODO had to refactor a bit, check if you want to the below code to stay.
-           /* // Map each location of each event to a LocationDTO, including the zipcodes
-            List<LocationDTO> locationDTOS = eventList.stream()
-                    .flatMap(event -> event.getLocations().stream()
-                            .map(location -> {
-                                LocationDTO locationDTO = new LocationDTO(
-                                        location.getId(),
-                                        location.getStreet(),
-                                        new EventSpecsDTO(location.getEventSpec())
-                                );
-                                locationDTO.setZipcode(new ZipcodeDTO(location.getZipcodes()));
-                                return locationDTO;
-                            })
-                    )
-                    .toList();
-
-            // Map each EventDTO to a SuperEventDTO and add the corresponding LocationDTOs
-            List<SuperEventDTO> completeEvents = new ArrayList<>();
-            for (EventDTO e : eventDTOs) {
-                SuperEventDTO event = new SuperEventDTO(e);
-                for (LocationDTO locationDTO : locationDTOS) {
-                    if (e.getId() == locationDTO.getId()) {
-                        event.getLocations().add(locationDTO);
-                        completeEvents.add(event);
-                    }
-                }
-            }
-
-            // Send the list of SuperEventDTOs as the response
-            ctx.json(completeEvents);*/
         };
     }
 
@@ -109,28 +82,6 @@ public class EventController {
             Event event = eventDAO.getById(id);
             EventDTO eventDTO = new EventDTO(event);
             ctx.json(eventDTO);
-            // TODO had to refactor a bit, check if you want to the below code to stay.
-           /* // Map the event to an EventDTO
-            EventDTO eventDTO = new EventDTO(event.getId(), event.getImageUrl(), event.getTitle(), event.getDescription(), event.getPrice());
-            // Map each location of the event to a LocationDTO, including the zipcodes
-            List<LocationDTO> locationDTOS = event.getLocations().stream()
-                    .map(location -> {
-                        LocationDTO locationDTO = new LocationDTO(
-                                location.getId(),
-                                location.getStreet(),
-                                new EventSpecsDTO(location.getEventSpec())
-                        );
-                        locationDTO.setZipcode(new ZipcodeDTO(location.getZipcodes()));
-                        return locationDTO;
-                    })
-                    .toList();
-
-            // Create a SuperEventDTO and set the EventDTO and LocationDTOs
-            SuperEventDTO superEventDTO = new SuperEventDTO(eventDTO);
-            superEventDTO.setLocations(locationDTOS);
-
-            // Send the SuperEventDTO as the response
-            ctx.json(superEventDTO);*/
         };
     }
 
@@ -140,42 +91,6 @@ public class EventController {
             List<Event> eventList = eventDAO.getEventsByCategory(Category.valueOf(category.toUpperCase()));
             List<EventDTO> eventDTOList = eventList.stream().map(event -> new EventDTO(event)).collect(Collectors.toList());
             ctx.json(eventDTOList);
-
-            // TODO had to refactor a bit, check if you want to the below code to stay.
-            /* // Map each event to an EventDTO
-            List<EventDTO> eventDTOs = eventList.stream()
-                    .map(EventDTO::new)
-                    .toList();
-
-            // Map each location of each event to a LocationDTO, including the zipcodes
-            List<LocationDTO> locationDTOS = eventList.stream()
-                    .flatMap(event -> event.getLocations().stream()
-                            .map(location -> {
-                                LocationDTO locationDTO = new LocationDTO(
-                                        location.getId(),
-                                        location.getStreet(),
-                                        new EventSpecsDTO(location.getEventSpec())
-                                );
-                                locationDTO.setZipcode(new ZipcodeDTO(location.getZipcodes()));
-                                return locationDTO;
-                            })
-                    )
-                    .toList();
-
-            // Map each EventDTO to a SuperEventDTO and add the corresponding LocationDTOs
-            List<SuperEventDTO> completeEvents = new ArrayList<>();
-            for (EventDTO e : eventDTOs) {
-                SuperEventDTO event = new SuperEventDTO(e);
-                for (LocationDTO locationDTO : locationDTOS) {
-                    if (e.getId() == locationDTO.getId()) {
-                        event.getLocations().add(locationDTO);
-                        completeEvents.add(event);
-                    }
-                }
-            }
-
-            // Send the list of SuperEventDTOs as the response
-            ctx.json(completeEvents);*/
         };
     }
 
@@ -185,50 +100,12 @@ public class EventController {
             List<Event> eventList = eventDAO.getEventsByStatus(Status.valueOf(status.toUpperCase()));
             List<EventDTO> eventDTOList = eventList.stream().map(event -> new EventDTO(event)).collect(Collectors.toList());
             ctx.json(eventDTOList);
-            // TODO had to refactor a bit, check if you want to the below code to stay.
-           /* // Map each event to an EventDTO
-            List<EventDTO> eventDTOs = eventList.stream()
-                    .map(EventDTO::new)
-                    .toList();
-
-            // Map each location of each event to a LocationDTO, including the zipcodes
-            List<LocationDTO> locationDTOS = eventList.stream()
-                    .flatMap(event -> event.getLocations().stream()
-                            .map(location -> {
-                                LocationDTO locationDTO = new LocationDTO(
-                                        location.getId(),
-                                        location.getStreet(),
-                                        new EventSpecsDTO(location.getEventSpec())
-                                );
-                                locationDTO.setZipcode(new ZipcodeDTO(location.getZipcodes()));
-                                return locationDTO;
-                            })
-                    )
-                    .toList();
-
-            // Map each EventDTO to a SuperEventDTO and add the corresponding LocationDTOs
-            List<SuperEventDTO> completeEvents = new ArrayList<>();
-            for (EventDTO e : eventDTOs) {
-                SuperEventDTO event = new SuperEventDTO(e);
-                for (LocationDTO locationDTO : locationDTOS) {
-                    if (e.getId() == locationDTO.getId()) {
-                        event.getLocations().add(locationDTO);
-                        completeEvents.add(event);
-                    }
-                }
-            }
-
-            // Send the list of SuperEventDTOs as the response
-            ctx.json(completeEvents);*/
         };
     }
 
     public Handler createEvent() {
         return ctx -> {
             Event event = ctx.bodyAsClass(Event.class);
-            // TODO remove below code its not needed
-           /* for (int i = 0; i < event.getLocations().size(); i++) {
-                event.getLocations().get(i).getEventSpec().setLocation(event.getLocations().get(i));*/
                 eventDAO.create(event);
                 EventDTO eventDTO = new EventDTO(event);
                 ctx.status(200);
@@ -270,6 +147,77 @@ public class EventController {
             }
             List<UserDTO> users = FoundEvent.getUsers().stream().map(UserDTO::new).collect(Collectors.toList());
             ctx.json(users);
+        };
+    }
+
+
+    /**
+     * Handler for the cancelEvent route.
+     * Fetches the user from the token, the id, street name and zip from the path.
+     * Cancels the specific event at a specific location based on the inputs given.
+     * If all locations are cancelled for the event, the event gets a deletion date.
+     * @return A Handler that can be used with Javalin to handle requests to the "cancelEvent" route.
+     */
+    public Handler cancelEvent() {
+        return ctx -> {
+            //Fetches parameters:
+            UserDTO user = ctx.attribute("user");
+            int id = Integer.parseInt(ctx.pathParam("id"));
+            int zip = Integer.parseInt(ctx.pathParam("zip"));
+            String street = ctx.pathParam("address");
+
+            //Fetches the event:
+            Event event = eventDAO.getById(id);
+
+            //Initialization of local variables:
+            ObjectNode toReturn;
+            String location ="";
+            int locationZip = 0;
+            boolean found = false;
+
+            //If the event has a deletion date already, notify the user, that all locations has been cancelled already.
+            if(event.getDeletedAt() != null){
+                toReturn = objectMapper.createObjectNode().put("Message","Event: "+event.getTitle()+" already cancelled at all locations. The date of deletion was: "+event.getDeletedAt());
+                ctx.json(toReturn);
+                return;
+            }
+
+            //Checks every location on the event if it matches the fetched parameters. If so, it changes the status to cancelled.
+            for(Location l : event.getLocations()){
+                if(l.getEventSpec().getInstructorEmail().equals(user.getEmail()) && l.getZipcodes().getZip() == zip && l.getStreet().equals(street)){
+                    l.getEventSpec().setStatus(Status.CANCELLED);
+                    location = l.getStreet();
+                    locationZip = l.getZipcodes().getZip();
+                    found = true;
+                }
+            }
+
+            //Checks every location and counts every cancelled event.
+            int count = 0;
+            for(Location l : event.getLocations()){
+                if(l.getEventSpec().getStatus() == Status.CANCELLED){
+                    count++;
+                }
+            }
+
+            /*
+            If the amount of cancelled locations is equal to the size of the list of locations, then every location is cancelled
+            and the event should be cancelled as well. The date of deletion is registered here.
+            If that isn't the case, but the method found a location it cancelled, the boolean "found" will be true, and
+            we notify the user about which specific location that has been cancelled.
+            If none of the above happens we notify the user that no event or location was cancelled.
+            */
+            if(count == event.getLocations().size()){
+                event.setDeletedAt(LocalDate.now());
+                toReturn = objectMapper.createObjectNode().put("Message","Successfully cancelled event: "+event.getTitle()+" at all locations. Date of deletion is: "+LocalDate.now());
+            }else if (found){
+                toReturn = objectMapper.createObjectNode().put("Message", "Successfully cancelled event: "+event.getTitle()+" at "+location+", "+locationZip);
+            }else {
+                toReturn = objectMapper.createObjectNode().put("Message", "No event was cancelled");
+            }
+            //We keep the merged object in case we need it later. Currently not used.
+            Event merged = eventDAO.update(event, event.getId());
+            ctx.json(toReturn);
         };
     }
 }

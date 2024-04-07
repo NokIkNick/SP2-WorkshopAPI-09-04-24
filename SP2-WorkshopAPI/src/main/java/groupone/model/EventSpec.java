@@ -39,7 +39,7 @@ public class EventSpec {
         this.category = category;
     }
 
-    @OneToOne(cascade = {/*CascadeType.PERSIST,*/ CascadeType.DETACH})
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH}, mappedBy = "eventSpec")
     @JsonIgnore
     private Location location;
 
