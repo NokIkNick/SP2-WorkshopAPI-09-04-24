@@ -208,7 +208,7 @@ class EventControllerTest {
                 .contentType("application/json")
                 .body(json)
                 .when()
-                .post("http://localhost:7778/api/events")
+                .post("http://localhost:7778/api/events/create")
                 .then().log().all()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200)

@@ -53,9 +53,9 @@ GET http://localhost:7008/api/events/status/ONGOING
 
 ###
 
-POST http://localhost:7008/api/events
+POST http://localhost:7008/api/events/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiIxMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjI1NjU3NCwicm9sZXMiOiJJTlNUUlVDVE9SIiwidXNlcm5hbWUiOiIxMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayJ9.Y1oJFYGgXuSbSuz-YGeT-ROqOF93puzZvBLvcNSLELY
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwYXRyaWNrX3RoZV9hd2Vzb21lMl8xMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjQ1MTM4MSwicm9sZXMiOiJJTlNUUlVDVE9SIiwidXNlcm5hbWUiOiJwYXRyaWNrX3RoZV9hd2Vzb21lMl8xMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayJ9.YZlvRgQDEJ9lP6C3A3oTB7lbrDvglmZqdJTsilnWh44
 
 {
   "title":"newTestEvent",
@@ -77,11 +77,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiIxM
         "category":"EVENT",
         "capacity":1200
       },
-      "zipcodes":[
-        {
-          "zip":4700
+      "zipcodes":{
+          "zip":2700
         }
-      ]
     },
     {
     "street":"the-other-test-street-wahoo",
@@ -95,11 +93,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiIxM
       "category":"EVENT",
       "capacity":500
     },
-      "zipcodes":[
-        {
-          "zip":3990
+      "zipcodes":{
+          "zip":2100
         }
-      ]
     }
   ]
 }
@@ -114,4 +110,8 @@ Authorization: BEARER eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwY
 GET http://localhost:7008/api/events/1/users
 Authorization: BEARER eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwYXRyaWNrX3RoZV9hd2Vzb21lMl8xMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjMzMTAxNywicm9sZXMiOiJTVFVERU5ULEFETUlOLElOU1RSVUNUT1IiLCJ1c2VybmFtZSI6InBhdHJpY2tfdGhlX2F3ZXNvbWUyXzEyMzQ1Njc4OTEwQDEyMzQ1Njc4OTEwLmRrIn0._JlE9vQM6uwjs-JL6oMpsHi-_CJZfuw3YoKZEaMrFx0
 
+### Instructor - Cancel event.
+
+PUT http://localhost:7008/api/events/1/the-other-test-street-wahoo/2100/cancel
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwYXRyaWNrX3RoZV9hd2Vzb21lMl8xMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjQ1MTM4MSwicm9sZXMiOiJJTlNUUlVDVE9SIiwidXNlcm5hbWUiOiJwYXRyaWNrX3RoZV9hd2Vzb21lMl8xMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayJ9.YZlvRgQDEJ9lP6C3A3oTB7lbrDvglmZqdJTsilnWh44
 ###

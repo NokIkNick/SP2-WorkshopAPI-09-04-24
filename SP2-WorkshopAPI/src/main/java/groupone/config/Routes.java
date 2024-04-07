@@ -25,18 +25,20 @@ public class Routes {
         sc = SecurityController.getInstance(isTesting);
         uc = UserController.getInstance(isTesting);
         return () -> {
-            before(sc.authenticate());
             path("", () -> {
                 get("/", ctx -> ctx.json(objectMapper.createObjectNode().put("Message", "Connected Successfully")), roles.ANYONE);
             });
             path("/events", () -> {
+                before(sc.authenticate());
                 get("/category/{category}", ec.getEventsByCategory(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
                 get("/status/{status}", ec.getEventsByStatus(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
                 get("", ec.getUpcomingEvents(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
                 get("/{id}", ec.getEventById(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
                 get("/{id}/users", ec.getEventByIdsParticipants(), roles.INSTRUCTOR);
                 // Posts!
-                post("", ec.createEvent(), roles.INSTRUCTOR);
+                post("/create", ec.createEvent(), roles.INSTRUCTOR);
+                //TODO: NEEDS TESTING
+                put("/{id}/{address}/{zip}/cancel", ec.cancelEvent(), roles.INSTRUCTOR);
             });
             path("/auth", () -> {
                 post("/login", sc.login(), roles.ANYONE);

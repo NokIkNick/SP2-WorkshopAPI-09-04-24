@@ -31,7 +31,7 @@ public class Event {
     @JsonIgnore
     private List<User> users = new ArrayList<>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.DETACH},fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.DETACH, CascadeType.MERGE},fetch = FetchType.EAGER)
     private List<Location> locations = new ArrayList<>();
 
     public Event( String title,String description,double price,String imageUrl){
