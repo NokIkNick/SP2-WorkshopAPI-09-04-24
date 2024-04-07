@@ -73,7 +73,19 @@ public class UserController {
         };
 
     }
-
+    public Handler removeEventFromUser(){
+        return(ctx)->{
+          UserDTO user = ctx.attribute("user");
+          Integer eventId = Integer.parseInt((ctx.pathParam("id")));
+          User foundUser = userDAO.getById(user.getEmail());
+          Event foundEvent = eventDAO.getById(eventId);
+          foundEvent.removeUser(foundUser);
+          Event updated = eventDAO.update(foundEvent, foundEvent.getId());
+          //User updated = userDAO.update(foundUser,foundUser.getEmail());
+          EventDTO eventDTO = new EventDTO(updated);
+          ctx.json(eventDTO);
+        };
+    }
 
     public Handler getAll() {
         return (ctx) -> {
