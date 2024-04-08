@@ -220,5 +220,15 @@ public class EventController {
             ctx.json(toReturn);
         };
     }
+
+    public Handler getLocationsByCurrentInstructor(){
+        return ctx -> {
+            UserDTO user = ctx.attribute("user");
+            assert user != null;
+            List<Location> locations = eventDAO.getLocationsByInstructor(user.getEmail());
+            List<LocationDTO> locationDTOS = locations.stream().map(LocationDTO::new).toList();
+            ctx.json(locationDTOS);
+        };
+    }
 }
 

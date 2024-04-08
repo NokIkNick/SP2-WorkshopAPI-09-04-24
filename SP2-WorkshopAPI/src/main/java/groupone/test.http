@@ -25,7 +25,7 @@ POST http://localhost:7008/api/auth/login
 POST http://localhost:7008/api/auth/login
 
 {
-"email":"patrick_the_awesome_12345678910@12345678910.dk",
+"email":"patrick_the_awesome2_12345678910@12345678910.dk",
 "password":"123456789"
 
 }
@@ -40,8 +40,8 @@ GET http://localhost:7008/api/auth/reset/password?email=12345678910@12345678910.
 
 ###
 
-GET http://localhost:7008/api/events/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwYXRyaWNrX3RoZV9hd2Vzb21lXzEyMzQ1Njc4OTEwQDEyMzQ1Njc4OTEwLmRrIiwiZXhwIjoxNzEyNDMxNzczLCJyb2xlcyI6IkFETUlOIiwidXNlcm5hbWUiOiJwYXRyaWNrX3RoZV9hd2Vzb21lXzEyMzQ1Njc4OTEwQDEyMzQ1Njc4OTEwLmRrIn0.LITNUws0JvhevSWnNChaOkkVPpvmgEoZTxqkYGWwNXI
+GET http://localhost:7008/api/events/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwYXRyaWNrX3RoZV9hd2Vzb21lMl8xMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjUyNjQ1OSwicm9sZXMiOiJJTlNUUlVDVE9SIiwidXNlcm5hbWUiOiJwYXRyaWNrX3RoZV9hd2Vzb21lMl8xMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayJ9.jJAGpGsgDdJ1D0B5_pvsv8aKdw4ckCtEZtkxO-3aGr4
 
 ###
 
@@ -121,4 +121,9 @@ Authorization: BEARER eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwY
 
 PUT http://localhost:7008/api/events/1/the-other-test-street-wahoo/2100/cancel
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwYXRyaWNrX3RoZV9hd2Vzb21lMl8xMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjQ1MTM4MSwicm9sZXMiOiJJTlNUUlVDVE9SIiwidXNlcm5hbWUiOiJwYXRyaWNrX3RoZV9hd2Vzb21lMl8xMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayJ9.YZlvRgQDEJ9lP6C3A3oTB7lbrDvglmZqdJTsilnWh44
+
+### Intructor - Get events that I'm instructing.
+
+GET http://localhost:7008/api/events/instructing
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwYXRyaWNrX3RoZV9hd2Vzb21lMl8xMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjUyNTIwOSwicm9sZXMiOiJJTlNUUlVDVE9SIiwidXNlcm5hbWUiOiJwYXRyaWNrX3RoZV9hd2Vzb21lMl8xMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayJ9.qHsi1aAzx59QM9MNSf0HyKfTwl6dRIP5ZRf5SxvnMQU
 ###

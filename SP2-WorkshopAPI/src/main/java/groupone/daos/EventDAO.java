@@ -36,6 +36,7 @@ public class EventDAO extends DAO<Event, Integer>{
                 for(Location l : e.getLocations()){
                     l.getEventSpec();
                     l.getZipcodes().getCity();
+                    l.getEvents().size();
                 }
             }
             em.getTransaction().commit();
@@ -53,6 +54,7 @@ public class EventDAO extends DAO<Event, Integer>{
             for(Location l : event.getLocations()){
                 l.getEventSpec();
                 l.getZipcodes().getCity();
+                l.getEvents().size();
             }
             em.getTransaction().commit();
         }
@@ -70,6 +72,7 @@ public class EventDAO extends DAO<Event, Integer>{
                 for(Location l : e.getLocations()){
                     l.getEventSpec();
                     l.getZipcodes().getCity();
+                    l.getEvents().size();
                 }
             }
             em.getTransaction().commit();
@@ -89,10 +92,50 @@ public class EventDAO extends DAO<Event, Integer>{
                 for(Location l : e.getLocations()){
                     l.getEventSpec();
                     l.getZipcodes().getCity();
+                    l.getEvents().size();
                 }
             }
             em.getTransaction().commit();
         }
         return eventList;
     }
+
+
+    public List<Event> getEventsByInstructor(String instructorEmail){
+        List<Event> eventList;
+        try(var em = emf.createEntityManager()){
+            em.getTransaction().begin();
+            TypedQuery<Event> query = em.createQuery("select e from Event e join Location l on e.id = l.id join EventSpec es on l.id = es.id where es.instructorEmail = :email", Event.class);
+            query.setParameter("email",instructorEmail);
+            eventList = query.getResultList();
+            for (Event e: eventList) {
+                e.getLocations().size();
+                for(Location l : e.getLocations()){
+                    l.getEventSpec();
+                    l.getZipcodes().getCity();
+                    l.getEvents().size();
+                }
+            }
+            em.getTransaction().commit();
+        }
+        return eventList;
+    }
+
+    public List<Location> getLocationsByInstructor(String instructorEmail){
+        List<Location> locations;
+        try(var em = emf.createEntityManager()){
+            em.getTransaction().begin();
+            TypedQuery<Location> query = em.createQuery("select l from Location l join EventSpec es on l.eventSpec.id = es.id where es.instructorEmail = :email", Location.class);
+            query.setParameter("email", instructorEmail);
+            locations = query.getResultList();
+            for(Location l : locations){
+                l.getEvents().size();
+                l.getEventSpec();
+                l.getZipcodes().getCity();
+            }
+            em.getTransaction().commit();
+        }
+        return locations;
+    }
+
 }

@@ -30,6 +30,8 @@ public class Routes {
                 get("/", ctx -> ctx.json(objectMapper.createObjectNode().put("Message", "Connected Successfully")), roles.ANYONE);
             });
             path("/events", () -> {
+                //TODO: NEEDS TESTING
+                get("/instructing", ec.getLocationsByCurrentInstructor(), roles.INSTRUCTOR);
                 get("/category/{category}", ec.getEventsByCategory(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
                 get("/status/{status}", ec.getEventsByStatus(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
                 get("", ec.getUpcomingEvents(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
