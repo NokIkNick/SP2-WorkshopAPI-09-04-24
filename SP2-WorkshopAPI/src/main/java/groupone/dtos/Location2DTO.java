@@ -14,25 +14,32 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public class LocationDTO {
+public class Location2DTO {
 
+    private String eventName;
     private int id;
     private String street;
     private EventSpecsDTO eventSpecifications;
     private ZipcodeDTO zipcode;
 
 
-    public LocationDTO(int id, String street, EventSpecsDTO eventSpecifications) {
+    public Location2DTO(int id, String street, EventSpecsDTO eventSpecifications) {
         this.id = id;
         this.street = street;
         this.eventSpecifications = eventSpecifications;
     }
 
 
-    public LocationDTO(Location location){
+    public Location2DTO(Location location){
         setId(location.getId());
         setStreet(location.getStreet());
         setEventSpecifications(new EventSpecsDTO(location.getEventSpec()));
         setZipcode(new ZipcodeDTO(location.getZipcodes()));
+        if(location.getEvents().size()>0) {
+            setEventName(location.getEvents().get(0).getTitle());
+        }else{
+            setEventName("Undefined");
+        }
+
     }
 }

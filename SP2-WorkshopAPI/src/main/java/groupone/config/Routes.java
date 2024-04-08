@@ -30,13 +30,16 @@ public class Routes {
                 get("/", ctx -> ctx.json(objectMapper.createObjectNode().put("Message", "Connected Successfully")), roles.ANYONE);
             });
             path("/events", () -> {
+                get("/instructing", ec.getLocationsByCurrentInstructor(), roles.INSTRUCTOR);
                 get("/category/{category}", ec.getEventsByCategory(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
                 get("/status/{status}", ec.getEventsByStatus(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
-                get("", ec.getAllEvents(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
+                get("", ec.getUpcomingEvents(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
                 get("/{id}", ec.getEventById(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
                 get("/{id}/users", ec.getEventByIdsParticipants(), roles.INSTRUCTOR);
                 // Posts!
-                post("", ec.createEvent(), roles.INSTRUCTOR);
+                post("/create", ec.createEvent(), roles.INSTRUCTOR);
+                post("/update/{id}", ec.updateEvent(), roles.INSTRUCTOR);
+                put("/{id}/{address}/{zip}/cancel", ec.cancelEvent(), roles.INSTRUCTOR);
             });
             path("/auth", () -> {
                 post("/login", sc.login(), roles.ANYONE);
@@ -46,11 +49,10 @@ public class Routes {
             });
             path("/student",() ->{
                 post("/toevent/{id}",uc.addEventToUser(),roles.STUDENT);
-            });
-            path("/test", () ->{
-                get("/",uc.getAll(),roles.ANYONE);
+                put("/remove_event/{id}", uc.removeEventFromUser(),roles.STUDENT);
             });
             path("/admin",()->{
+                get("/get_all_events",ec.getAllEvents(),roles.ADMIN);
                 get("/get_all_users",uc.getAllUsers(),roles.ADMIN);
             });
         };

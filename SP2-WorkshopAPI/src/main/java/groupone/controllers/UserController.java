@@ -6,10 +6,12 @@ import groupone.daos.UserDAO;
 import groupone.dtos.EventDTO;
 import groupone.dtos.UserDTO;
 import groupone.model.Event;
+import groupone.model.Location;
 import groupone.model.User;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import jakarta.persistence.EntityManager;
+import org.hibernate.Hibernate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +32,20 @@ public class UserController {
         return instance;
     }
 
-    public Handler getAllEvents(){
+    public Handler getAllUsers(){
+        return(ctx)->{
+            var em = HibernateConfig.getEntityManagerFactoryConfig().createEntityManager();
+            List<User> users = (List<User>) em.createQuery("SELECT u from users u",User.class).getResultList();
+            List<UserDTO> userDTOS = new ArrayList<>();
+            for(User u: users){
+                UserDTO userDTO = new UserDTO(u);
+                userDTOS.add(userDTO);
+            }
+            ctx.json(userDTOS);
+        };
+    }
+    // already done in event Controller.
+   /* public Handler getAllEvents(){
         return(ctx)->{
             EntityManager em = HibernateConfig.getEntityManagerFactoryConfig().createEntityManager();
             List<Event> events = em.createQuery("select e from Event e").getResultList();
@@ -44,24 +59,9 @@ public class UserController {
                 ctx.json("no events was found.");
             }
         };
-
-    }
-
+    }*/
 
 
-    public Handler getAllUsers(){
-        return(ctx)->{
-            var em = HibernateConfig.getEntityManagerFactoryConfig().createEntityManager();
-            List<User> users = (List<User>) em.createQuery("SELECT u from users u",User.class).getResultList();
-            List<UserDTO> userDTOS = new ArrayList<>();
-            for(User u: users){
-                UserDTO userDTO = new UserDTO(u);
-                userDTOS.add(userDTO);
-            }
-            ctx.json(userDTOS);
-        };
-    }
-    
     public Handler addEventToUser() {
         return (ctx) -> {
             UserDTO user = ctx.attribute("user");
@@ -75,7 +75,19 @@ public class UserController {
         };
 
     }
-
+    public Handler removeEventFromUser(){
+        return(ctx)->{
+          UserDTO user = ctx.attribute("user");
+          Integer eventId = Integer.parseInt((ctx.pathParam("id")));
+          User foundUser = userDAO.getById(user.getEmail());
+          Event foundEvent = eventDAO.getById(eventId);
+          foundEvent.removeUser(foundUser);
+          Event updated = eventDAO.update(foundEvent, foundEvent.getId());
+          //User updated = userDAO.update(foundUser,foundUser.getEmail());
+          EventDTO eventDTO = new EventDTO(updated);
+          ctx.json(eventDTO);
+        };
+    }
 
     public Handler getAll() {
         return (ctx) -> {

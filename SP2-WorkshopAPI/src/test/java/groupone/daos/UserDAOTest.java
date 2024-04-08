@@ -1,16 +1,12 @@
-package groupone.controllers;
+package groupone.daos;
 
-import groupone.config.ApplicationConfig;
 import groupone.config.HibernateConfig;
-import groupone.config.Routes;
 import groupone.enums.Category;
 import groupone.enums.Status;
+import groupone.exceptions.ValidationException;
 import groupone.model.*;
-import io.restassured.RestAssured;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import org.eclipse.jetty.http.HttpStatus;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,31 +15,21 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.jupiter.api.Assertions.*;
 
-class UserControllerTest {
+public class UserDAOTest {
 
     private static EntityManagerFactory emf;
     private static User userStudent, userAdmin,userInstructor;
     private static Role student, admin,instructor;
-    private static Object adminToken;
-    private static Object studentToken;
-    private static Object instructorToken;
+    private static UserDAO userDAO;
 
     @BeforeAll
     static void setUpAll(){
         emf = HibernateConfig.getEntityManagerFactoryConfigForTesting();
         //emf = HibernateConfig.getEntityManagerFactoryConfig();
 
-        RestAssured.baseURI = "http://localhost:7777/api";
-        ApplicationConfig applicationConfig = ApplicationConfig.getInstance();
-        applicationConfig.initiateServer()
-                .startServer(7777)
-                .setExceptionHandling()
-                .setRoutes(Routes.getRoutes(true))
-                .checkSecurityRoles(true);
-
+        userDAO = UserDAO.getInstance(true);
         student = new Role("STUDENT");
         admin = new Role("ADMIN");
         instructor = new Role("INSTRUCTOR");
@@ -62,9 +48,6 @@ class UserControllerTest {
             em.persist(userInstructor);
             em.getTransaction().commit();
         }
-        adminToken = getToken(userAdmin.getEmail(), "test");
-        studentToken = getToken(userStudent.getEmail(), "test");
-        instructorToken = getToken(userInstructor.getEmail(),"test");
 
     }
 
@@ -107,6 +90,7 @@ class UserControllerTest {
             em.persist(event2);
 
             event1.addUser(userStudent);
+            //userStudent.addEvent(event1);
 
             em.persist(event1);
             em.getTransaction().commit();
@@ -125,57 +109,17 @@ class UserControllerTest {
         }
     }
 
-    public static Object getToken(String email, String password)
-    {
-        return login(email, password);
-    }
-
-    private static Object login(String email, String password)
-    {
-        String json = String.format("{\"email\": \"%s\", \"password\": \"%s\"}", email, password);
-
-        var token = given()
-                .contentType("application/json")
-                .body(json)
-                .when()
-                .post("http://localhost:7777/api/auth/login")
-                .then()
-                .extract()
-                .response()
-                .body()
-                .path("token");
-
-        return "Bearer " + token;
+    @Test
+    void createUser() {
+        User user = userDAO.createUser("Anders@mss1.com", "1234", "Anders", 12345678);
+        assertNotNull(user);
+        assertEquals("Anders@mss1.com",user.getEmail());
     }
 
     @Test
-    void addEventToUser() {
-        RestAssured.given()
-                .header("Authorization", studentToken)
-                .when()
-                .post("http://localhost:7777/api/student/toevent/1")
-                .then().log().all()
-                .assertThat()
-                .statusCode(HttpStatus.OK_200)
-                .body("eventDTOList.size()",equalTo(2));
-
-    }
-    @Test
-    void getAllUsers(){
-        RestAssured.given()
-                .header("Authorization", adminToken)
-                .when()
-                .get("/admin/get_all_users")
-                .then().log().all()
-                .body("[0].email",equalTo("test@student.com"));
-    }
-
-    @Test
-    void testStuff(){
-        RestAssured.given()
-                .when()
-                .get("/test")
-                .then().log().all()
-                .body("email",equalTo("test@student.com"));
+    void getVerifiedUser() throws ValidationException {
+        User user1 = userDAO.createUser("Anders@mss.com", "1234", "Anders", 12345678);
+        User user = userDAO.getVerifiedUser("Anders@mss.com", "1234");
+        assertNotNull(user);
     }
 }

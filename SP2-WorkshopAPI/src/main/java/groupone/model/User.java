@@ -3,10 +3,15 @@ package groupone.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import groupone.dtos.UserDTO;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.proxy.HibernateProxy;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -29,8 +34,7 @@ public class User {
     Set<Role> roles = new HashSet<>();
 
 
-    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.DETACH}, mappedBy = "users",fetch = FetchType.EAGER)
-
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE}, mappedBy = "users",fetch = FetchType.EAGER)
     Set<Event> events = new HashSet<>();
 
     @PrePersist
@@ -74,9 +78,40 @@ public class User {
     }
 
     public void addEvent(Event event) {
-            if(event != null && !events.contains(event)){
+            if(event != null && !events.contains(event) && !checkNameIsNotInList(event.getTitle())){
                 events.add(event);
                 event.addUser(this);
             }
+    }
+
+    private boolean checkNameIsNotInList(String name){
+        for(Event e: events){
+            if(e.getTitle().equals(name)){
+                return true;
+            }
+        }
+        return false;
+    }
+    public void removeEvent(Event event){
+        if(event != null && events.contains(event)){
+            events.remove(event);
+            event.removeUser(this);
+        }
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
+        User user = (User) o;
+        return getEmail() != null && Objects.equals(getEmail(), user.getEmail());
+    }
+
+    @Override
+    public final int hashCode() {
+        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
 }
