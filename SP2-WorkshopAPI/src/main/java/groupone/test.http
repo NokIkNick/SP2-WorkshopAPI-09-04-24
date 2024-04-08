@@ -32,7 +32,7 @@ POST http://localhost:7008/api/auth/login
 
 ###
 
-GET http://localhost:7008/api/auth/request/password/reset?email=12345678910@12345678910.dk
+GET http://localhost:7008/api/auth/request/password/reset?email=patrick_the_awesome2_12345678910@12345678910.dk
 
 ###
 

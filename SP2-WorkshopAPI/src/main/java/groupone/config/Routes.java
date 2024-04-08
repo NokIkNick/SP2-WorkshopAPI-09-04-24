@@ -49,11 +49,7 @@ public class Routes {
             });
             path("/student",() ->{
                 post("/toevent/{id}",uc.addEventToUser(),roles.STUDENT);
-                //TODO: write tests for this code and actually test it itself can't remember if it's post or put but I sus put.
                 put("/remove_event/{id}", uc.removeEventFromUser(),roles.STUDENT);
-            });
-            path("/test", () ->{
-                get("/",uc.getAll(),roles.ANYONE);
             });
             path("/admin",()->{
                 get("/get_all_events",ec.getAllEvents(),roles.ADMIN);
