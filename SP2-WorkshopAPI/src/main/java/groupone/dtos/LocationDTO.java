@@ -16,7 +16,6 @@ import java.util.List;
 @Setter
 public class LocationDTO {
 
-    private String eventName;
     private int id;
     private String street;
     private EventSpecsDTO eventSpecifications;
@@ -35,7 +34,6 @@ public class LocationDTO {
         setStreet(location.getStreet());
         setEventSpecifications(new EventSpecsDTO(location.getEventSpec()));
         setZipcode(new ZipcodeDTO(location.getZipcodes()));
-        setEventName(location.getEvents().get(0).getTitle());
     }
 
 }
