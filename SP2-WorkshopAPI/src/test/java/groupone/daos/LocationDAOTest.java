@@ -29,7 +29,7 @@ public class LocationDAOTest {
         emf = HibernateConfig.getEntityManagerFactoryConfigForTesting();
         //emf = HibernateConfig.getEntityManagerFactoryConfig();
 
-        locationDAO = new LocationDAO(true);
+        locationDAO = LocationDAO.getInstance(true);
 
         student = new Role("STUDENT");
         admin = new Role("ADMIN");

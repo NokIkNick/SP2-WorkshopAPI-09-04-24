@@ -34,7 +34,7 @@ public class EventDAOTest {
         emf = HibernateConfig.getEntityManagerFactoryConfigForTesting();
         //emf = HibernateConfig.getEntityManagerFactoryConfig();
 
-        eventDAO = new EventDAO(true);
+        eventDAO = EventDAO.getInstance(true);
 
         student = new Role("STUDENT");
         admin = new Role("ADMIN");

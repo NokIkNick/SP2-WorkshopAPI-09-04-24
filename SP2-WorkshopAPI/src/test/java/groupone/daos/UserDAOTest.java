@@ -29,8 +29,7 @@ public class UserDAOTest {
         emf = HibernateConfig.getEntityManagerFactoryConfigForTesting();
         //emf = HibernateConfig.getEntityManagerFactoryConfig();
 
-        userDAO = new UserDAO(true);
-
+        userDAO = UserDAO.getInstance(true);
         student = new Role("STUDENT");
         admin = new Role("ADMIN");
         instructor = new Role("INSTRUCTOR");
@@ -112,8 +111,9 @@ public class UserDAOTest {
 
     @Test
     void createUser() {
-        User user = userDAO.createUser("Anders@mss.com", "1234", "Anders", 12345678);
+        User user = userDAO.createUser("Anders@mss1.com", "1234", "Anders", 12345678);
         assertNotNull(user);
+        assertEquals("Anders@mss1.com",user.getEmail());
     }
 
     @Test
