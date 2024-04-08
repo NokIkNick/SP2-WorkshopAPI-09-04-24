@@ -16,7 +16,7 @@ import java.util.List;
 @Setter
 public class LocationDTO {
 
-    private String eventName;
+    private name;
     private int id;
     private String street;
     private EventSpecsDTO eventSpecifications;
@@ -40,5 +40,6 @@ public class LocationDTO {
         }else{
             setEventName("Undefined");
         }
+
     }
 }

@@ -32,6 +32,7 @@ public class EventDAO extends DAO<Event, Integer>{
             em.getTransaction().begin();
             TypedQuery<Event> query = em.createQuery("select e from Event e", Event.class);
             eventList = query.getResultList();
+            Hibernate.initialize(query);
             for (Event e: eventList) {
                 e.getLocations().size();
                 for(Location l : e.getLocations()){

@@ -37,7 +37,7 @@ public class Event {
     @JsonIgnore
     private List<User> users = new ArrayList<>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.DETACH, CascadeType.MERGE},fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.DETACH, CascadeType.MERGE,CascadeType.REMOVE},fetch = FetchType.EAGER)
     private List<Location> locations = new ArrayList<>();
 
     public Event( String title,String description,double price,String imageUrl){
@@ -48,11 +48,20 @@ public class Event {
     }
 
     public void addUser(User user){
-        if(user != null && !this.users.contains(user)){
+        if(user != null && !this.users.contains(user) && !checkEmailIsNotInList(user.getEmail())){
             this.users.add(user);
             user.addEvent(this);
         }
     }
+    private boolean checkEmailIsNotInList(String email){
+        for(User u: users){
+            if(u.getEmail().equals(email)){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public void removeUser(User user){
         if(user != null && this.users.contains(user)){
