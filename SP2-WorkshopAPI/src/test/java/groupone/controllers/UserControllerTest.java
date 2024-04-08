@@ -104,14 +104,11 @@ class UserControllerTest {
             event1.addLocation(location1);
             event2.addLocation(location2);
 
-            //em.persist(event1);
             em.persist(event2);
 
             event1.addUser(userStudent);
-            //userStudent.addEvent(event1);
 
-            // no need to persist event1, becouse merge is also a persist.
-            Event event124 = em.merge(event1);
+            em.persist(event1);
             em.getTransaction().commit();
             em.clear();
             //User found = em.find(User.class,user124.getEmail());
@@ -156,7 +153,7 @@ class UserControllerTest {
         RestAssured.given()
                 .header("Authorization", studentToken)
                 .when()
-                .post("http://localhost:7777/api/student/toevent/2")
+                .post("http://localhost:7777/api/student/toevent/1")
                 .then().log().all()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200)
