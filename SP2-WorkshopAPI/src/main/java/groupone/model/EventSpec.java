@@ -1,6 +1,7 @@
 package groupone.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import groupone.dtos.EventSpecsDTO;
 import groupone.enums.Category;
 import groupone.enums.Status;
 import jakarta.persistence.*;
@@ -42,6 +43,17 @@ public class EventSpec {
     @OneToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH}, mappedBy = "eventSpec")
     @JsonIgnore
     private Location location;
+
+    public EventSpec(EventSpecsDTO eventSpec) {
+        setDate(LocalDate.parse(eventSpec.getDate()));
+        setTime(LocalTime.parse(eventSpec.getTime()));
+        setDuration(eventSpec.getDuration());
+        setInstructorName(eventSpec.getInstructorName());
+        setInstructorEmail(eventSpec.getInstructorEmail());
+        setStatus(eventSpec.getStatus());
+        setCapacity(eventSpec.getCapacity());
+        setCategory(eventSpec.getCategory());
+    }
 
     public void setLocation(Location location){
         if(this.location != location) {
