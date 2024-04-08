@@ -40,6 +40,8 @@ public class Routes {
                 // Posts!
                 post("/create", ec.createEvent(), roles.INSTRUCTOR);
                 //TODO: NEEDS TESTING
+                post("/update/{id}", ec.updateEvent(), roles.INSTRUCTOR);
+                //TODO: NEEDS TESTING
                 put("/{id}/{address}/{zip}/cancel", ec.cancelEvent(), roles.INSTRUCTOR);
             });
             path("/auth", () -> {

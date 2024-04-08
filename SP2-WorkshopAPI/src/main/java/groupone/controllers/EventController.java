@@ -5,12 +5,12 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import groupone.daos.EventDAO;
+import groupone.daos.LocationDAO;
+import groupone.daos.ZipDAO;
 import groupone.dtos.*;
 import groupone.enums.Category;
 import groupone.enums.Status;
-import groupone.model.Event;
-import groupone.model.Location;
-import groupone.model.User;
+import groupone.model.*;
 import io.javalin.http.Handler;
 import io.javalin.http.HttpStatus;
 import org.hibernate.Hibernate;
@@ -31,6 +31,8 @@ public class EventController {
      */
     private static EventController instance;
     private static EventDAO eventDAO;
+    private static LocationDAO locationDAO;
+    private static ZipDAO zipDAO;
 
     /**
      * An ObjectMapper used for mapping between different object types.
@@ -43,6 +45,8 @@ public class EventController {
         if (instance == null) {
             instance = new EventController();
             eventDAO = EventDAO.getInstance(isTesting);
+            locationDAO = LocationDAO.getInstance(isTesting);
+            zipDAO = ZipDAO.getInstance(isTesting);
         }
         return instance;
     }
@@ -106,12 +110,10 @@ public class EventController {
     public Handler createEvent() {
         return ctx -> {
             Event event = ctx.bodyAsClass(Event.class);
-                eventDAO.create(event);
-                EventDTO eventDTO = new EventDTO(event);
-                ctx.status(200);
-                ctx.json(eventDTO);
-            //}
-        
+            eventDAO.create(event);
+            EventDTO eventDTO = new EventDTO(event);
+            ctx.status(200);
+            ctx.json(eventDTO);
         };
 
     }
@@ -137,11 +139,11 @@ public class EventController {
             }
             Event FoundEvent = eventDAO.getById(eventID, (ev) -> {
                 Hibernate.initialize(ev.getUsers()); // initialize users
-                for(User u : ev.getUsers()) {
+                for (User u : ev.getUsers()) {
                     Hibernate.initialize(u.getRoles());
                 }
             }); // toString so everything being part of toString on users is also initialized.
-            if(FoundEvent == null) {
+            if (FoundEvent == null) {
                 ctx.status(HttpStatus.NOT_FOUND);
                 return;
             }
@@ -156,6 +158,7 @@ public class EventController {
      * Fetches the user from the token, the id, street name and zip from the path.
      * Cancels the specific event at a specific location based on the inputs given.
      * If all locations are cancelled for the event, the event gets a deletion date.
+     *
      * @return A Handler that can be used with Javalin to handle requests to the "cancelEvent" route.
      */
     public Handler cancelEvent() {
@@ -171,20 +174,20 @@ public class EventController {
 
             //Initialization of local variables:
             ObjectNode toReturn;
-            String location ="";
+            String location = "";
             int locationZip = 0;
             boolean found = false;
 
             //If the event has a deletion date already, notify the user, that all locations has been cancelled already.
-            if(event.getDeletedAt() != null){
-                toReturn = objectMapper.createObjectNode().put("Message","Event: "+event.getTitle()+" already cancelled at all locations. The date of deletion was: "+event.getDeletedAt());
+            if (event.getDeletedAt() != null) {
+                toReturn = objectMapper.createObjectNode().put("Message", "Event: " + event.getTitle() + " already cancelled at all locations. The date of deletion was: " + event.getDeletedAt());
                 ctx.json(toReturn);
                 return;
             }
 
             //Checks every location on the event if it matches the fetched parameters. If so, it changes the status to cancelled.
-            for(Location l : event.getLocations()){
-                if(l.getEventSpec().getInstructorEmail().equals(user.getEmail()) && l.getZipcodes().getZip() == zip && l.getStreet().equals(street)){
+            for (Location l : event.getLocations()) {
+                if (l.getEventSpec().getInstructorEmail().equals(user.getEmail()) && l.getZipcodes().getZip() == zip && l.getStreet().equals(street)) {
                     l.getEventSpec().setStatus(Status.CANCELLED);
                     location = l.getStreet();
                     locationZip = l.getZipcodes().getZip();
@@ -194,8 +197,8 @@ public class EventController {
 
             //Checks every location and counts every cancelled event.
             int count = 0;
-            for(Location l : event.getLocations()){
-                if(l.getEventSpec().getStatus() == Status.CANCELLED){
+            for (Location l : event.getLocations()) {
+                if (l.getEventSpec().getStatus() == Status.CANCELLED) {
                     count++;
                 }
             }
@@ -207,12 +210,12 @@ public class EventController {
             we notify the user about which specific location that has been cancelled.
             If none of the above happens we notify the user that no event or location was cancelled.
             */
-            if(count == event.getLocations().size()){
+            if (count == event.getLocations().size()) {
                 event.setDeletedAt(LocalDate.now());
-                toReturn = objectMapper.createObjectNode().put("Message","Successfully cancelled event: "+event.getTitle()+" at all locations. Date of deletion is: "+LocalDate.now());
-            }else if (found){
-                toReturn = objectMapper.createObjectNode().put("Message", "Successfully cancelled event: "+event.getTitle()+" at "+location+", "+locationZip);
-            }else {
+                toReturn = objectMapper.createObjectNode().put("Message", "Successfully cancelled event: " + event.getTitle() + " at all locations. Date of deletion is: " + LocalDate.now());
+            } else if (found) {
+                toReturn = objectMapper.createObjectNode().put("Message", "Successfully cancelled event: " + event.getTitle() + " at " + location + ", " + locationZip);
+            } else {
                 toReturn = objectMapper.createObjectNode().put("Message", "No event was cancelled");
             }
             //We keep the merged object in case we need it later. Currently not used.
@@ -221,13 +224,72 @@ public class EventController {
         };
     }
 
-    public Handler getLocationsByCurrentInstructor(){
+    public Handler getLocationsByCurrentInstructor() {
         return ctx -> {
             UserDTO user = ctx.attribute("user");
             assert user != null;
             List<Location> locations = eventDAO.getLocationsByInstructor(user.getEmail());
             List<LocationDTO> locationDTOS = locations.stream().map(LocationDTO::new).toList();
             ctx.json(locationDTOS);
+        };
+    }
+
+    /**
+     * Updates an event with new locations and possibly new information.
+     *
+     * @return A Handler that can be used with Javalin to handle requests to the "updateEvent" route.
+     */
+    public Handler updateEvent() {
+        return ctx -> {
+            EventDTO eventDTO = ctx.bodyAsClass(EventDTO.class);
+            int id = Integer.parseInt(ctx.pathParam("id"));
+
+            Event foundEvent = eventDAO.getById(id, ev -> {
+                Hibernate.initialize(ev.getLocations());
+            });
+
+            boolean updated = false;
+
+            // Title
+            if (eventDTO.getTitle() != null) {
+                updated = true;
+                foundEvent.setTitle(eventDTO.getTitle());
+            }
+
+            //Description
+            if (eventDTO.getDescription() != null) {
+                updated = true;
+                foundEvent.setDescription(eventDTO.getDescription());
+            }
+
+            if (eventDTO.getLocations() != null) {
+                updated = true;
+                eventDTO.getLocations().forEach(location -> {
+                    Location foundLocation = locationDAO.findLocationByStreet(location.getStreet());
+                    if (foundLocation == null) {
+                        if (location.getZipcode() != null) {
+                            Zipcode foundZip = zipDAO.getById(location.getZipcode().getZip());
+                            if (foundZip != null) {
+                                foundLocation = new Location(location.getStreet());
+                                foundLocation.setZipcodes(foundZip);
+                                foundLocation.addEvent(foundEvent);
+                                if(location.getEventSpecifications() != null){
+                                    foundLocation.setEventSpec(new EventSpec(location.getEventSpecifications()));
+                                }
+                            }
+                        }
+                    }
+                    if (foundLocation != null) {
+                        foundEvent.addLocation(foundLocation);
+                    }
+                });
+            }
+            if(updated){
+                eventDAO.update(foundEvent, foundEvent.getId());
+            }
+
+            ctx.status(200);
+            ctx.json(new EventDTO(foundEvent));
         };
     }
 }
