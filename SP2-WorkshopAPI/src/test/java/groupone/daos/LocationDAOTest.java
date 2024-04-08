@@ -1,13 +1,9 @@
 package groupone.daos;
 
-import groupone.config.ApplicationConfig;
 import groupone.config.HibernateConfig;
-import groupone.config.Routes;
-import groupone.daos.EventDAO;
 import groupone.enums.Category;
 import groupone.enums.Status;
 import groupone.model.*;
-import io.restassured.RestAssured;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.AfterAll;
@@ -19,22 +15,21 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class EventDAOTest {
+public class LocationDAOTest {
 
     private static EntityManagerFactory emf;
     private static User userStudent, userAdmin,userInstructor;
     private static Role student, admin,instructor;
-    private static EventDAO eventDAO;
+    private static LocationDAO locationDAO;
 
     @BeforeAll
     static void setUpAll(){
         emf = HibernateConfig.getEntityManagerFactoryConfigForTesting();
         //emf = HibernateConfig.getEntityManagerFactoryConfig();
 
-        eventDAO = new EventDAO(true);
+        locationDAO = new LocationDAO(true);
 
         student = new Role("STUDENT");
         admin = new Role("ADMIN");
@@ -116,38 +111,9 @@ public class EventDAOTest {
     }
 
     @Test
-    void getAllEvents() {
-        List<Event> events = eventDAO.getAll();
-        assertEquals(2, events.size());
-    }
-
-    @Test
-    void getById() {
-        Event event = eventDAO.getById(1);
-        assertEquals("testEvent2", event.getTitle());
-    }
-
-    @Test
-    void getByCategory() {
-        List<Event> events = eventDAO.getEventsByCategory(Category.EVENT);
-        assertEquals(1, events.size());
-    }
-
-    @Test
-    void getEventsByInstructor() {
-        List<Event> events = eventDAO.getEventsByInstructor("denVilde@hej.com");
-        assertEquals(2, events.size());
-    }
-
-    @Test
-    void getEventsByStatus() {
-        List<Event> events = eventDAO.getEventsByStatus(Status.UPCOMING);
-        assertEquals(2, events.size());
-    }
-
-    @Test
-    void getLocationsByInstructor() {
-        List<Event> events = eventDAO.getEventsByInstructor("denVilde@hej.com");
-        assertEquals(2, events.size());
+    void findLocationByStreet() {
+        Location location = locationDAO.findLocationByStreet("Fredensvej 19");
+        assertNotNull(location);
+        assertEquals("Fredensvej 19",location.getStreet());
     }
 }
