@@ -13,12 +13,36 @@
 - Nicklas Waldemar Seier Winther | email: cph-nw89@cphbusiness.dk
 
 ## Description:
-
+A custom made API, created to be implemented into applications that wishes to manage events and workshops. The API comes with built in security, in the form of secured routing, encrypted user data and JWT tokens.
 
 ## EER DIAGRAM:
 <img src="/SP2-WorkshopAPI/src/main/java/groupone/images/event.png" width="600" alt="EER Diagram">
 
+
+## Technical Requirements:
+
+    JPA
+    JPQL
+    Maven
+    JDK 17^
+    JUnit 5
+    Docker
+    PostgresSQL 42.7.3^
+    pgAdmin
+    Lombok
+    Javalin 5.5.0^
+    Jackson-databind 2.15.0^
+    Jackson-datatype 2.13.0^
+    Hibernate 6.2.4^
+    RestAssured 5.3.2^
+    Hamcrest-library 1.3^
+    Nimbus-jose-jwt 9.0.1^
+    jbcrypt 0.4^
+
+
 ## API DOCUMENTATION:
+### Scroll to the right to see the rest of the table:
+
 <table>
 <tr>
 <th>HTTP Method</th>
