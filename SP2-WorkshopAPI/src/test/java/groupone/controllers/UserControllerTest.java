@@ -74,8 +74,8 @@ class UserControllerTest {
             em.getTransaction().begin();
 
             //em.createQuery("delete from users").executeUpdate();
-            em.createQuery("delete from EventSpec").executeUpdate();
             em.createQuery("delete from Location").executeUpdate();
+            em.createQuery("delete from EventSpec").executeUpdate();
             em.createQuery("delete from Event").executeUpdate();
             em.createQuery("delete from Zipcode").executeUpdate();
 
@@ -104,23 +104,20 @@ class UserControllerTest {
             event1.addLocation(location1);
             event2.addLocation(location2);
 
-            em.persist(event1);
             em.persist(event2);
 
-            userStudent.addEvent(event1);
-            //userStudent.addRole(student);
+            event1.addUser(userStudent);
 
-            User user124 = em.merge(userStudent);
+            em.persist(event1);
             em.getTransaction().commit();
+            em.clear();
             //User found = em.find(User.class,user124.getEmail());
-
-
         }
     }
 
     @AfterAll
-    static void tearDown() {
-        try (EntityManager em = emf.createEntityManager()) {
+    static void tearDown(){
+        try(EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.createQuery("delete from roles").executeUpdate();
             em.createQuery("delete from users").executeUpdate();
@@ -156,7 +153,7 @@ class UserControllerTest {
         RestAssured.given()
                 .header("Authorization", studentToken)
                 .when()
-                .post("http://localhost:7777/api/student/toevent/2")
+                .post("http://localhost:7777/api/student/toevent/1")
                 .then().log().all()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200)

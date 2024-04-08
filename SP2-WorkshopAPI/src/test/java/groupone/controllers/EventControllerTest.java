@@ -74,8 +74,8 @@ class EventControllerTest {
             em.getTransaction().begin();
 
             //em.createQuery("delete from users").executeUpdate();
-            em.createQuery("delete from EventSpec").executeUpdate();
             em.createQuery("delete from Location").executeUpdate();
+            em.createQuery("delete from EventSpec").executeUpdate();
             em.createQuery("delete from Event").executeUpdate();
             em.createQuery("delete from Zipcode").executeUpdate();
 
@@ -104,17 +104,15 @@ class EventControllerTest {
             event1.addLocation(location1);
             event2.addLocation(location2);
 
-            em.persist(event1);
             em.persist(event2);
 
-            userStudent.addEvent(event1);
-            //userStudent.addRole(student);
+            event1.addUser(userStudent);
+            //userStudent.addEvent(event1);
 
-            User user124 = em.merge(userStudent);
+            em.persist(event1);
             em.getTransaction().commit();
+            em.clear();
             //User found = em.find(User.class,user124.getEmail());
-
-
         }
     }
 
@@ -171,7 +169,7 @@ class EventControllerTest {
                 .then().log().all()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200)
-                .body("title",equalTo("testEvent2"));
+                .body("title",equalTo("testEvent"));
     }
 
     @Test
@@ -220,7 +218,7 @@ class EventControllerTest {
         RestAssured.given()
                 .header("Authorization", instructorToken)
                 .when()
-                .get("http://localhost:7778/api/events/1/users")
+                .get("http://localhost:7778/api/events/2/users")
                 .then().log().all()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200)
