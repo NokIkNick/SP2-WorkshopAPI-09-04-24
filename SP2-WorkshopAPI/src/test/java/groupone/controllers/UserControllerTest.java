@@ -74,8 +74,8 @@ class UserControllerTest {
             em.getTransaction().begin();
 
             //em.createQuery("delete from users").executeUpdate();
-            em.createQuery("delete from EventSpec").executeUpdate();
             em.createQuery("delete from Location").executeUpdate();
+            em.createQuery("delete from EventSpec").executeUpdate();
             em.createQuery("delete from Event").executeUpdate();
             em.createQuery("delete from Zipcode").executeUpdate();
 
@@ -104,23 +104,23 @@ class UserControllerTest {
             event1.addLocation(location1);
             event2.addLocation(location2);
 
-            em.persist(event1);
+            //em.persist(event1);
             em.persist(event2);
 
-            userStudent.addEvent(event1);
-            //userStudent.addRole(student);
+            event1.addUser(userStudent);
+            //userStudent.addEvent(event1);
 
-            User user124 = em.merge(userStudent);
+            // no need to persist event1, becouse merge is also a persist.
+            Event event124 = em.merge(event1);
             em.getTransaction().commit();
+            em.clear();
             //User found = em.find(User.class,user124.getEmail());
-
-
         }
     }
 
     @AfterAll
-    static void tearDown() {
-        try (EntityManager em = emf.createEntityManager()) {
+    static void tearDown(){
+        try(EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.createQuery("delete from roles").executeUpdate();
             em.createQuery("delete from users").executeUpdate();

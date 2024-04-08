@@ -78,12 +78,20 @@ public class User {
     }
 
     public void addEvent(Event event) {
-            if(event != null && !events.contains(event)){
+            if(event != null && !events.contains(event) && !checkNameIsNotInList(event.getTitle())){
                 events.add(event);
                 event.addUser(this);
             }
     }
 
+    private boolean checkNameIsNotInList(String name){
+        for(Event e: events){
+            if(e.getTitle().equals(name)){
+                return true;
+            }
+        }
+        return false;
+    }
     public void removeEvent(Event event){
         if(event != null && events.contains(event)){
             events.remove(event);
