@@ -41,7 +41,7 @@ A custom made API, created to be implemented into applications that wishes to ma
 
 
 ## Security Template Used:
-[Repository](https://github.com/NokIkNick/RESTSECURITY)
+[NokIkNick - RESTSECURITY - TEMPLATE](https://github.com/NokIkNick/RESTSECURITY)
 
 ## API DOCUMENTATION:
 ### Scroll to the right to see the rest of the table:
