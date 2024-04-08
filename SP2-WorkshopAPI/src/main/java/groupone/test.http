@@ -126,4 +126,20 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwY
 
 GET http://localhost:7008/api/events/instructing
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwYXRyaWNrX3RoZV9hd2Vzb21lMl8xMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjUyNTIwOSwicm9sZXMiOiJJTlNUUlVDVE9SIiwidXNlcm5hbWUiOiJwYXRyaWNrX3RoZV9hd2Vzb21lMl8xMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayJ9.qHsi1aAzx59QM9MNSf0HyKfTwl6dRIP5ZRf5SxvnMQU
-###
+
+### Instructor - Update Event
+
+POST http://localhost:7008/api/events/update/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHcm91cCBvbmUiLCJzdWIiOiJwYXRyaWNrX3RoZV9hd2Vzb21lMl8xMjM0NTY3ODkxMEAxMjM0NTY3ODkxMC5kayIsImV4cCI6MTcxMjU2Nzk5OCwicm9sZXMiOiJTVFVERU5ULEFETUlOLElOU1RSVUNUT1IiLCJ1c2VybmFtZSI6InBhdHJpY2tfdGhlX2F3ZXNvbWUyXzEyMzQ1Njc4OTEwQDEyMzQ1Njc4OTEwLmRrIn0.Nf5CvFaF68WxqOJgthX76RBT1lyEL0Bj2jNp8QmvLgs
+
+{
+    "title": "something new",
+    "locations": [
+        {
+            "street": "new Street",
+            "zipcode": {
+            "zip": 2700
+            }
+        }
+    ]
+}

@@ -265,7 +265,10 @@ public class EventController {
             if (eventDTO.getLocations() != null) {
                 updated = true;
                 eventDTO.getLocations().forEach(location -> {
-                    Location foundLocation = locationDAO.findLocationByStreet(location.getStreet());
+                    Location foundLocation = null;
+                    try{
+                        locationDAO.findLocationByStreet(location.getStreet());
+                    } catch (Exception ignored) {}
                     if (foundLocation == null) {
                         if (location.getZipcode() != null) {
                             Zipcode foundZip = zipDAO.getById(location.getZipcode().getZip());
