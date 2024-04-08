@@ -13,6 +13,7 @@ public class LocationDAO extends DAO<Location, Integer> {
         }
         return instance;
     }
+
     public LocationDAO(boolean isTesting) {
         super(Location.class, isTesting);
     }
