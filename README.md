@@ -14,8 +14,8 @@
 
 ## Description:
 
-
 ## EER DIAGRAM:
+<img src="/SP2-WorkshopAPI/src/main/java/groupone/images/event.png" width="600" alt="EER Diagram">
 
 
 ## API DOCUMENTATION:
