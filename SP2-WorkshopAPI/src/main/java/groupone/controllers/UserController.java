@@ -6,10 +6,12 @@ import groupone.daos.UserDAO;
 import groupone.dtos.EventDTO;
 import groupone.dtos.UserDTO;
 import groupone.model.Event;
+import groupone.model.Location;
 import groupone.model.User;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import jakarta.persistence.EntityManager;
+import org.hibernate.Hibernate;
 
 import java.util.ArrayList;
 import java.util.List;
