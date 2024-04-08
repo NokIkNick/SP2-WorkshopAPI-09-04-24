@@ -141,6 +141,9 @@ public class EventController {
                 for (User u : ev.getUsers()) {
                     Hibernate.initialize(u.getRoles());
                 }
+                for (Location l: ev.getLocations()){
+                    Hibernate.initialize(l.getEvents());
+                }
             }); // toString so everything being part of toString on users is also initialized.
             if (FoundEvent == null) {
                 ctx.status(HttpStatus.NOT_FOUND);
@@ -228,8 +231,8 @@ public class EventController {
             UserDTO user = ctx.attribute("user");
             assert user != null;
             List<Location> locations = eventDAO.getLocationsByInstructor(user.getEmail());
-            List<LocationDTO> locationDTOS = locations.stream().map(LocationDTO::new).toList();
-            ctx.json(locationDTOS);
+            List<Location2DTO> location2DTOS = locations.stream().map(Location2DTO::new).toList();
+            ctx.json(location2DTOS);
         };
     }
 
