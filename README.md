@@ -40,6 +40,9 @@ A custom made API, created to be implemented into applications that wishes to ma
     jbcrypt 0.4^
 
 
+## Security Template Used:
+[Repository](https://github.com/NokIkNick/RESTSECURITY)
+
 ## API DOCUMENTATION:
 ### Scroll to the right to see the rest of the table:
 
