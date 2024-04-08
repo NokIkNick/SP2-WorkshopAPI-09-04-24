@@ -131,9 +131,10 @@ public class EventDAO extends DAO<Event, Integer>{
             query.setParameter("email", instructorEmail);
             locations = query.getResultList();
             for(Location l : locations){
-                l.getEvents().size();
+                /*l.getEvents().size();
                 l.getEventSpec();
-                l.getZipcodes().getCity();
+                l.getZipcodes().getCity();*/
+                Hibernate.initialize(l.getEvents());
             }
             em.getTransaction().commit();
         }
