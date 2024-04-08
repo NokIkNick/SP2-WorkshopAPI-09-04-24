@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b59af9bc-6a0a-4a0a-8aff-8280499ebafd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/Location2DTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/EventController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/LocationDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/LocationDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/daos/EventDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/daos/EventDAOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/daos/LocationDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/daos/LocationDAOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/daos/UserDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/daos/UserDAOTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +57,7 @@
     "WebServerToolWindowFactoryState": "false",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "(US09)-See-All-Events-Im-teaching",
+    "git-widget-placeholder": "Test-branch",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "19",
     "node.js.detected.package.eslint": "true",
@@ -86,14 +85,8 @@
       <recent name="groupone.controllers" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.controllers in SP2-WorkshopAPI">
-    <configuration name="test | Intructor - Get events that I'm instructing." type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/test.http" index="14" requestIdentifier="Intructor - Get events that I'm instructing." runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="test | Login as Admin" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/test.http" index="3" requestIdentifier="Login as Admin" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="EventControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.java in SP2-WorkshopAPI">
+    <configuration name="EventControllerTest.cancelEvent" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SP2-WorkshopAPI" />
       <extension name="coverage">
         <pattern>
@@ -103,12 +96,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="groupone.controllers" />
       <option name="MAIN_CLASS_NAME" value="groupone.controllers.EventControllerTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="cancelEvent" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserControllerTest.addEventToUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="EventControllerTest.removeEventFromUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SP2-WorkshopAPI" />
       <extension name="coverage">
         <pattern>
@@ -117,8 +111,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="groupone.controllers" />
-      <option name="MAIN_CLASS_NAME" value="groupone.controllers.UserControllerTest" />
-      <option name="METHOD_NAME" value="addEventToUser" />
+      <option name="MAIN_CLASS_NAME" value="groupone.controllers.EventControllerTest" />
+      <option name="METHOD_NAME" value="removeEventFromUser" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -132,13 +126,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="daos in SP2-WorkshopAPI" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SP2-WorkshopAPI" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/daos" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="java in SP2-WorkshopAPI" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SP2-WorkshopAPI" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.java in SP2-WorkshopAPI" />
+        <item itemvalue="JUnit.daos in SP2-WorkshopAPI" />
         <item itemvalue="JUnit.controllers in SP2-WorkshopAPI" />
-        <item itemvalue="HTTP Request.test | Intructor - Get events that I'm instructing." />
-        <item itemvalue="HTTP Request.test | Login as Admin" />
-        <item itemvalue="JUnit.UserControllerTest.addEventToUser" />
-        <item itemvalue="JUnit.EventControllerTest" />
+        <item itemvalue="JUnit.EventControllerTest.removeEventFromUser" />
+        <item itemvalue="JUnit.EventControllerTest.cancelEvent" />
       </list>
     </recent_temporary>
   </component>
@@ -157,7 +167,7 @@
       <workItem from="1712342646998" duration="3986000" />
       <workItem from="1712416069797" duration="3959000" />
       <workItem from="1712560257183" duration="7108000" />
-      <workItem from="1712567870868" duration="8748000" />
+      <workItem from="1712567870868" duration="13408000" />
     </task>
     <servers />
   </component>
@@ -196,6 +206,7 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/SP2_WorkshopAPI$java_in_SP2_WorkshopAPI.ic" NAME="java in SP2-WorkshopAPI Coverage Results" MODIFIED="1712581019862" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/SP2_WorkshopAPI$EventControllerTest_getEventByIdsPerticipants.ic" NAME="EventControllerTest.getEventByIdsPerticipants Coverage Results" MODIFIED="1712568322373" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>groupone.controllers.*</FILTER>
     </SUITE>

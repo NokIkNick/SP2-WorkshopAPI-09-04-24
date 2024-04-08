@@ -21,6 +21,7 @@ import java.time.LocalTime;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.not;
 
 class EventControllerTest {
 
@@ -85,12 +86,12 @@ class EventControllerTest {
 
             Event event1 = new Event("testEvent","test med test på",99999,"pictureUrl");
             Location location1 = new Location("Fredensvej 19");
-            EventSpec eventSpec1 = new EventSpec(LocalDate.now(), LocalTime.now(),30,"Den vilde","denVilde@hej.com", Status.UPCOMING,30, Category.EVENT);
+            EventSpec eventSpec1 = new EventSpec(LocalDate.now(), LocalTime.now(),30,"Den vilde","test@instructor.com", Status.UPCOMING,30, Category.EVENT);
             Zipcode zipcode1 = new Zipcode(2970,"Hørsholm");
 
             Event event2 = new Event("testEvent2","test med test på",99999,"pictureUrl");
             Location location2 = new Location("Thyrasvej 4");
-            EventSpec eventSpec2 = new EventSpec(LocalDate.now(), LocalTime.now(),30,"Den vilde","denVilde@hej.com", Status.UPCOMING,30,Category.WORKSHOP);
+            EventSpec eventSpec2 = new EventSpec(LocalDate.now(), LocalTime.now(),30,"Den vilde","test@instructor.com", Status.UPCOMING,30,Category.WORKSHOP);
             //Zipcode zipcode2 = new Zipcode(2970,"Hørsholm");
 
             em.persist(zipcode1);
@@ -104,12 +105,15 @@ class EventControllerTest {
             event1.addLocation(location1);
             event2.addLocation(location2);
 
-            em.persist(event2);
+            //em.persist(event2);
 
             event1.addUser(userStudent);
+            event2.addUser(userInstructor);
+            event2.addUser(userStudent);
             //userStudent.addEvent(event1);
 
             em.persist(event1);
+            em.persist(event2);
             em.getTransaction().commit();
             em.clear();
             //User found = em.find(User.class,user124.getEmail());
@@ -169,7 +173,7 @@ class EventControllerTest {
                 .then().log().all()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200)
-                .body("title",equalTo("testEvent"));
+                .body("title",equalTo("testEvent2"));
     }
 
     @Test
@@ -218,7 +222,7 @@ class EventControllerTest {
         RestAssured.given()
                 .header("Authorization", instructorToken)
                 .when()
-                .get("http://localhost:7778/api/events/2/users")
+                .get("http://localhost:7778/api/events/1/users")
                 .then().log().all()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200)
@@ -236,5 +240,55 @@ class EventControllerTest {
                     .statusCode(HttpStatus.OK_200)
                     .body("events.size()",equalTo(2));
     }
+    @Test
+    void getLocationsByCurrentInstructor(){
+        RestAssured.given()
+                .header("Authorization", instructorToken)
+                .when()
+                .get("http://localhost:7778/api/events/instructing")
+                .then().log().all()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200)
+                .body("events.size()",equalTo(2));
+    }
+    @Test
+    void updateEvent(){
+        String json = "{\"title\":\"something new\",\"locations\":[{\"street\":\"new Street\",\"zipcode\":{\"zip\":2700}}]}";
 
+        RestAssured.given()
+                .header("Authorization", instructorToken)
+                .contentType("application/json")
+                .body(json)
+                .when()
+                .post("http://localhost:7778/api/events/update/1")
+                .then().log().all()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200)
+                .body("title", equalTo("something new"))
+                .body("locations.size()",equalTo(1));
+    }
+    @Test
+    void cancelEvent(){
+        RestAssured.given()
+                .header("Authorization", instructorToken)
+                .contentType("application/json")
+                .when()
+                .put("http://localhost:7778/api/events/2/Thyrasvej 4/2970/cancel")
+                .then().log().all()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200);
+    }
+    @Test
+    void removeEventFromUser(){
+        RestAssured.given()
+                .header("Authorization", studentToken)
+                .contentType("application/json")
+                .when()
+                .put("http://localhost:7778/api/student/remove_event/2")
+                .then().log().all()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200)
+                .body("users[0].email",not("test@student.com"))
+                .body("users[0].email",equalTo("test@instructor.com"));
+    }
 }
