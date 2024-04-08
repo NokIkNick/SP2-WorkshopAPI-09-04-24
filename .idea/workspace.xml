@@ -6,12 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b59af9bc-6a0a-4a0a-8aff-8280499ebafd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/config/Routes.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/config/Routes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/EventController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/UserDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/controllers/EventControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/controllers/EventControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/controllers/UserControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/controllers/UserControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/daos/EventDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/daos/EventDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/LocationDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/LocationDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/test.http" beforeDir="false" afterPath="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/test.http" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +56,7 @@
     "WebServerToolWindowFactoryState": "false",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "Test-branch",
+    "git-widget-placeholder": "(US09)-See-All-Events-Im-teaching",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "19",
     "node.js.detected.package.eslint": "true",
@@ -87,7 +84,13 @@
       <recent name="groupone.controllers" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.controllers in SP2-WorkshopAPI">
+  <component name="RunManager">
+    <configuration name="test | Intructor - Get events that I'm instructing." type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/test.http" index="14" requestIdentifier="Intructor - Get events that I'm instructing." runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="test | Login as Admin" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/test.http" index="3" requestIdentifier="Login as Admin" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <configuration name="EventControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SP2-WorkshopAPI" />
       <extension name="coverage">
@@ -103,39 +106,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EventControllerTest.getAllEvents" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SP2-WorkshopAPI" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="groupone.controllers.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="groupone.controllers" />
-      <option name="MAIN_CLASS_NAME" value="groupone.controllers.EventControllerTest" />
-      <option name="METHOD_NAME" value="getAllEvents" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="EventControllerTest.getEventByIdsPerticipants" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SP2-WorkshopAPI" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="groupone.controllers.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="groupone.controllers" />
-      <option name="MAIN_CLASS_NAME" value="groupone.controllers.EventControllerTest" />
-      <option name="METHOD_NAME" value="getEventByIdsPerticipants" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UserControllerTest.getAllUsers" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserControllerTest.addEventToUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SP2-WorkshopAPI" />
       <extension name="coverage">
         <pattern>
@@ -145,7 +116,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="groupone.controllers" />
       <option name="MAIN_CLASS_NAME" value="groupone.controllers.UserControllerTest" />
-      <option name="METHOD_NAME" value="getAllUsers" />
+      <option name="METHOD_NAME" value="addEventToUser" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -161,10 +132,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP Request.test | Intructor - Get events that I'm instructing." />
+        <item itemvalue="HTTP Request.test | Login as Admin" />
         <item itemvalue="JUnit.controllers in SP2-WorkshopAPI" />
-        <item itemvalue="JUnit.UserControllerTest.getAllUsers" />
-        <item itemvalue="JUnit.EventControllerTest.getAllEvents" />
-        <item itemvalue="JUnit.EventControllerTest.getEventByIdsPerticipants" />
+        <item itemvalue="JUnit.UserControllerTest.addEventToUser" />
         <item itemvalue="JUnit.EventControllerTest" />
       </list>
     </recent_temporary>
@@ -182,7 +153,9 @@
       <workItem from="1712253351914" duration="11996000" />
       <workItem from="1712300596066" duration="10500000" />
       <workItem from="1712342646998" duration="3986000" />
-      <workItem from="1712416069797" duration="2129000" />
+      <workItem from="1712416069797" duration="3959000" />
+      <workItem from="1712560257183" duration="7108000" />
+      <workItem from="1712567870868" duration="7429000" />
     </task>
     <servers />
   </component>
@@ -193,21 +166,42 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/SP2-WorkshopAPI/src/test/java/groupone/controllers/UserControllerTest.java</url>
-          <line>116</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/dtos/EventDTO.java</url>
           <line>70</line>
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/EventController.java</url>
-          <line>252</line>
+          <line>129</line>
           <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/EventController.java</url>
+          <line>107</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/UserController.java</url>
+          <line>64</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/SP2-WorkshopAPI/src/main/java/groupone/controllers/EventController.java</url>
+          <line>225</line>
+          <option name="timeStamp" value="47" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/SP2_WorkshopAPI$EventControllerTest_getEventByIdsPerticipants.ic" NAME="EventControllerTest.getEventByIdsPerticipants Coverage Results" MODIFIED="1712568322373" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>groupone.controllers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/SP2_WorkshopAPI$UserControllerTest.ic" NAME="UserControllerTest Coverage Results" MODIFIED="1712418650526" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>groupone.controllers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/SP2_WorkshopAPI$EventControllerTest.ic" NAME="EventControllerTest Coverage Results" MODIFIED="1712418431619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>groupone.controllers.*</FILTER>
+    </SUITE>
   </component>
 </project>

@@ -35,7 +35,10 @@ public class LocationDTO {
         setStreet(location.getStreet());
         setEventSpecifications(new EventSpecsDTO(location.getEventSpec()));
         setZipcode(new ZipcodeDTO(location.getZipcodes()));
-        setEventName(location.getEvents().get(0).getTitle());
+        if(location.getEvents().size()>0) {
+            setEventName(location.getEvents().get(0).getTitle());
+        }else{
+            setEventName("Undefined");
+        }
     }
-
 }

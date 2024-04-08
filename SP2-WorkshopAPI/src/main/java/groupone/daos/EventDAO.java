@@ -6,6 +6,7 @@ import groupone.model.Event;
 import groupone.model.EventSpec;
 import groupone.model.Location;
 import jakarta.persistence.TypedQuery;
+import org.hibernate.Hibernate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -129,9 +130,10 @@ public class EventDAO extends DAO<Event, Integer>{
             query.setParameter("email", instructorEmail);
             locations = query.getResultList();
             for(Location l : locations){
-                l.getEvents().size();
+                /*l.getEvents().size();
                 l.getEventSpec();
-                l.getZipcodes().getCity();
+                l.getZipcodes().getCity();*/
+                Hibernate.initialize(l.getEvents());
             }
             em.getTransaction().commit();
         }
