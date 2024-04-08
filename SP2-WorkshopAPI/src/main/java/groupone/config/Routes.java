@@ -30,7 +30,6 @@ public class Routes {
                 get("/", ctx -> ctx.json(objectMapper.createObjectNode().put("Message", "Connected Successfully")), roles.ANYONE);
             });
             path("/events", () -> {
-                //TODO: NEEDS TESTING
                 get("/instructing", ec.getLocationsByCurrentInstructor(), roles.INSTRUCTOR);
                 get("/category/{category}", ec.getEventsByCategory(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
                 get("/status/{status}", ec.getEventsByStatus(), roles.STUDENT, roles.INSTRUCTOR, roles.ADMIN);
@@ -39,9 +38,7 @@ public class Routes {
                 get("/{id}/users", ec.getEventByIdsParticipants(), roles.INSTRUCTOR);
                 // Posts!
                 post("/create", ec.createEvent(), roles.INSTRUCTOR);
-                //TODO: NEEDS TESTING
                 post("/update/{id}", ec.updateEvent(), roles.INSTRUCTOR);
-                //TODO: NEEDS TESTING
                 put("/{id}/{address}/{zip}/cancel", ec.cancelEvent(), roles.INSTRUCTOR);
             });
             path("/auth", () -> {
